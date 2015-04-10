@@ -1,0 +1,26 @@
+<form id="loginForm" action="{{ path("fos_user_security_check") }}" method="post">
+
+    <div class="login-box-error"></div>
+
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+
+    {#<label for="username">{{ 'security.login.username'|trans }}</label>#}
+    <input class="login-form-control" type="text" id="username" name="_username" value="{{ last_username }}" required="required" placeholder="{{ 'menu.login.form.username'|trans({}, 'navigation') }}"/>
+
+    {#<label for="password">{{ 'security.login.password'|trans }}</label>#}
+    <input class="login-form-control" type="password" id="password" name="_password" required="required" placeholder="{{ 'menu.login.form.password'|trans({}, 'navigation') }}"/>
+
+    {#<input type="checkbox" id="remember_me" name="_remember_me" value="on" />#}
+    {#<label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>#}
+
+    <input class="connection btn btn-primary" type="submit" id="_submit" name="_submit" value="{{ 'menu.login.submit'|trans({}, 'navigation') }}" />
+
+</form>
+<div class="login-menu">
+    <span id="remember_check" class="login-menu-item checkbox">{{ 'menu.login.remember'|trans({}, 'navigation') }}</span>
+    <input class="attached-checkbox" id="remember_me" name="_remember_me" value="0" type="hidden">
+    <span class="login-menu-item-separator">|</span>
+    <a href="{{ path('chaplean_user_register') }}" data-toggle="modal" data-target="#loginModal" class="login-menu-item">{{ 'menu.login.register'|trans({}, 'navigation') }}</a>
+    <span class="login-menu-item-separator">|</span>
+    <a href="{{ path('chaplean_user_forgot') }}" data-toggle="modal" data-target="#loginModal" class="login-menu-item">{{ 'menu.login.forgot'|trans({}, 'navigation') }}</a>
+</div>

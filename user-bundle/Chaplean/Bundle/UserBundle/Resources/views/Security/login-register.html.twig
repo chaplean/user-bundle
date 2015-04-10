@@ -1,0 +1,64 @@
+{% extends 'OpiiecFrontBundle::layout.html.twig' %}
+
+{% block content %}
+    {% set errors = app.session.flashbag.get('error') %}
+    <section class="login-page col-sm-12 col-md-10">
+        <div class="block-width-header-alt">
+            &nbsp;{{ 'login.title.global'|trans }}
+        </div>
+        <h3>{{ 'login.title.login.1'|trans }}</h3>
+        <h4>{{ 'login.title.login.2'|trans }}</h4>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-1">
+                <form id="loginPageForm" class="form-horizontal" action="{{ path('fos_user_security_check') }}" method="post">
+                    {% if errors is not empty %}
+                        {% for error in errors %}
+                            <div class="alert alert-danger alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+
+                    <div class="form-group">
+                        <label for="username" class="col-md-4 control-label">{{ 'login.identifiant'|trans }}</label>
+                        <div class="col-md-8">
+                            <input class="form-control" type="text" id="username-login" name="_username" value="{{ last_username }}" required="required" placeholder="{{ 'menu.login.form.username'|trans({}, 'navigation') }}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="col-md-4 control-label">{{ 'login.password'|trans }}</label>
+                        <div class="col-md-8">
+                            <input class="form-control" type="password" id="password-login" name="_password" required="required" placeholder="{{ 'menu.login.form.password'|trans({}, 'navigation') }}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4" for=""></label>
+                        <div class="col-md-8 remember-me-login-page">
+                            <span id="remember_check_page" class="checkbox">{{ 'menu.login.remember'|trans({}, 'navigation') }}</span>
+                            <input class="attached-checkbox" id="remember_me_page" name="_remember_me" value="0" type="hidden">
+                        </div>
+                    </div>
+                    <div class="form-group pull-right">
+                        <div class="col-md-12">
+                            <input class="connection btn btn-primary" type="submit" id="_submit-login" name="_submit" value="{{ 'menu.login.submit'|trans({}, 'navigation') }}" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <h3>{{ 'login.title.register.1'|trans }}</h3>
+        <h4>{{ 'login.title.register.2'|trans }}</h4>
+        <div class="row">
+            <div class="col-md-offset-5">
+                <div class="form-group">
+                    <label class="col-md-2">
+                        <a href="{{ path('chaplean_user_register') }}" data-toggle="modal" data-target="#loginModal" class="btn btn-primary register-account">{{ 'menu.login.register'|trans({}, 'navigation') }}</a>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

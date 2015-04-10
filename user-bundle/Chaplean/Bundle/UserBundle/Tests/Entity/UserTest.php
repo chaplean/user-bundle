@@ -1,0 +1,115 @@
+<?php
+/**
+ * UserTest.php.
+ *
+ * @author    Tom - Chaplean <tom@chaplean.com>
+ * @copyright 2014 - 2015 Chaplean (http://www.chaplean.com)
+ * @since     1.0.0
+ */
+
+namespace Chaplean\Bundle\UserBundle\Tests\Entity;
+
+use Chaplean\Bundle\UserBundle\Entity\User;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+
+class UserTest extends \PHPUnit_Framework_TestCase {
+
+    public function testUsername()
+    {
+        $user = $this->getUser();
+        $this->assertNull($user->getUsername());
+
+        $user->setUsername('john');
+        $this->assertEquals('john', $user->getUsername());
+
+    }
+
+    public function testEmail()
+    {
+        $user = $this->getUser();
+        $this->assertNull($user->getEmail());
+
+        $user->setEmail('john@chaplean.com');
+        $this->assertEquals('john@chaplean.com', $user->getEmail());
+    }
+
+    public function testIsPasswordRequestNonExpired()
+    {
+        $user = $this->getUser();
+        $user->setEnabled(true);
+
+        $passwordRequestedAt = new \DateTime('-10 seconds');
+
+        $user->setPasswordRequestedAt($passwordRequestedAt);
+
+        $this->assertSame($passwordRequestedAt, $user->getPasswordRequestedAt());
+        $this->assertTrue($user->isPasswordRequestNonExpired(15));
+        $this->assertFalse($user->isPasswordRequestNonExpired(5));
+    }
+
+    public function testIsPasswordRequestAtCleared()
+    {
+        $user = $this->getUser();
+        $passwordRequestedAt = new \DateTime('-10 seconds');
+
+        $user->setPasswordRequestedAt($passwordRequestedAt);
+        $user->setPasswordRequestedAt(null);
+
+        $this->assertTrue($user->isPasswordRequestNonExpired(15));
+        $this->assertTrue($user->isPasswordRequestNonExpired(5));
+    }
+
+    public function testTrueHasRole()
+    {
+        $user = $this->getUser();
+        $defaultrole = User::ROLE_DEFAULT;
+        $newrole = 'ROLE_X';
+        $this->assertTrue($user->hasRole($defaultrole));
+        $user->addRole($defaultrole);
+        $this->assertTrue($user->hasRole($defaultrole));
+        $user->addRole($newrole);
+        $this->assertTrue($user->hasRole($newrole));
+    }
+
+    public function testFalseHasRole()
+    {
+        $user = $this->getUser();
+        $newrole = 'ROLE_X';
+        $this->assertFalse($user->hasRole($newrole));
+        $user->addRole($newrole);
+        $this->assertTrue($user->hasRole($newrole));
+    }
+
+    public function testfirstnameAllCaps()
+    {
+        $user = $this->getUser();
+
+        $user->setFirstname('JEAN PIERRE');
+
+        $this->assertEquals('Jean Pierre', $user->getFirstname());
+    }
+
+    public function testlastnameAllUppercase()
+    {
+        $user = $this->getUser();
+
+        $user->setLastname('Dupont');
+
+        $this->assertEquals('DUPONT', $user->getLastname());
+    }
+
+    public function testpasswordSaltElevenChars()
+    {
+        $user = $this->getUser();
+
+        $this->assertGreaterThan(11, strlen($user->getSalt()));
+    }
+
+    /**
+     * @return User
+     */
+    protected function getUser()
+    {
+        return new User();
+    }
+}

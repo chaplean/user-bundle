@@ -1,0 +1,6 @@
+chaplean_user:
+    email:
+        already_exist: Cet email est déjà utilisé.
+        invalid: Le format de l'adresse email est invalide.
+    password:
+        min_length: Veuillez saisir au moins 6 caractères.

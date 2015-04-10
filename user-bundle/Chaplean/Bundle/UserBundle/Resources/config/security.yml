@@ -1,0 +1,29 @@
+security:
+    encoders:
+        FOS\UserBundle\Model\UserInterface: md5
+
+    providers:
+        main:
+            entity:
+                class: ChapleanUserBundle:User
+                property: email
+        fos_userbundle:
+            id: fos_user.user_provider.username_email
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt))/
+            security: false
+        main:
+            pattern: ^/
+            form_login:
+                provider: fos_userbundle
+                login_path: /login
+                use_forward: false
+                remember_me: true
+                use_referer: true
+                success_handler: authentication_handler
+                failure_handler: authentication_handler
+                csrf_provider: form.csrf_provider
+            logout:       true
+            anonymous:    true
