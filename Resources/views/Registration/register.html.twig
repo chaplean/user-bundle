@@ -1,0 +1,72 @@
+<div class="popin-content">
+    <div class="popin-header">
+        <button type="button" class="popin-btn popin-btn-close" data-dismiss="modal" aria-label="Close">{{ ('global.back')|trans|upper }}</button>
+        <h3 class="popin-subtitle">{% if update is defined %}{{ ('profile.form.title')|trans|upper }}{% else %}{{ ('register.form.title')|trans|upper }}{% endif %}</h3>
+    </div>
+    <div class="popin-body">
+        {% if errors is defined %}
+        <div class="alert alert-danger alert-dismissible popin-group-error" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            {% for error in errors %}
+            <p>{{ error.message }}</p>
+            {% endfor %}
+        </div>
+        {% endif %}
+        <form id="registerForm" action="{% if update is defined %}{{ path('chaplean_user_profile') }}{% else %}{{ path('chaplean_user_register') }}{% endif %}" method="post" data-idparent="#loginModal">
+            <div class="popin-form-group">
+                <label class="col-sm-1 popin-required"></label>
+                <label class="col-sm-3 popin-form-label">{{ 'register.form.civility.label'|trans }}</label>
+                <div class="col-sm-8 popin-form-control">
+                    {% for child in form.title %}
+                        <label class="popin-form-radio">
+                        {% if userTitle is defined and userTitle == loop.index-1 %}
+                            {{ form_widget(child, {'attr': {'checked': 'checked'} }) }}
+                        {% else %}
+                            {{ form_widget(child) }}
+                        {% endif %}
+                        <span>{{ ('register.form.civility.choices.'~loop.index)|trans }}</span></label>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="popin-form-group">
+                <label class="col-sm-1 popin-required"></label>
+                <div class="col-sm-11 popin-form-control">
+                    {{ form_widget(form.firstname , {'attr': {'placeholder': ('register.form.firstname')|trans, 'class': 'popin-form-input capitalize'} }) }}
+                </div>
+            </div>
+            <div class="popin-form-group">
+                <label class="col-sm-1 popin-required"></label>
+                <div class="col-sm-11 popin-form-control">
+                    {{ form_widget(form.lastname , {'attr': {'placeholder': ('register.form.lastname')|trans, 'class': 'popin-form-input uppercase'} }) }}
+                </div>
+            </div>
+            <div class="popin-form-group">
+                <label class="col-sm-1 popin-required"></label>
+                <div class="col-sm-11 popin-form-control">
+                    {{ form_widget(form.email , {'attr': {'placeholder': ('register.form.email')|trans, 'class': 'popin-form-input'} }) }}
+                </div>
+            </div>
+            <div class="popin-form-group">
+                <label class="col-sm-1 popin-required"></label>
+                <div class="col-sm-11 popin-form-control">
+                    {{ form_widget(form.companySize , {'attr': {'class': 'popin-form-input'} }) }}
+                </div>
+            </div>
+            <div hidden>
+                {% if update is defined %}
+                    {{ form_widget(form.dateUpdate) }}
+                {% else %}
+                    {{ form_widget(form.dateAdd) }}
+                {% endif %}
+
+                {{ form_widget(form._token) }}
+            </div>
+            <div class="popin-form-submit">
+                <input type="submit" class="popin-btn" value="{{ 'register.form.send'|trans }}"/>
+            </div>
+        </form>
+    </div>
+    <div class="popin-footer">
+        <div class="popin-legend"><label class="popin-required"></label><span>{{ ('opinion.required')|trans }}</span></div>
+    </div>
+</div>

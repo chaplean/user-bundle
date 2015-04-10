@@ -1,0 +1,24 @@
+{
+	"name": "chaplean/user-bundle",
+	"description": "Contains utilities for users",
+	"keywords": ["symfony2"],
+	"type": "symfony-bundle",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Chaplean",
+			"homepage": "http://chaplean.com/"
+		}
+	],
+	"require": {
+		"php": ">=5.3.2",
+		"symfony/framework-bundle": "~2.0",
+		"friendsofsymfony/user-bundle": "~2.0@dev"
+	},
+	"autoload": {
+		"psr-0": {
+			"Chaplean\\Bundle\\UserBundle": ""
+		}
+	},
+	"target-dir" : "Chaplean/Bundle/UserBundle"
+}

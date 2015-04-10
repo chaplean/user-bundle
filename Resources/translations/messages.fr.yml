@@ -1,0 +1,95 @@
+imports:
+    - { resource: '@FOS/Resources/translations/FOSUserBundle.fr.yml' }
+
+login:
+    title:
+        global: Connectez-vous ou inscrivez-vous
+        login:
+            1: Vous avez déjà un compte personnel ?
+            2: Identifiez-vous pour accéder au module de création de fiches métiers
+        register:
+            1: Vous n'avez pas de compte personnel ?
+            2: Inscrivez-vous pour profiter des outils de création et d'administration des fiches métiers en ligne
+    identifiant: Identifiant
+    password: Mot de passe
+    error: Identifiant/Mot de passe incorrect
+    bad_credentials: Identifiant/Mot de passe incorrect
+    user_account_is_disabled: Votre compte n'est pas activé
+
+register:
+    form:
+        title: Créer un compte
+        titlePassword: Mot de passe
+        description: Veuillez saisir deux fois un mot de passe identique.
+        civility:
+            label: Civilité
+            choices:
+                1: Madame
+                2: Monsieur
+        firstname: Prénom
+        lastname: Nom
+        email: Adresse email
+        password: Mot de passe
+        passwordRepeat: Saisissez à nouveau votre mot de passe
+        role:
+            admin: Administrateur
+            user: Utilisateur enregistré
+        send: Valider
+        error:
+            emailInvalid: Le format de l'adresse email est invalide.
+            alreadyEmail: Cet email est déjà utilisé.
+            notMatch: Les mot de passe ne correspondent pas.
+    builder:
+        civility:
+            miss:
+                abbr: Mme
+                name: Madame
+            mister:
+                abbr: Mr
+                name: Monsieur
+        company_size:
+            empty: Taille de votre entreprise
+            choice:
+                not_applicable: Non concerné
+                one_to: 1 à 9 salariés
+                ten_to: 10 à 49 salariés
+                fifty_to: 50 à 250 salariés
+                250_to: 250 à 5000 salariés
+                more: Plus de 5000 salariés
+    message: Merci d’avoir créé un compte sur le site des référentiels métiers de l’OPIIEC. Un lien d’activation vient de vous être envoyé par mail. Pour vous connecter et configurer votre mot de passe, veuillez cliquer sur ce lien.
+    mail:
+        subject: OPIIEC - Finalisation de votre inscription
+        body: |
+            Bonjour %civility% %firstname% %lastname%,<br />
+            <br />
+            Pour finaliser votre inscription, vous devez choisir votre mot de passe en cliquant sur le lien suivant :<br />
+            <a href="%link%">%link%</a><br />
+            La durée de validité de ce lien est de 24h. Passé ce délai, ou dans le cas d'une connexion à votre compte, celui-ci ne sera plus valide.<br />
+            <br />
+            L’OPIIEC vous remercie et vous attend avec impatience sur le site des référentiels métiers.<br />
+            <br />
+            <i>Merci de ne pas répondre à cet email.</i>
+    tokenUnvalid: Ce lien n'est plus valide.
+
+profile:
+    form:
+        title: Mon compte
+
+forgot:
+    form:
+        title: Réinitialisation de votre mot de passe
+        description: Veuillez saisir l’adresse email choisie lors de votre inscription sur le site, pour réinitialiser votre mot de passe.
+        email: Adresse email
+        error:
+            emailNotFound: Adresse email inconnue
+        success: Un lien de réinitialisation vient de vous être envoyé par mail. Veuillez cliquer sur ce lien pour réinitialiser votre mot de passe.
+    mail:
+        subject: OPIIEC : Demande de réinitialisation de mot de passe
+        body: |
+            Bonjour %civility% %firstname% %lastname%,<br />
+            <br />
+            Vous pouvez réinitialiser votre mot de passe en cliquant sur le lien suivant : <br />
+            <a href="%link%">%link%</a><br />
+            La durée de validité de ce lien est de 24h. Passé ce délai, ou dans le cas d'une connexion à votre compte, celui-ci ne sera plus valide.<br />
+            <br />
+            <i>Merci de ne pas répondre à cet email.</i>
