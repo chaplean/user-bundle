@@ -18,11 +18,20 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $treeBuilder->root('fos_user');
+        $rootNode = $treeBuilder->root('chaplean_user');
 
         // Here you should define the parameters that are allowed to
         // configure your bundle. See the documentation linked above for
         // more information on that topic.
+
+        $rootNode
+            ->children()
+            ->arrayNode('controller')
+                ->children()
+                    ->scalarNode('index_path')->isRequired()->end()
+                ->end()
+            ->end()
+            ->end();
 
         return $treeBuilder;
     }

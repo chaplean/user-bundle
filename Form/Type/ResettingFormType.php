@@ -25,7 +25,6 @@ class ResettingFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username', 'hidden')
             ->add('plainPassword', 'repeated', array(
                 'type' => 'password',
                 'options' => array('translation_domain' => ''),
@@ -47,7 +46,7 @@ class ResettingFormType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Chaplean\Bundle\UserBundle\Entity\User',
+            'data_class' => 'Chaplean\Bundle\UserBundle\Doctrine\User',
             'intention'  => 'resetting',
         ));
     }

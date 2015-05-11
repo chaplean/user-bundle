@@ -9,13 +9,13 @@
 
 namespace Chaplean\Bundle\UserBundle\Doctrine;
 
+use Chaplean\Bundle\UserBundle\Model\AbstractUserManager;
 use Doctrine\Common\Persistence\ObjectManager;
-use FOS\UserBundle\Model\UserInterface;
+use Chaplean\Bundle\UserBundle\Model\UserInterface;
 use FOS\UserBundle\Util\CanonicalizerInterface;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
-use \Chaplean\Bundle\UserBundle\Model\UserManager as BaseUserManager;
 
-class UserManager extends BaseUserManager
+class UserManager extends AbstractUserManager
 {
     private $objectManager;
     private $repository;
@@ -161,17 +161,5 @@ class UserManager extends BaseUserManager
     {
         $this->objectManager->remove($user);
         $this->objectManager->flush();
-    }
-
-    /**
-     * Updates the canonical username and email fields for a user.
-     *
-     * @param UserInterface $user
-     *
-     * @return void
-     */
-    public function updateCanonicalFields(UserInterface $user)
-    {
-        /**/
     }
 }

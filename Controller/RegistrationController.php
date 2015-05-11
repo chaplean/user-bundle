@@ -3,7 +3,7 @@
 namespace Chaplean\Bundle\UserBundle\Controller;
 
 use Chaplean\Bundle\UserBundle\Doctrine\UserManager;
-use Chaplean\Bundle\UserBundle\Entity\User;
+use Chaplean\Bundle\UserBundle\Doctrine\User;
 use Chaplean\Bundle\UserBundle\Form\Type\ForgotPasswordFormType;
 use Chaplean\Bundle\UserBundle\Form\Type\RegistrationFormType;
 use Chaplean\Bundle\UserBundle\Form\Type\ResettingFormType;
@@ -38,8 +38,10 @@ class RegistrationController extends BaseController
      */
     public function registerAction(Request $request)
     {
+        $indexPath = $this->container->getParameter('chaplean_user.controller.index_path');
+
         if (!$request->isXmlHttpRequest()) {
-            return $this->redirect($this->generateUrl('home'));
+            return $this->redirectToRoute($indexPath);
         }
 
         /** @var $userManager UserManager */
@@ -118,10 +120,10 @@ class RegistrationController extends BaseController
         /** @var Translator $translator */
         $translator = $this->get('translator');
 
+        $indexPath = $this->container->getParameter('chaplean_user.controller.index_path');
+
         if (!$request->isXmlHttpRequest()) {
-            return $this->render('ChapleanUserBundle:Registration:confirmed.html.twig', array(
-                'render' => $this->forward('OpiiecFrontBundle:Default:home')->getContent()
-            ));
+            return $this->render('ChapleanUserBundle:Registration:confirmed.html.twig');
         }
 
         /** @var $userManager UserManager */
@@ -135,26 +137,22 @@ class RegistrationController extends BaseController
 
         if (!$user) {
             // message error token is invalid
-            return $this->render(
-                'OpiiecFrontBundle:Popin:message.html.twig',
-                array(
-                    'subtitle' => $translator->trans('register.form.password'),
-                    'message' => $translator->trans('register.tokenUnvalid')
-                )
-            );
+            return new JsonResponse(array(
+                'success' => false,
+                'message' => $translator->trans('register.tokenUnvalid'),
+                'data'    => null
+            ));
         } elseif (!$user->isPasswordRequestNonExpired(86400)) {
             // clean user
             $userManager->cleanUser($user);
             $userManager->updateUser($user);
 
             // message error token is invalid
-            return $this->render(
-                'OpiiecFrontBundle:Popin:message.html.twig',
-                array(
-                    'subtitle' => $translator->trans('register.form.password'),
-                    'message' => $translator->trans('register.tokenUnvalid')
-                )
-            );
+            return new JsonResponse(array(
+                'success' => false,
+                'message' => $translator->trans('register.tokenUnvalid'),
+                'data'    => null
+            ));
         } elseif ($request->getMethod() == 'GET') {
             // load popin regsister password
             return $this->render(
@@ -184,7 +182,7 @@ class RegistrationController extends BaseController
                     'success' => true,
                     'message' => '',
                     'data'    => array(
-                        'redirect' => $this->generateUrl('home')
+                        'redirect' => $this->generateUrl($indexPath)
                     )
                 ));
 
@@ -267,8 +265,8 @@ class RegistrationController extends BaseController
                 }
             }
         }
-
+        $indexPath = $this->container->getParameter('chaplean_user.controller.index_path');
         // redirection to the homepage for no ajax request
-        return $this->redirect($this->generateUrl('home'));
+        return $this->redirectToRoute($indexPath);
     }
 }

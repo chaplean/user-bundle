@@ -2,10 +2,9 @@
 
 namespace Chaplean\Bundle\UserBundle\Form\Type;
 
-use Chaplean\Bundle\UserBundle\Entity\User;
+use Chaplean\Bundle\UserBundle\Doctrine\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
@@ -32,18 +31,6 @@ class ProfileFormType extends AbstractType
                 ->add('dateUpdate', 'datetime', array(
                     'input' => 'datetime',
                     'data' => new \DateTime('now'),
-                ))
-                ->remove('companySize')
-                ->add('companySize', 'choice', array(
-                    'choices'  => array(
-                        '-1'    => 'register.builder.company_size.choice.not_applicable',
-                        '1'   => 'register.builder.company_size.choice.one_to',
-                        '10'  => 'register.builder.company_size.choice.ten_to',
-                        '50'  => 'register.builder.company_size.choice.fifty_to',
-                        '250' => 'register.builder.company_size.choice.250_to',
-                        '5000' => 'register.builder.company_size.choice.more',
-                    ),
-                    'required' => true,
                 ));
     }
 
@@ -56,7 +43,7 @@ class ProfileFormType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'data_class' => 'Chaplean\Bundle\UserBundle\Entity\User',
+                'data_class' => 'Chaplean\Bundle\UserBundle\Doctrine\User',
                 'validation_groups' => array('profile'),
                 'translation_domain' => 'messages'
             )

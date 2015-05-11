@@ -9,7 +9,7 @@
 
 namespace Chaplean\Bundle\UserBundle\Tests\Doctrine;
 
-use Chaplean\Bundle\UserBundle\Entity\User;
+use Chaplean\Bundle\UserBundle\Model\AbstractUser;
 use Chaplean\Bundle\UserBundle\Doctrine\UserManager;
 
 class UserManagerTest extends \PHPUnit_Framework_TestCase
@@ -101,7 +101,7 @@ class UserManagerTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-class DummyUser extends User
+class DummyUser extends AbstractUser
 {
     /**/
 }

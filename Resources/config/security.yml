@@ -1,29 +1,29 @@
 security:
     encoders:
-        FOS\UserBundle\Model\UserInterface: md5
+        Chaplean\Bundle\UserBundle\Doctrine\User: { id: chaplean_user.encoder.password }
 
     providers:
-        main:
-            entity:
-                class: ChapleanUserBundle:User
-                property: email
-        fos_userbundle:
-            id: fos_user.user_provider.username_email
+        user_provider:
+            id: chaplean_user.user_provider.email
 
     firewalls:
         dev:
-            pattern: ^/(_(profiler|wdt))/
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+
+        default:
+            anonymous: ~
+
         main:
             pattern: ^/
             form_login:
-                provider: fos_userbundle
+                provider: user_provider
                 login_path: /login
                 use_forward: false
                 remember_me: true
                 use_referer: true
-                success_handler: authentication_handler
-                failure_handler: authentication_handler
-                csrf_provider: form.csrf_provider
+                success_handler: chaplean_use.authentication.handler
+                failure_handler: chaplean_use.authentication.handler
+                csrf_provider: security.csrf.token_manager
             logout:       true
             anonymous:    true
