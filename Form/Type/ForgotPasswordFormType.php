@@ -37,7 +37,7 @@ class ForgotPasswordFormType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'data_class' => 'Chaplean\Bundle\UserBundle\Entity\User',
+                'data_class' => 'Chaplean\Bundle\UserBundle\Doctrine\User',
                 'intention'  => 'forgot',
             )
         );

@@ -11,7 +11,9 @@
 namespace Chaplean\Bundle\UserBundle\Utility;
 
 use Chaplean\Bundle\MailerBundle\lib\classes\Chaplean\Message;
-use Chaplean\Bundle\UserBundle\Entity\User;
+use Chaplean\Bundle\UserBundle\Doctrine\User;
+use Symfony\Component\DependencyInjection\Container;
+use Symfony\Component\Routing\Router;
 
 class Registration
 {
@@ -21,7 +23,7 @@ class Registration
     /**
      * Constructor.
      *
-     * @param Service $serviceContainer serviceContainer.
+     * @param Container $serviceContainer serviceContainer.
      */
     public function __construct($serviceContainer)
     {
@@ -65,12 +67,16 @@ class Registration
     private function sendMail($subject, $user, $view)
     {
         // set a token for user
-        $token = $this->serviceContainer->get('fos_user.util.token_generator')->generateToken();
+        $token = $this->serviceContainer->get('fos_user.util.token_generator.default')->generateToken();
         $user->setConfirmationToken($token);
 
-        // create email to send with token for enter password
+        /** @var Twig $templateRenderer */
         $templateRenderer = $this->serviceContainer->get('templating');
-        $router = $this->serviceContainer->get('router');
+
+        /** @var Router $router */
+        $router = $this->serviceContainer->get('router.default');
+
+
         $chapleanMailerConfig = $this->serviceContainer->getParameter('chaplean_mailer');
         $message = new Message($chapleanMailerConfig);
         $message->setContentType('text/html');
@@ -80,13 +86,10 @@ class Registration
                 $templateRenderer->render(
                     $view,
                     array(
-                        'civility'  => $this->translator->trans('register.builder.civility.'.$user->getTitle().'.abbr'),
-                        'firstname' => $user->getFirstname(),
-                        'lastname'  => $user->getLastname(),
                         'link'      => $router->generate('chaplean_user_confirm', array('token' => $token), true)
                     )
                 )
             );
-        $this->serviceContainer->get('swiftmailer.mailer.default')->send($message);
+        $this->serviceContainer->get('swiftmailer.mailer.abstract')->send($message);
     }
 }

@@ -8,17 +8,9 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use FOS\UserBundle\Controller\RegistrationController as BaseController;
-use Chaplean\Bundle\UserBundle\Entity\User;
+use Chaplean\Bundle\UserBundle\Doctrine\User;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
-/**
- * Class ProfileController.
- *
- * @package   Chaplean\Bundle\UserBundle\Controller
- * @author    Valentin - Chaplean <valentin@chaplean.com>
- * @copyright 2014 - 2015 Chaplean (http://www.chaplean.com)
- * @since     0.1.0
- */
 class ProfileController extends BaseController
 {
     /**
@@ -28,15 +20,16 @@ class ProfileController extends BaseController
      */
     public function indexAction(Request $request)
     {
-        if (!$request->isXmlHttpRequest()) {
-            return $this->redirect($this->generateUrl('home'));
-        }
+        $indexUrl = $this->container->getParameter('chaplean_user.controller.index_path');
 
+        if (!$request->isXmlHttpRequest()) {
+            return $this->redirect($this->generateUrl($indexUrl));
+        }
         /** @var $userManager UserManager */
         $userManager = $this->get('chaplean_user.user_manager');
 
         /** @var User $user */
-        $user = $this->get('security.context')->getToken()->getUser();
+        $user = $this->getUser();
 
         $form = $this->createForm(new ProfileFormType(), $user);
 
@@ -49,14 +42,15 @@ class ProfileController extends BaseController
                 $userManager->updateUser($user);
 
                 // update user session
-                $token = new UsernamePasswordToken($user, null, "main", $user->getRoles());
-                $this->get('security.context')->setToken($token);
+                $token = new UsernamePasswordToken($user, null, 'main', $user->getRoles());
 
-                return $response = new JsonResponse(array(
+                $this->get('security.token_storage')->setToken($token);
+
+                return new JsonResponse(array(
                     'success' => true,
                     'message' => '',
                     'data'    => array(
-                        'redirect' => $this->generateUrl('home')
+                        'redirect' => $this->generateUrl($indexUrl)
                     )
                 ));
             } else {
@@ -69,12 +63,14 @@ class ProfileController extends BaseController
                 ));
             }
         } else {
+            $enumTitle = User::getEnumTitle();
+            $title = $user->getTitle();
             return $this->render(
                 'ChapleanUserBundle:Registration:register.html.twig',
                 array(
                     'form' => $form->createView(),
                     'update' => true,
-                    'userTitle' => array_keys(User::getEnumTitle(), $user->getTitle())[0],
+                    'userTitle' => array_keys($enumTitle, $title)[0],
                 )
             );
         }

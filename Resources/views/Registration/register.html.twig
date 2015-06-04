@@ -15,33 +15,6 @@
         <form id="registerForm" action="{% if update is defined %}{{ path('chaplean_user_profile') }}{% else %}{{ path('chaplean_user_register') }}{% endif %}" method="post" data-idparent="#loginModal">
             <div class="popin-form-group">
                 <label class="col-sm-1 popin-required"></label>
-                <label class="col-sm-3 popin-form-label">{{ 'register.form.civility.label'|trans }}</label>
-                <div class="col-sm-8 popin-form-control">
-                    {% for child in form.title %}
-                        <label class="popin-form-radio">
-                        {% if userTitle is defined and userTitle == loop.index-1 %}
-                            {{ form_widget(child, {'attr': {'checked': 'checked'} }) }}
-                        {% else %}
-                            {{ form_widget(child) }}
-                        {% endif %}
-                        <span>{{ ('register.form.civility.choices.'~loop.index)|trans }}</span></label>
-                    {% endfor %}
-                </div>
-            </div>
-            <div class="popin-form-group">
-                <label class="col-sm-1 popin-required"></label>
-                <div class="col-sm-11 popin-form-control">
-                    {{ form_widget(form.firstname , {'attr': {'placeholder': ('register.form.firstname')|trans, 'class': 'popin-form-input capitalize'} }) }}
-                </div>
-            </div>
-            <div class="popin-form-group">
-                <label class="col-sm-1 popin-required"></label>
-                <div class="col-sm-11 popin-form-control">
-                    {{ form_widget(form.lastname , {'attr': {'placeholder': ('register.form.lastname')|trans, 'class': 'popin-form-input uppercase'} }) }}
-                </div>
-            </div>
-            <div class="popin-form-group">
-                <label class="col-sm-1 popin-required"></label>
                 <div class="col-sm-11 popin-form-control">
                     {{ form_widget(form.email , {'attr': {'placeholder': ('register.form.email')|trans, 'class': 'popin-form-input'} }) }}
                 </div>

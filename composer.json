@@ -1,24 +1,33 @@
 {
-	"name": "chaplean/user-bundle",
-	"description": "Contains utilities for users",
-	"keywords": ["symfony2"],
-	"type": "symfony-bundle",
-	"license": "MIT",
-	"authors": [
-		{
-			"name": "Chaplean",
-			"homepage": "http://chaplean.com/"
-		}
-	],
-	"require": {
-		"php": ">=5.3.2",
-		"symfony/framework-bundle": "~2.0",
-		"friendsofsymfony/user-bundle": "~2.0@dev"
-	},
-	"autoload": {
-		"psr-0": {
-			"Chaplean\\Bundle\\UserBundle": ""
-		}
-	},
-	"target-dir" : "Chaplean/Bundle/UserBundle"
+    "name": "chaplean/user-bundle",
+    "description": "Contains utilities for users",
+    "keywords": ["symfony2"],
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Chaplean",
+            "homepage": "http://chaplean.com/"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.2",
+        "symfony/symfony": "2.6.*",
+        "doctrine/orm": "~2.2,>=2.2.3,<2.5",
+        "doctrine/dbal": "<2.5",
+        "doctrine/doctrine-bundle": "~1.2",
+        "twig/extensions": "~1.0",
+        "symfony/assetic-bundle": "~2.3",
+        "symfony/swiftmailer-bundle": "~2.3",
+        "symfony/monolog-bundle": "~2.4",
+        "sensio/distribution-bundle": "~3.0,>=3.0.12",
+        "sensio/framework-extra-bundle": "~3.0,>=3.0.2",
+        "friendsofsymfony/user-bundle": "~2.0@dev"
+    },
+    "autoload": {
+        "psr-0": {
+            "Chaplean\\Bundle\\UserBundle": ""
+        }
+    },
+    "target-dir" : "Chaplean/Bundle/UserBundle"
 }
