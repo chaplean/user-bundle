@@ -64,13 +64,13 @@ class ProfileController extends BaseController
             }
         } else {
             $enumTitle = User::getEnumTitle();
-            $title = $user->getTitle();
+            $title = array_keys($enumTitle, $user->getTitle());
             return $this->render(
                 'ChapleanUserBundle:Registration:register.html.twig',
                 array(
                     'form' => $form->createView(),
                     'update' => true,
-                    'userTitle' => array_keys($enumTitle, $title)[0],
+                    'userTitle' => (empty($title)) ? '' : $title[0],
                 )
             );
         }
