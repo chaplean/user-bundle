@@ -80,24 +80,6 @@ class UserTest extends \PHPUnit_Framework_TestCase {
         $this->assertTrue($user->hasRole($newrole));
     }
 
-    public function testfirstnameAllCaps()
-    {
-        $user = $this->getUser();
-
-        $user->setFirstname('JEAN PIERRE');
-
-        $this->assertEquals('Jean Pierre', $user->getFirstname());
-    }
-
-    public function testlastnameAllUppercase()
-    {
-        $user = $this->getUser();
-
-        $user->setLastname('Dupont');
-
-        $this->assertEquals('DUPONT', $user->getLastname());
-    }
-
     public function testpasswordSaltElevenChars()
     {
         $user = $this->getUser();

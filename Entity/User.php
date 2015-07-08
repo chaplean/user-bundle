@@ -203,7 +203,7 @@ class User implements UserInterface, GroupableInterface
     public function setEmail($email)
     {
         $this->email = strtolower($email);
-        $this->setUsername($this->$email);
+        $this->setUsername($this->email);
 
         return $this;
     }
