@@ -27,7 +27,3 @@ services:
 
     chaplean_user.encoder.password:
         class: Chaplean\Bundle\UserBundle\Encoder\PasswordEncoder
-
-    chaplean_user.user.provider:
-            class: %chaplean_user.user.provider.class%
-            arguments: [@chaplean_sso_server.user.repository]
