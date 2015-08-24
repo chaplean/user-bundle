@@ -15,6 +15,7 @@ login:
     error: Erreur d'identification ou création de compte non effectuée. Cliquez sur Créer un compte. #Identifiant/Mot de passe incorrect
     bad_credentials: Erreur d'identification ou création de compte non effectuée. Cliquez sur Créer un compte. #Identifiant/Mot de passe incorrect
     user_account_is_disabled: Votre compte n'est pas activé
+    invalid_csrf_token: Votre session d'authentification est expirée, veuillez recharger la page
 
 register:
     form:
