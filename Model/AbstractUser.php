@@ -1,14 +1,5 @@
 <?php
 
-/**
- * AbstractUser.php
- *
- * @package   Chaplean\Bundle\UserBundle\Model
- * @author    Benoit - Chaplean <benoit@chaplean.com>
- * @copyright 2014 - 2015 Chaplean (http://www.chaplean.com)
- * @since     0.1.0
- */
-
 namespace Chaplean\Bundle\UserBundle\Model;
 
 use Chaplean\Bundle\UserBundle\Model\UserInterface as ChapleanUserInterface;
@@ -18,7 +9,12 @@ use Symfony\Component\Security\Core\User\UserInterface as SecurityUserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Class AbstractUser.
+ * AbstractUser.php
+ *
+ * @package   Chaplean\Bundle\UserBundle\Model
+ * @author    Benoit - Chaplean <benoit@chaplean.com>
+ * @copyright 2014 - 2015 Chaplean (http://www.chaplean.com)
+ * @since     1.0.0
  *
  * @ORM\MappedSuperclass
  */
