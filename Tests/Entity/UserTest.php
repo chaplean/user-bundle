@@ -10,18 +10,20 @@
 namespace Chaplean\Bundle\UserBundle\Tests\Entity;
 
 use Chaplean\Bundle\UserBundle\Entity\User;
+use Chaplean\Bundle\UserBundle\Model\AbstractUser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class UserTest extends \PHPUnit_Framework_TestCase {
-
+class UserTest extends \PHPUnit_Framework_TestCase
+{
+    /**
+     * @expectedException \Exception
+     * @expectedExceptionMessage Method deprecated
+     */
     public function testUsername()
     {
         $user = $this->getUser();
-        $this->assertNull($user->getUsername());
 
         $user->setUsername('john');
-        $this->assertEquals('john', $user->getUsername());
-
     }
 
     public function testEmail()
@@ -106,10 +108,15 @@ class UserTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
-     * @return User
+     * @return DummyUser
      */
     protected function getUser()
     {
-        return new User();
+        return new DummyUser();
     }
+}
+
+class DummyUser extends AbstractUser
+{
+    /**/
 }
