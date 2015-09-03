@@ -52,14 +52,21 @@ class AuthenticationHandler implements AuthenticationSuccessHandlerInterface, Au
         /** @var User $user */
         $user = $this->security->getToken()->getUser();
 
+        $user->setLastLogin(new \DateTime('now'));
+
+        $em = $this->container->get('doctrine.orm.entity_manager');
+        $em->persist($user);
+
         // reset token
         if ($user->isEnabled() && $user->getConfirmationToken() != null) {
             /** @var UserManager $userManager */
             $userManager = $this->container->get('chaplean_user.user_manager');
 
             $userManager->cleanUser($user);
-            $userManager->updateUser($user, true);
+            $userManager->updateUser($user, false);
         }
+
+        $em->flush();
 
         $referer = $request->headers->get('referer');
 
