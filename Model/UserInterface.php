@@ -2,6 +2,8 @@
 
 namespace Chaplean\Bundle\UserBundle\Model;
 
+use FOS\UserBundle\Model\UserInterface as FOSUserInterface;
+
 /**
  * Interface UserInterface.
  *
@@ -10,12 +12,8 @@ namespace Chaplean\Bundle\UserBundle\Model;
  * @copyright 2014 - 2015 Chaplean (http://www.chaplean.com)
  * @since     0.1.0
  */
-interface UserInterface extends \Serializable
+interface UserInterface extends \Serializable, FOSUserInterface
 {
-    const ROLE_DEFAULT = 'ROLE_USER';
-    const ROLE_ADMIN = 'ROLE_ADMIN';
-    const ROLE_SUPER_ADMIN = 'ROLE_SUPER_ADMIN';
-
     /**
      * Gets email.
      *
