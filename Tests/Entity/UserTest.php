@@ -15,17 +15,6 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class UserTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * @expectedException \Exception
-     * @expectedExceptionMessage Method deprecated
-     */
-    public function testUsername()
-    {
-        $user = $this->getUser();
-
-        $user->setUsername('john');
-    }
-
     public function testEmail()
     {
         $user = $this->getUser();

@@ -838,11 +838,10 @@ abstract class AbstractUser implements ChapleanUserInterface
      *
      * @return string The username
      * @deprecated Username is replaced by email
-     * @throws \Exception
      */
     public function getUsername()
     {
-        throw new \Exception('Method deprecated');
+        return $this->email;
     }
 
     /**
@@ -852,12 +851,11 @@ abstract class AbstractUser implements ChapleanUserInterface
      *
      * @return self
      * @deprecated Username not used in ChapleanUserBundle, see email
-     * @throws \Exception
      */
     public function setUsername($username)
     {
         $username = null;
-        throw new \Exception('Method deprecated');
+        return $this;
     }
 
     /**
@@ -865,11 +863,10 @@ abstract class AbstractUser implements ChapleanUserInterface
      *
      * @return string
      * @deprecated Username not used in ChapleanUserBundle
-     * @throws \Exception
      */
     public function getUsernameCanonical()
     {
-        throw new \Exception('Method deprecated');
+        return $this->email;
     }
 
     /**
@@ -879,12 +876,11 @@ abstract class AbstractUser implements ChapleanUserInterface
      *
      * @return self
      * @deprecated Username not used in ChapleanUserBundle, see email
-     * @throws \Exception
      */
     public function setUsernameCanonical($usernameCanonical)
     {
         $usernameCanonical = null;
-        throw new \Exception('Method deprecated');
+        return $this;
     }
 
     /**
@@ -892,11 +888,10 @@ abstract class AbstractUser implements ChapleanUserInterface
      *
      * @return string
      * @deprecated Username not used in ChapleanUserBundle, see email
-     * @throws \Exception
      */
     public function getEmailCanonical()
     {
-        throw new \Exception('Method deprecated');
+        return $this->email;
     }
 
     /**
@@ -906,12 +901,11 @@ abstract class AbstractUser implements ChapleanUserInterface
      *
      * @return self
      * @deprecated Username not used in ChapleanUserBundle, see email
-     * @throws \Exception
      */
     public function setEmailCanonical($emailCanonical)
     {
         $emailCanonical = null;
-        throw new \Exception('Method deprecated');
+        return $this;
     }
 
     /**
