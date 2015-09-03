@@ -10,7 +10,7 @@ use FOS\UserBundle\Model\UserInterface as FOSUserInterface;
  * @package   Chaplean\Bundle\UserBundle\Model
  * @author    Benoit - Chaplean <benoit@chaplean.com>
  * @copyright 2014 - 2015 Chaplean (http://www.chaplean.com)
- * @since     0.1.0
+ * @since     1.0.0
  */
 interface UserInterface extends \Serializable, FOSUserInterface
 {
