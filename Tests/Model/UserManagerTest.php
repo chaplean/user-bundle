@@ -11,9 +11,10 @@
 
 namespace Chaplean\Bundle\UserBundle\Tests\Model;
 
+use Chaplean\Bundle\UnitBundle\Test\LogicalTest;
 use Chaplean\Bundle\UserBundle\Doctrine\User;
 
-class UserManagerTest extends \PHPUnit_Framework_TestCase
+class UserManagerTest extends LogicalTest
 {
     private $manager;
     private $encoderFactory;

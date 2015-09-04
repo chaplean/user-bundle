@@ -9,23 +9,13 @@
 
 namespace Chaplean\Bundle\UserBundle\Tests\Entity;
 
+use Chaplean\Bundle\UnitBundle\Test\LogicalTest;
 use Chaplean\Bundle\UserBundle\Entity\User;
 use Chaplean\Bundle\UserBundle\Model\AbstractUser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class UserTest extends \PHPUnit_Framework_TestCase
+class UserTest extends LogicalTest
 {
-    /**
-     * @expectedException \Exception
-     * @expectedExceptionMessage Method deprecated
-     */
-    public function testUsername()
-    {
-        $user = $this->getUser();
-
-        $user->setUsername('john');
-    }
-
     public function testEmail()
     {
         $user = $this->getUser();

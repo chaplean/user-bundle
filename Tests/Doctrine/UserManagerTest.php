@@ -9,10 +9,11 @@
 
 namespace Chaplean\Bundle\UserBundle\Tests\Doctrine;
 
+use Chaplean\Bundle\UnitBundle\Test\LogicalTest;
 use Chaplean\Bundle\UserBundle\Model\AbstractUser;
 use Chaplean\Bundle\UserBundle\Doctrine\UserManager;
 
-class UserManagerTest extends \PHPUnit_Framework_TestCase
+class UserManagerTest extends LogicalTest
 {
     const USER_CLASS = 'Chaplean\Bundle\UserBundle\Tests\Doctrine\DummyUser';
 

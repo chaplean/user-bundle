@@ -842,7 +842,7 @@ abstract class AbstractUser implements ChapleanUserInterface
      */
     public function getUsername()
     {
-        throw new \Exception('Method deprecated');
+        return $this->email;
     }
 
     /**
@@ -857,7 +857,7 @@ abstract class AbstractUser implements ChapleanUserInterface
     public function setUsername($username)
     {
         $username = null;
-        throw new \Exception('Method deprecated');
+        return $this;
     }
 
     /**
@@ -869,7 +869,7 @@ abstract class AbstractUser implements ChapleanUserInterface
      */
     public function getUsernameCanonical()
     {
-        throw new \Exception('Method deprecated');
+        return $this->email;
     }
 
     /**
@@ -884,7 +884,7 @@ abstract class AbstractUser implements ChapleanUserInterface
     public function setUsernameCanonical($usernameCanonical)
     {
         $usernameCanonical = null;
-        throw new \Exception('Method deprecated');
+        return $this;
     }
 
     /**
@@ -896,7 +896,7 @@ abstract class AbstractUser implements ChapleanUserInterface
      */
     public function getEmailCanonical()
     {
-        throw new \Exception('Method deprecated');
+        return $this->email;
     }
 
     /**
@@ -911,7 +911,7 @@ abstract class AbstractUser implements ChapleanUserInterface
     public function setEmailCanonical($emailCanonical)
     {
         $emailCanonical = null;
-        throw new \Exception('Method deprecated');
+        return $this;
     }
 
     /**

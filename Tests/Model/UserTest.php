@@ -9,9 +9,11 @@
 
 namespace Chaplean\Bundle\UserBundle\Tests\Model;
 
+use Chaplean\Bundle\UnitBundle\Test\LogicalTest;
 use Chaplean\Bundle\UserBundle\Doctrine\User;
 
-class UserTest extends \PHPUnit_Framework_TestCase {
+class UserTest extends LogicalTest
+{
 
     public function testEmail()
     {
