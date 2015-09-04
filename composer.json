@@ -29,7 +29,7 @@
         "sensio/distribution-bundle": "~4.0",
         "sensio/framework-extra-bundle": "~3.0,>=3.0.2",
         "friendsofsymfony/user-bundle": "~2.0@dev",
-        "chpaplean/unit-bundle": "1.6.*"
+        "chaplean/unit-bundle": "1.6.*"
     },
     "autoload": {
         "psr-0": {
