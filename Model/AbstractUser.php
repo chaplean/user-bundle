@@ -4,7 +4,6 @@ namespace Chaplean\Bundle\UserBundle\Model;
 
 use Chaplean\Bundle\UserBundle\Model\UserInterface as ChapleanUserInterface;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Routing\Exception\MethodNotAllowedException;
 use Symfony\Component\Security\Core\Role\Role;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -35,20 +34,6 @@ abstract class AbstractUser implements ChapleanUserInterface
      * @ORM\Column(name="email", type="string", length=250, nullable=false)
      */
     protected $email;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="firstname", type="string", length=250, nullable=false)
-     */
-    protected $firstname;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="lastname", type="string", length=250, nullable=false)
-     */
-    protected $lastname;
 
     /**
      * The salt to use for hashing.
@@ -769,55 +754,6 @@ abstract class AbstractUser implements ChapleanUserInterface
     public function getPasswordRequestedAt()
     {
         return $this->datePasswordRequest;
-    }
-
-
-    /**
-     * Get lastname.
-     *
-     * @return string
-     */
-    public function getLastname()
-    {
-        return $this->lastname;
-    }
-
-    /**
-     * Set lastname.
-     *
-     * @param string $lastname
-     *
-     * @return self
-     */
-    public function setLastname($lastname)
-    {
-        $this->lastname = strtoupper($lastname);
-
-        return $this;
-    }
-
-    /**
-     * Get firstname.
-     *
-     * @return string
-     */
-    public function getFirstname()
-    {
-        return $this->firstname;
-    }
-
-    /**
-     * Set firstname.
-     *
-     * @param string $firstname
-     *
-     * @return self
-     */
-    public function setFirstname($firstname)
-    {
-        $this->firstname = ucwords(strtolower($firstname));
-
-        return $this;
     }
 
     /**
