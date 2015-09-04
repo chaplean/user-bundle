@@ -21,7 +21,7 @@
     </testsuites>
 
     <php>
-        <server name="KERNEL_DIR" value="app/" />
+        <server name="KERNEL_DIR" value="vendor/chaplean/unit-bundle/Chaplean/Bundle/UnitBundle/app/" />
     </php>
 
     <filter>
