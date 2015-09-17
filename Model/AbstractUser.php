@@ -1,28 +1,23 @@
 <?php
 
+namespace Chaplean\Bundle\UserBundle\Model;
+
+use Chaplean\Bundle\UserBundle\Model\UserInterface as ChapleanUserInterface;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\Role\Role;
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * AbstractUser.php
  *
  * @package   Chaplean\Bundle\UserBundle\Model
  * @author    Benoit - Chaplean <benoit@chaplean.com>
  * @copyright 2014 - 2015 Chaplean (http://www.chaplean.com)
- * @since     0.1.0
- */
-
-namespace Chaplean\Bundle\UserBundle\Model;
-
-use Chaplean\Bundle\UserBundle\Model\UserInterface as ChapleanUserInterface;
-use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\Role\Role;
-use Symfony\Component\Security\Core\User\UserInterface as SecurityUserInterface;
-use Symfony\Component\Validator\Constraints as Assert;
-
-/**
- * Class AbstractUser.
+ * @since     1.0.0
  *
  * @ORM\MappedSuperclass
  */
-abstract class AbstractUser implements ChapleanUserInterface, SecurityUserInterface
+abstract class AbstractUser implements ChapleanUserInterface
 {
     /**
      * @var integer
@@ -783,5 +778,97 @@ abstract class AbstractUser implements ChapleanUserInterface, SecurityUserInterf
     public function getUsername()
     {
         return $this->email;
+    }
+
+    /**
+     * Sets the username.
+     *
+     * @param string $username
+     *
+     * @return self
+     * @deprecated Username not used in ChapleanUserBundle, see email
+     */
+    public function setUsername($username)
+    {
+        $username = null;
+        return $this;
+    }
+
+    /**
+     * Gets the canonical username in search and sort queries.
+     *
+     * @return string
+     * @deprecated Username not used in ChapleanUserBundle
+     */
+    public function getUsernameCanonical()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Sets the canonical username.
+     *
+     * @param string $usernameCanonical
+     *
+     * @return self
+     * @deprecated Username not used in ChapleanUserBundle, see email
+     */
+    public function setUsernameCanonical($usernameCanonical)
+    {
+        $usernameCanonical = null;
+        return $this;
+    }
+
+    /**
+     * Gets the canonical email in search and sort queries.
+     *
+     * @return string
+     * @deprecated Username not used in ChapleanUserBundle, see email
+     */
+    public function getEmailCanonical()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Sets the canonical email.
+     *
+     * @param string $emailCanonical
+     *
+     * @return self
+     * @deprecated Username not used in ChapleanUserBundle, see email
+     */
+    public function setEmailCanonical($emailCanonical)
+    {
+        $emailCanonical = null;
+        return $this;
+    }
+
+    /**
+     * Tells if the the given user has the super admin role.
+     *
+     * @return boolean
+     */
+    public function isSuperAdmin()
+    {
+        return $this->hasRole(self::ROLE_SUPER_ADMIN);
+    }
+
+    /**
+     * Sets the super admin status
+     *
+     * @param boolean $boolean
+     *
+     * @return self
+     */
+    public function setSuperAdmin($boolean)
+    {
+        if ($boolean) {
+            $this->addRole(self::ROLE_SUPER_ADMIN);
+        } else {
+            $this->removeRole(self::ROLE_SUPER_ADMIN);
+        }
+
+        return $this;
     }
 }
