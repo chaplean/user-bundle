@@ -146,7 +146,6 @@ abstract class AbstractUser implements ChapleanUserInterface
      */
     protected $dateCredentialExpired;
 
-
     /**
      * Constructor
      */
@@ -174,6 +173,7 @@ abstract class AbstractUser implements ChapleanUserInterface
      * Set email
      *
      * @param string $email
+     *
      * @return self
      */
     public function setEmail($email)
@@ -197,6 +197,7 @@ abstract class AbstractUser implements ChapleanUserInterface
      * Set passwordSalt
      *
      * @param string $passwordSalt
+     *
      * @return self
      */
     public function setPasswordSalt($passwordSalt)
@@ -233,6 +234,7 @@ abstract class AbstractUser implements ChapleanUserInterface
      * Set password
      *
      * @param string $password
+     *
      * @return self
      */
     public function setPassword($password)
@@ -430,7 +432,7 @@ abstract class AbstractUser implements ChapleanUserInterface
      *
      * This overwrites any previous roles.
      *
-     * @param array[string] $roles
+     * @param array [string] $roles
      *
      * @return self
      */
@@ -531,6 +533,7 @@ abstract class AbstractUser implements ChapleanUserInterface
      * Set dateAdd
      *
      * @param \DateTime $dateAdd
+     *
      * @return self
      */
     public function setDateAdd($dateAdd)
@@ -554,6 +557,7 @@ abstract class AbstractUser implements ChapleanUserInterface
      * Set dateUpdate
      *
      * @param \DateTime $dateUpdate
+     *
      * @return self
      */
     public function setDateUpdate($dateUpdate)
@@ -577,6 +581,7 @@ abstract class AbstractUser implements ChapleanUserInterface
      * Set dateLastlogin
      *
      * @param \DateTime $dateLastlogin
+     *
      * @return self
      */
     public function setDateLastlogin($dateLastlogin)
@@ -614,6 +619,7 @@ abstract class AbstractUser implements ChapleanUserInterface
      * Set dateExpired
      *
      * @param \DateTime $dateExpired
+     *
      * @return self
      */
     public function setDateExpired($dateExpired)
@@ -637,6 +643,7 @@ abstract class AbstractUser implements ChapleanUserInterface
      * Set dateCredentialExpired
      *
      * @param \DateTime $dateCredentialExpired
+     *
      * @return self
      */
     public function setDateCredentialExpired($dateCredentialExpired)
@@ -656,8 +663,6 @@ abstract class AbstractUser implements ChapleanUserInterface
         return $this->dateCredentialExpired;
     }
 
-
-
     /**
      * (PHP 5 &gt;= 5.1.0)<br/>
      * String representation of object
@@ -667,16 +672,18 @@ abstract class AbstractUser implements ChapleanUserInterface
      */
     public function serialize()
     {
-        return serialize(array(
-            $this->password,
-            $this->passwordSalt,
-            $this->email,
-            $this->expired,
-            $this->locked,
-            $this->credentialExpired,
-            $this->enabled,
-            $this->id,
-        ));
+        return serialize(
+            array(
+                $this->password,
+                $this->passwordSalt,
+                $this->email,
+                $this->expired,
+                $this->locked,
+                $this->credentialExpired,
+                $this->enabled,
+                $this->id,
+            )
+        );
     }
 
     /**
@@ -698,16 +705,7 @@ abstract class AbstractUser implements ChapleanUserInterface
         // older data which does not include all properties.
         $data = array_merge($data, array_fill(0, 2, null));
 
-        list(
-            $this->password,
-            $this->passwordSalt,
-            $this->email,
-            $this->expired,
-            $this->locked,
-            $this->credentialsExpired,
-            $this->enabled,
-            $this->id
-            ) = $data;
+        list($this->password, $this->passwordSalt, $this->email, $this->expired, $this->locked, $this->credentialsExpired, $this->enabled, $this->id) = $data;
     }
 
     /**
@@ -791,6 +789,7 @@ abstract class AbstractUser implements ChapleanUserInterface
     public function setUsername($username)
     {
         $username = null;
+
         return $this;
     }
 
@@ -816,6 +815,7 @@ abstract class AbstractUser implements ChapleanUserInterface
     public function setUsernameCanonical($usernameCanonical)
     {
         $usernameCanonical = null;
+
         return $this;
     }
 
@@ -841,6 +841,7 @@ abstract class AbstractUser implements ChapleanUserInterface
     public function setEmailCanonical($emailCanonical)
     {
         $emailCanonical = null;
+
         return $this;
     }
 
