@@ -31,7 +31,7 @@ class ProfileController extends BaseController
         /** @var User $user */
         $user = $this->getUser();
 
-        $form = $this->createForm(new ProfileFormType(), $user);
+        $form = $this->createForm(ProfileFormType::class, $user);
 
         if ($request->getMethod() == 'POST') {
             $form->setData($user);
@@ -63,8 +63,6 @@ class ProfileController extends BaseController
                 ));
             }
         } else {
-            $enumTitle = User::getEnumTitle();
-            $title = array_keys($enumTitle, $user->getTitle());
             return $this->render(
                 'ChapleanUserBundle:Registration:register.html.twig',
                 array(
