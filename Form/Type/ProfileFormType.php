@@ -3,9 +3,11 @@
 namespace Chaplean\Bundle\UserBundle\Form\Type;
 
 use Chaplean\Bundle\UserBundle\Doctrine\User;
+use FOS\UserBundle\Tests\Form\Type\RegistrationFormTypeTest;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Class ProfileFormType
@@ -28,18 +30,18 @@ class ProfileFormType extends AbstractType
         parent::buildForm($builder, $options);
             $builder
                 ->remove('dateAdd')
-                ->add('dateUpdate', 'datetime', array(
+                ->add('dateUpdate', DateTimeType::class, array(
                     'input' => 'datetime',
                     'data' => new \DateTime('now'),
                 ));
     }
 
     /**
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      *
      * @return void
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             array(
@@ -55,13 +57,13 @@ class ProfileFormType extends AbstractType
      */
     public function getParent()
     {
-        return 'chaplean_user_registration';
+        return RegistrationFormType::class;
     }
 
     /**
      * @return string
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'chaplean_user_profile';
     }

@@ -66,7 +66,7 @@ class RegistrationController extends BaseController
             return $event->getResponse();
         }
 
-        $form = $this->createForm(new RegistrationFormType());
+        $form = $this->createForm(RegistrationFormType::class);
 
         if ($request->getMethod() == 'POST') {
             $form->setData($user);
@@ -133,7 +133,7 @@ class RegistrationController extends BaseController
         $user = $userManager->findUserByConfirmationToken($token);
 
         // create user form with only password fields
-        $form = $this->createForm(new ResettingFormType(), $user);
+        $form = $this->createForm(ResettingFormType::class, $user);
 
         if (!$user) {
             // message error token is invalid
@@ -220,7 +220,7 @@ class RegistrationController extends BaseController
             $user = $userManager->createUser();
 
             /** @var Form $form */
-            $form = $this->createForm(new ForgotPasswordFormType());
+            $form = $this->createForm(ForgotPasswordFormType::class);
 
             if ($request->getMethod() == 'GET') {
                 // render form
