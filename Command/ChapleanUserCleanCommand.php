@@ -16,7 +16,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  * @copyright 2014 - 2015 Chaplean (http://www.chaplean.com)
  * @since     0.1.0
  */
-class UserCommand extends ContainerAwareCommand
+class ChapleanUserCleanCommand extends ContainerAwareCommand
 {
     /**
      * Defines how the command works;
@@ -25,7 +25,7 @@ class UserCommand extends ContainerAwareCommand
      */
     protected function configure()
     {
-        $this->setName('account:clean')->setDescription('clear user account');
+        $this->setName('chaplean:user:clean')->setDescription('clear user account');
     }
 
     /**

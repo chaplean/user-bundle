@@ -1,9 +1,21 @@
 parameters:
-    chaplean_user.authentication.handler.class: Chaplean\Bundle\UserBundle\Handler\AuthenticationHandler
-    chaplean_user.entity.user.class: Chaplean\Bundle\UserBundle\Doctrine\User
     chaplean_user.user.provider.class: Chaplean\Bundle\UserBundle\Provider\UserProvider
 
 services:
+    chaplean_user.user.manager:
+        class: Doctrine\ORM\EntityManager
+        factory: [@doctrine, getManagerForClass]
+        arguments: [%chaplean_user.entity.user.class%]
+
+    chaplean_user.user.repository:
+        class: Chaplean\Bundle\UserBundle\Repository\UserRepository
+        factory: [@chaplean_user.user.manager, getRepository]
+        arguments: [%chaplean_user.entity.user.class%]
+
+    chaplean_user.user.provider:
+        class: %chaplean_user.user.provider.class%
+        arguments: [@chaplean_user.user.repository]
+
     chaplean_user.registration.form.type:
         class: Chaplean\Bundle\UserBundle\Form\Type\RegistrationFormType
         tags:
@@ -22,8 +34,8 @@ services:
         arguments: [@service_container]
 
     chaplean_user.authentication.handler:
-            class:  %chaplean_user.authentication.handler.class%
-            arguments:  [@router, @security.token_storage, @service_container]
+            class:  Chaplean\Bundle\UserBundle\Handler\AuthenticationHandler
+            arguments:  [@doctrine, @router.default, @session, @chaplean_user.user_manager, @translator.default, @templating.engine.twig, %chaplean_user%]
 
     chaplean_user.encoder.password:
         class: Chaplean\Bundle\UserBundle\Encoder\PasswordEncoder

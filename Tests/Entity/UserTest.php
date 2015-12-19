@@ -1,4 +1,9 @@
 <?php
+
+namespace Chaplean\Bundle\UserBundle\Tests\Entity;
+
+use Chaplean\Bundle\UserBundle\Model\AbstractUser;
+
 /**
  * UserTest.php.
  *
@@ -6,15 +11,11 @@
  * @copyright 2014 - 2015 Chaplean (http://www.chaplean.com)
  * @since     1.0.0
  */
-
-namespace Chaplean\Bundle\UserBundle\Tests\Entity;
-
-use Chaplean\Bundle\UserBundle\Entity\User;
-use Chaplean\Bundle\UserBundle\Model\AbstractUser;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-
 class UserTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @return void
+     */
     public function testEmail()
     {
         $user = $this->getUser();
@@ -24,6 +25,9 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('john@chaplean.com', $user->getEmail());
     }
 
+    /**
+     * @return void
+     */
     public function testIsPasswordRequestNonExpired()
     {
         $user = $this->getUser();
@@ -38,6 +42,9 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($user->isPasswordRequestNonExpired(5));
     }
 
+    /**
+     * @return void
+     */
     public function testIsPasswordRequestAtCleared()
     {
         $user = $this->getUser();
@@ -50,10 +57,13 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($user->isPasswordRequestNonExpired(5));
     }
 
+    /**
+     * @return void
+     */
     public function testTrueHasRole()
     {
         $user = $this->getUser();
-        $defaultrole = User::ROLE_DEFAULT;
+        $defaultrole = AbstractUser::ROLE_DEFAULT;
         $newrole = 'ROLE_X';
         $this->assertTrue($user->hasRole($defaultrole));
         $user->addRole($defaultrole);
@@ -62,6 +72,9 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($user->hasRole($newrole));
     }
 
+    /**
+     * @return void
+     */
     public function testFalseHasRole()
     {
         $user = $this->getUser();
@@ -71,6 +84,9 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($user->hasRole($newrole));
     }
 
+    /**
+     * @return void
+     */
     public function testpasswordSaltElevenChars()
     {
         $user = $this->getUser();
@@ -87,6 +103,14 @@ class UserTest extends \PHPUnit_Framework_TestCase
     }
 }
 
+/**
+ * Class DummyUser.
+ *
+ * @package   Chaplean\Bundle\UserBundle\Tests\Entity
+ * @author    Valentin - Chaplean <valentin@chaplean.com>
+ * @copyright 2014 - 2015 Chaplean (http://www.chaplean.com)
+ * @since     1.0.0
+ */
 class DummyUser extends AbstractUser
 {
     /**/

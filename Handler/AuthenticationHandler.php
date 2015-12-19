@@ -3,14 +3,17 @@
 namespace Chaplean\Bundle\UserBundle\Handler;
 
 use Chaplean\Bundle\UserBundle\Doctrine\UserManager;
-use Chaplean\Bundle\UserBundle\Doctrine\User;
+use Chaplean\Bundle\UserBundle\Model\AbstractUser;
+use Doctrine\Bundle\DoctrineBundle\Registry;
+use Doctrine\ORM\EntityManager;
+use Symfony\Bridge\Twig\TwigEngine;
 use Symfony\Bundle\FrameworkBundle\Translation\Translator;
-use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\Routing\Generator\UrlGenerator;
+use Symfony\Component\Routing\Router;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Http\Authentication\AuthenticationFailureHandlerInterface;
@@ -25,62 +28,95 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationSuccessHandlerI
  */
 class AuthenticationHandler implements AuthenticationSuccessHandlerInterface, AuthenticationFailureHandlerInterface
 {
-    protected $router;
-    protected $security;
-    protected $container;
+    /**
+     * @var EntityManager
+     */
+    private $em;
 
     /**
-     * @param RouterInterface $router
-     * @param TokenStorage    $security
-     * @param Container       $container
+     * @var Router
      */
-    public function __construct(RouterInterface $router, TokenStorage $security, $container)
+    protected $router;
+
+    /**
+     * @var Session
+     */
+    protected $session;
+
+    /**
+     * @var Session
+     */
+    protected $userManager;
+
+    /**
+     * @var Translator
+     */
+    protected $translator;
+
+    /**
+     * @var TwigEngine
+     */
+    protected $template;
+
+    /**
+     * @var array
+     */
+    protected $parameters;
+
+    /**
+     * AuthenticationHandler constructor.
+     *
+     * @param Registry    $registry
+     * @param Router      $router
+     * @param Session     $session
+     * @param UserManager $userManager
+     * @param Translator  $translator
+     * @param TwigEngine  $template
+     * @param array       $parameters
+     */
+    public function __construct(Registry $registry, Router $router, Session $session, UserManager $userManager, Translator $translator, TwigEngine $template, array $parameters)
     {
-        $this->router = $router;
-        $this->security = $security;
-        $this->container = $container;
+        $this->em          = $registry->getManager();
+        $this->router      = $router;
+        $this->session     = $session;
+        $this->userManager = $userManager;
+        $this->translator  = $translator;
+        $this->template    = $template;
+        $this->parameters  = $parameters;
     }
 
     /**
      * @param Request        $request
      * @param TokenInterface $token
      *
-     * @return JsonResponse|RedirectResponse
+     * @return RedirectResponse
      */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token)
     {
-        /** @var User $user */
-        $user = $this->security->getToken()->getUser();
+        /** @var AbstractUser $user */
+        $user = $token->getUser();
 
         $user->setLastLogin(new \DateTime('now'));
 
-        $em = $this->container->get('doctrine.orm.entity_manager');
-        $em->persist($user);
-
         // reset token
         if ($user->isEnabled() && $user->getConfirmationToken() != null) {
-            /** @var UserManager $userManager */
-            $userManager = $this->container->get('chaplean_user.user_manager');
-
-            $userManager->cleanUser($user);
-            $userManager->updateUser($user, false);
+            $this->userManager->cleanUser($user);
+            $this->userManager->updateUser($user);
+        } else {
+            $this->em->persist($user);
+            $this->em->flush();
         }
 
-        $em->flush();
+        $redirection = $this->session->get('_security.main.target_path');
 
-        $referer = $request->headers->get('referer');
-
-        if (empty($referer)) {
-            $referer = $this->router->generate($this->container->getParameter('chaplean_user.controller.index_path'));
+        if (empty($redirection)) {
+            $redirection = $this->router->generate($this->parameters['controller']['index_path'], array(), UrlGenerator::ABSOLUTE_PATH);
         }
 
         if ($request->isXmlHttpRequest()) {
-            $result = array('success' => true, 'message' => $referer);
-            $response = new JsonResponse($result);
-
-            return $response;
+            return new JsonResponse(array('redirect' => $redirection));
         } else {
-            return new RedirectResponse($referer);
+            return new RedirectResponse($redirection, 302);
         }
     }
 
@@ -92,22 +128,16 @@ class AuthenticationHandler implements AuthenticationSuccessHandlerInterface, Au
      */
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
-        var_dump($exception->getMessage());
-        /** @var Translator $translator */
-        $translator = $this->container->get('translator');
-
         $messageError = str_replace('.', '', str_replace(' ', '_', strtolower($exception->getMessage())));
-        $messageError = $translator->trans('login.' . $messageError);
+        $messageError = $this->translator->trans('login.' . $messageError);
 
         if ($request->isXmlHttpRequest()) {
-            $result = array('success' => false, 'message' => $messageError);
-            $response = new JsonResponse($result);
-
-            return $response;
+            return new JsonResponse(array('error' => $messageError), 400);
         } else {
-            $request->getSession()->getFlashBag()->add('error', $messageError);
-
-            return new RedirectResponse($request->headers->get('referer'));
+            return $this->template->render($this->parameters['template_login'], array(
+                'error' => $messageError,
+            ));
         }
+
     }
 }
