@@ -29,19 +29,22 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-            ->scalarNode('template_login')->defaultValue('')->end()
-            ->arrayNode('entity')
-                ->children()
-                ->arrayNode('user')
+                ->scalarNode('template_login')->defaultValue('')->end()
+                ->arrayNode('entity')
                     ->children()
-                        ->scalarNode('class')->isRequired()->end()
+                        ->arrayNode('user')
+                            ->children()
+                                ->scalarNode('class')->isRequired()->end()
+                            ->end()
+                        ->end()
                     ->end()
                 ->end()
-            ->arrayNode('controller')
-                ->children()
-                    ->scalarNode('index_path')->isRequired()->end()
+                ->arrayNode('controller')
+                    ->children()
+                        ->scalarNode('index_path')->isRequired()->end()
+                        ->scalarNode('login_path')->isRequired()->end()
+                    ->end()
                 ->end()
-            ->end()
             ->end();
 
         return $treeBuilder;

@@ -129,15 +129,13 @@ class AuthenticationHandler implements AuthenticationSuccessHandlerInterface, Au
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
         $messageError = str_replace('.', '', str_replace(' ', '_', strtolower($exception->getMessage())));
-        $messageError = $this->translator->trans('login.' . $messageError);
+//        $messageError = $this->translator->trans('login.' . $messageError);
 
         if ($request->isXmlHttpRequest()) {
             return new JsonResponse(array('error' => $messageError), 400);
         } else {
-            return $this->template->render($this->parameters['template_login'], array(
-                'error' => $messageError,
-            ));
+            $this->session->getFlashBag()->add('error', $messageError);
+            return new RedirectResponse($this->router->generate($this->parameters['controller']['login_path'], array(), UrlGenerator::ABSOLUTE_PATH));
         }
-
     }
 }
