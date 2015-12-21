@@ -1,12 +1,4 @@
 <?php
-/**
- * UserManager
- *
- * @author    Valentin - Chaplean <valentin@chaplean.com>
- * @copyright 2014 - 2015 Chaplean (http://www.chaplean.com)
- * @since     1.0.0
- */
-
 namespace Chaplean\Bundle\UserBundle\Model;
 
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
@@ -16,6 +8,14 @@ use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface as SecurityUserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
+/**
+ * Class AbstractUserManager.
+ *
+ * @package   Chaplean\Bundle\UserBundle\Model
+ * @author    Valentin - Chaplean <valentin@chaplean.com>
+ * @copyright 2014 - 2015 Chaplean (http://www.chaplean.com)
+ * @since     2.0.0
+ */
 abstract class AbstractUserManager implements UserManagerInterface, UserProviderInterface
 {
     /**
@@ -88,12 +88,28 @@ abstract class AbstractUserManager implements UserManagerInterface, UserProvider
      */
     public function loadUserByUsername($username)
     {
+        $username = null;
         return;
     }
 
+    /**
+     * @param string $email
+     *
+     * @return UserInterface
+     */
     public function loadUserByEmail($email)
     {
+        $user = $this->findUserByEmail($email);
 
+        if (is_array($user)) {
+            $user = $user[0];
+        }
+
+        if (!$user) {
+            throw new UsernameNotFoundException(sprintf('No user with email "%s" was found.', $email));
+        }
+
+        return $user;
     }
 
     /**

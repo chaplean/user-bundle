@@ -1,11 +1,4 @@
 <?php
-/**
- * UserProvider.php.
- *
- * @author    Valentin - Chaplean <valentin@chaplean.com>
- * @copyright 2014 - 2015 Chaplean (http://www.chaplean.com)
- * @since     1.0.0
- */
 
 namespace Chaplean\Bundle\UserBundle\Provider;
 
@@ -15,6 +8,13 @@ use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
+/**
+ * UserProvider.php.
+ *
+ * @author    Valentin - Chaplean <valentin@chaplean.com>
+ * @copyright 2014 - 2015 Chaplean (http://www.chaplean.com)
+ * @since     1.0.0
+ */
 class UserProvider implements UserProviderInterface
 {
     /**

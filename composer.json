@@ -1,13 +1,21 @@
 {
     "name": "chaplean/user-bundle",
     "description": "Creates a user account and log in (from FOSUserBundle)",
-    "keywords": ["symfony2"],
+    "keywords": [
+        "symfony2"
+    ],
     "type": "symfony-bundle",
     "license": "MIT",
     "authors": [
         {
             "name": "Chaplean",
             "homepage": "http://chaplean.com/"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "http://satis.chaplean.com"
         }
     ],
     "require": {
@@ -21,12 +29,54 @@
         "symfony/monolog-bundle": "~2.4",
         "sensio/distribution-bundle": "~4.0",
         "sensio/framework-extra-bundle": "^3.0.2",
-        "friendsofsymfony/user-bundle": "~2.0@dev"
+        "friendsofsymfony/user-bundle": "~2.0@dev",
+        "incenteev/composer-parameter-handler": "~2.1",
+        "friendsofsymfony/jsrouting-bundle": "~1.5",
+        "friendsofsymfony/rest-bundle": "~1.7"
+    },
+    "require-dev": {
+        "sensio/generator-bundle": "~2.5",
+        "chaplean/unit-bundle": "^2.0",
+        "chaplean/coding-standard": "1.1.*"
+    },
+    "scripts": {
+        "post-root-package-install": [
+            "SymfonyStandard\\Composer::hookRootPackageInstall"
+        ],
+        "post-install-cmd": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache"
+        ],
+        "post-update-cmd": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache"
+        ]
+    },
+    "config": {
+        "bin-dir": "bin",
+        "discard-changes": true
+    },
+    "extra": {
+        "symfony-app-dir": "app",
+        "symfony-bin-dir": "bin",
+        "symfony-var-dir": "var",
+        "symfony-web-dir": "web",
+        "symfony-assets-install": "symlink",
+        "incenteev-parameters": {
+            "file": "app/config/parameters.yml",
+            "keep-outdated": true
+        },
+        "branch-alias": {
+            "dev-master": "2.8-dev"
+        }
     },
     "autoload": {
         "psr-0": {
-            "Chaplean\\Bundle\\UserBundle": ""
+            "Chaplean\\Bundle\\UserBundle": "",
+            "SymfonyStandard": "app/"
         }
     },
-    "target-dir" : "Chaplean/Bundle/UserBundle"
+    "target-dir": "Chaplean/Bundle/UserBundle"
 }

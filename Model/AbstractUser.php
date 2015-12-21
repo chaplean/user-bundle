@@ -4,9 +4,7 @@ namespace Chaplean\Bundle\UserBundle\Model;
 
 use Chaplean\Bundle\UserBundle\Model\UserInterface as ChapleanUserInterface;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Routing\Exception\MethodNotAllowedException;
 use Symfony\Component\Security\Core\Role\Role;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * AbstractUser.php
@@ -720,7 +718,7 @@ abstract class AbstractUser implements ChapleanUserInterface
         // older data which does not include all properties.
         $data = array_merge($data, array_fill(0, 2, null));
 
-        list($this->password, $this->passwordSalt, $this->email, $this->expired, $this->locked, $this->credentialsExpired, $this->enabled, $this->id) = $data;
+        list($this->password, $this->passwordSalt, $this->email, $this->expired, $this->locked, $this->credentialExpired, $this->enabled, $this->id) = $data;
     }
 
     /**
@@ -768,7 +766,6 @@ abstract class AbstractUser implements ChapleanUserInterface
     {
         return $this->datePasswordRequest;
     }
-
 
     /**
      * Get lastname.
