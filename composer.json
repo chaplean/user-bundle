@@ -12,6 +12,13 @@
             "homepage": "http://chaplean.com/"
         }
     ],
+    "autoload": {
+        "psr-0": {
+            "Chaplean\\Bundle\\UserBundle": "",
+            "SymfonyStandard": "app/"
+        }
+    },
+    "target-dir": "Chaplean/Bundle/UserBundle",
     "repositories": [
         {
             "type": "composer",
@@ -45,13 +52,11 @@
         ],
         "post-install-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache"
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap"
         ],
         "post-update-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache"
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap"
         ]
     },
     "config": {
@@ -69,14 +74,7 @@
             "keep-outdated": true
         },
         "branch-alias": {
-            "dev-master": "2.8-dev"
+            "dev-master": "2.7-dev"
         }
-    },
-    "autoload": {
-        "psr-0": {
-            "Chaplean\\Bundle\\UserBundle": "",
-            "SymfonyStandard": "app/"
-        }
-    },
-    "target-dir": "Chaplean/Bundle/UserBundle"
+    }
 }
