@@ -49,6 +49,6 @@ class SecurityController extends Controller
         /** @var Security $security */
         $security = $this->get('chaplean_user.security');
 
-        return $this->render('ChapleanUserBundle:Security:login-register.html.twig', $security->getParametersLogin());
+        return $this->render('ChapleanUserBundle:Security:login.html.twig', $security->getParametersLogin());
     }
 }
