@@ -20,7 +20,7 @@ class ProfileController extends BaseController
      */
     public function indexAction(Request $request)
     {
-        $indexUrl = $this->container->getParameter('chaplean_user.controller.index_path');
+        $indexUrl = $this->container->getParameter('chaplean_user.controller.index_route');
 
         if (!$request->isXmlHttpRequest()) {
             return $this->redirect($this->generateUrl($indexUrl));

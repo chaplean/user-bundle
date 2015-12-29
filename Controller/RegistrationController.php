@@ -38,7 +38,7 @@ class RegistrationController extends BaseController
      */
     public function registerAction(Request $request)
     {
-        $indexPath = $this->container->getParameter('chaplean_user.controller.index_path');
+        $indexPath = $this->container->getParameter('chaplean_user.controller.index_route');
 
         if (!$request->isXmlHttpRequest()) {
             return $this->redirectToRoute($indexPath);
@@ -120,7 +120,7 @@ class RegistrationController extends BaseController
         /** @var Translator $translator */
         $translator = $this->get('translator');
 
-        $indexPath = $this->container->getParameter('chaplean_user.controller.index_path');
+        $indexPath = $this->container->getParameter('chaplean_user.controller.index_route');
 
         if (!$request->isXmlHttpRequest()) {
             return $this->render('ChapleanUserBundle:Registration:confirmed.html.twig');
@@ -265,7 +265,7 @@ class RegistrationController extends BaseController
                 }
             }
         }
-        $indexPath = $this->container->getParameter('chaplean_user.controller.index_path');
+        $indexPath = $this->container->getParameter('chaplean_user.controller.index_route');
         // redirection to the homepage for no ajax request
         return $this->redirectToRoute($indexPath);
     }

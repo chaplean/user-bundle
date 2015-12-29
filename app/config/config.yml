@@ -1,6 +1,7 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
+    - { resource: @ChapleanUserBundle/Resources/config/config.yml }
 
 framework:
     translator:      { fallback: "%locale%" }
@@ -114,11 +115,6 @@ doctrine:
                 mappings:
                     ChapleanUserBundle: ~
 
-fos_user:
-    db_driver:     orm
-    firewall_name: main
-    user_class:    Chaplean\Bundle\UserBundle\Entity\DummyUser
-
 # Swiftmailer Configuration
 swiftmailer:
     transport: "%mailer_transport%"
@@ -128,6 +124,5 @@ swiftmailer:
     spool:     { type: memory }
 
 chaplean_user:
-    entity:
-        user:
-            class: Chaplean\Bundle\UserBundle\Entity\DummyUser
+    controller:
+        index_route: chaplean_user_index
