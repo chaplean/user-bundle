@@ -85,7 +85,7 @@ chaplean_user:
 
 ### Configure security
 
-`app/config/security.yml`:
+In `app/config/security.yml`:
 ```yaml
 imports:
     - { resource: @ChapleanUserBundle/Resources/config/security.yml }
@@ -103,3 +103,11 @@ security:
 
 ### Import routing.yml
 
+In `app/config/routing.yml`:
+```yaml
+fos_user:
+    resource: @FOSUserBundle/Resources/config/routing/all.xml
+
+chaplean_user:
+    resource: @ChapleanUserBundle/Resources/config/routing.yml
+```
