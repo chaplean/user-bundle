@@ -72,7 +72,7 @@ Import default config in `app/config/config.yml`:
 
 ```yaml
 imports:
-    - { resource: @ChapleanUnitBundle/Resources/config/config.yml }
+    - { resource: @ChapleanUserBundle/Resources/config/config.yml }
 ```
 
 Define a route name for index path
@@ -98,4 +98,8 @@ security:
             encode_as_base64:     true
             iterations:           1000
 ```
+
+
+
+### Import routing.yml
 

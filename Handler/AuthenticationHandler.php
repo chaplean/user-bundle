@@ -110,7 +110,7 @@ class AuthenticationHandler implements AuthenticationSuccessHandlerInterface, Au
         $redirection = $this->session->get('_security.main.target_path');
 
         if (empty($redirection)) {
-            $redirection = $this->router->generate($this->parameters['controller']['index_path'], array(), UrlGenerator::ABSOLUTE_PATH);
+            $redirection = $this->router->generate($this->parameters['controller']['index_route'], array(), UrlGenerator::ABSOLUTE_PATH);
         }
 
         if ($request->isXmlHttpRequest()) {
@@ -135,7 +135,7 @@ class AuthenticationHandler implements AuthenticationSuccessHandlerInterface, Au
             return new JsonResponse(array('error' => $messageError), 400);
         } else {
             $this->session->getFlashBag()->add('error', $messageError);
-            return new RedirectResponse($this->router->generate($this->parameters['controller']['login_path'], array(), UrlGenerator::ABSOLUTE_PATH));
+            return new RedirectResponse($this->router->generate($this->parameters['controller']['login_route'], array(), UrlGenerator::ABSOLUTE_PATH));
         }
     }
 }
