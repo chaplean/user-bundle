@@ -25,6 +25,8 @@
             "url": "http://satis.chaplean.com"
         }
     ],
+    "prefer-stable": true,
+    "minimum-stability": "dev",
     "require": {
         "php": ">=5.5.9",
         "symfony/symfony": "2.8.*",
@@ -34,7 +36,7 @@
         "symfony/assetic-bundle": "~2.3",
         "symfony/swiftmailer-bundle": "~2.3",
         "symfony/monolog-bundle": "~2.4",
-        "sensio/distribution-bundle": "~4.0",
+        "sensio/distribution-bundle": "~5.0",
         "sensio/framework-extra-bundle": "^3.0.2",
         "friendsofsymfony/user-bundle": "~2.0@dev",
         "incenteev/composer-parameter-handler": "~2.1",
@@ -42,14 +44,11 @@
         "friendsofsymfony/rest-bundle": "~1.7"
     },
     "require-dev": {
-        "sensio/generator-bundle": "~2.5",
+        "sensio/generator-bundle": "~3.0",
         "chaplean/unit-bundle": "^2.0",
         "chaplean/coding-standard": "1.1.*"
     },
     "scripts": {
-        "post-root-package-install": [
-            "SymfonyStandard\\Composer::hookRootPackageInstall"
-        ],
         "post-install-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap"
@@ -74,7 +73,7 @@
             "keep-outdated": true
         },
         "branch-alias": {
-            "dev-master": "2.7-dev"
+            "dev-master": "2.8-dev"
         }
     }
 }
