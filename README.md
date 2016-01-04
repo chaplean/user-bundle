@@ -11,9 +11,10 @@ Include ChapleanUserBundle in `composer.json`
 
 ``` json
 {
+"prefer-stable": true,
+"minimum-stability": "dev",
 ...
 "require": {
-        "friendsofsymfony/user-bundle": "~2.0@dev",
         "chaplean/user-bundle": "^2.0"
         ...
         }
