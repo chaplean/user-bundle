@@ -92,6 +92,12 @@ imports:
     - { resource: @ChapleanUserBundle/Resources/config/security.yml }
     
 security:
+    access_control:
+        - { path: ^/index$,         role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/login$,         role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register,       role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/forgot,         role: IS_AUTHENTICATED_ANONYMOUSLY }
+
     encoders:
         <NamespaceUserEntity>:
             algorithm:            pbkdf2
