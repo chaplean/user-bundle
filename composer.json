@@ -13,12 +13,11 @@
         }
     ],
     "autoload": {
-        "psr-0": {
-            "Chaplean\\Bundle\\UserBundle": "",
-            "SymfonyStandard": "app/"
-        }
+        "psr-4": {
+            "Chaplean\\Bundle\\UserBundle\\": ""
+        },
+        "classmap": ["app/AppKernel.php"]
     },
-    "target-dir": "Chaplean/Bundle/UserBundle",
     "repositories": [
         {
             "type": "composer",
