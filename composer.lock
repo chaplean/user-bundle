@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "76b51f6dbd3f44a8db8dd9da78b7cde7",
+    "hash": "df17d526df122e9f59d7d529558ed938",
     "content-hash": "36031c5ea1243810f01ee5f7a27a7fca",
     "packages": [
         {
@@ -3767,16 +3767,16 @@
         },
         {
             "name": "nelmio/alice",
-            "version": "2.1.2",
+            "version": "2.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nelmio/alice.git",
-                "reference": "f9afb65c8511967d672b6bc451d7156ea437d796"
+                "reference": "c05812b4864b2bdf547607f1c7f0ea8c847e7f9a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nelmio/alice/zipball/f9afb65c8511967d672b6bc451d7156ea437d796",
-                "reference": "f9afb65c8511967d672b6bc451d7156ea437d796",
+                "url": "https://api.github.com/repos/nelmio/alice/zipball/c05812b4864b2bdf547607f1c7f0ea8c847e7f9a",
+                "reference": "c05812b4864b2bdf547607f1c7f0ea8c847e7f9a",
                 "shasum": ""
             },
             "require": {
@@ -3821,7 +3821,7 @@
                 "orm",
                 "test"
             ],
-            "time": "2015-12-10 10:03:17"
+            "time": "2015-12-28 20:40:51"
         },
         {
             "name": "phpdocumentor/reflection-docblock",

@@ -4,7 +4,6 @@ security:
         - { path: ^/login$,         role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register,       role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/forgot,         role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/administration, role: ROLE_USER     }
 
     firewalls:
         dev:
@@ -19,7 +18,9 @@ security:
                 use_forward: false
                 remember_me: true
                 use_referer: true
-                csrf_provider: form.csrf_provider
+                success_handler: chaplean_user.authentication.handler_http
+                failure_handler: chaplean_user.authentication.handler_http
+                csrf_provider: security.csrf.token_manager
             logout:
                 path: /logout
                 target: /

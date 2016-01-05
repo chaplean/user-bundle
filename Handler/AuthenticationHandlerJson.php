@@ -47,7 +47,7 @@ class AuthenticationHandlerJson extends AuthenticationHandler
      */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token)
     {
-        $redirection = $this->onAuthenticationSuccess($request, $token);
+        $redirection = parent::onAuthenticationSuccess($request, $token);
 
         return new JsonResponse(array('redirect' => $redirection));
     }
@@ -60,7 +60,7 @@ class AuthenticationHandlerJson extends AuthenticationHandler
      */
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
-        $messageError = $this->onAuthenticationFailure($request, $exception);
+        $messageError = parent::onAuthenticationFailure($request, $exception);
 
         return new JsonResponse(array('error' => $messageError), 400);
     }
