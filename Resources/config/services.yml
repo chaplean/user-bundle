@@ -33,8 +33,12 @@ services:
         class: Chaplean\Bundle\UserBundle\Utility\Security
         arguments: [@service_container]
 
-    chaplean_user.authentication.handler:
-            class:  Chaplean\Bundle\UserBundle\Handler\AuthenticationHandler
+    chaplean_user.authentication.handler_http:
+            class:  Chaplean\Bundle\UserBundle\Handler\AuthenticationHandlerHttp
+            arguments:  [@doctrine, @router.default, @session, @chaplean_user.user_manager, @translator.default, @templating.engine.twig, %chaplean_user%]
+
+    chaplean_user.authentication.handler_json:
+            class:  Chaplean\Bundle\UserBundle\Handler\AuthenticationHandlerJson
             arguments:  [@doctrine, @router.default, @session, @chaplean_user.user_manager, @translator.default, @templating.engine.twig, %chaplean_user%]
 
     chaplean_user.encoder.password:

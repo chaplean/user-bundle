@@ -98,6 +98,12 @@ security:
             hash_algorithm:       sha512
             encode_as_base64:     true
             iterations:           1000
+
+    firewalls:
+        main:
+            form_login:
+                success_handler: chaplean_user.authentication.handler_<http|json>
+                failure_handler: chaplean_user.authentication.handler_<http|json>
 ```
 
 

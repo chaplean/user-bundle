@@ -19,8 +19,6 @@ security:
                 use_forward: false
                 remember_me: true
                 use_referer: true
-                success_handler: chaplean_user.authentication.handler
-                failure_handler: chaplean_user.authentication.handler
                 csrf_provider: form.csrf_provider
             logout:
                 path: /logout

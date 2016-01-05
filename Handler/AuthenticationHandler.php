@@ -26,7 +26,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationSuccessHandlerI
  * @copyright 2014 - 2015 Chaplean (http://www.chaplean.com)
  * @since     0.1.0
  */
-class AuthenticationHandler implements AuthenticationSuccessHandlerInterface, AuthenticationFailureHandlerInterface
+abstract class AuthenticationHandler implements AuthenticationSuccessHandlerInterface, AuthenticationFailureHandlerInterface
 {
     /**
      * @var EntityManager
@@ -113,11 +113,7 @@ class AuthenticationHandler implements AuthenticationSuccessHandlerInterface, Au
             $redirection = $this->router->generate($this->parameters['controller']['index_route'], array(), UrlGenerator::ABSOLUTE_PATH);
         }
 
-        if ($request->isXmlHttpRequest()) {
-            return new JsonResponse(array('redirect' => $redirection));
-        } else {
-            return new RedirectResponse($redirection, 302);
-        }
+        return $redirection;
     }
 
     /**
@@ -128,14 +124,6 @@ class AuthenticationHandler implements AuthenticationSuccessHandlerInterface, Au
      */
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
-        $messageError = str_replace('.', '', str_replace(' ', '_', strtolower($exception->getMessage())));
-//        $messageError = $this->translator->trans('login.' . $messageError);
-
-        if ($request->isXmlHttpRequest()) {
-            return new JsonResponse(array('error' => $messageError), 400);
-        } else {
-            $this->session->getFlashBag()->add('error', $messageError);
-            return new RedirectResponse($this->router->generate($this->parameters['controller']['login_route'], array(), UrlGenerator::ABSOLUTE_PATH));
-        }
+        return str_replace('.', '', str_replace(' ', '_', strtolower($exception->getMessage())));
     }
 }
