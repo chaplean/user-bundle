@@ -31,7 +31,7 @@ abstract class AuthenticationHandler implements AuthenticationSuccessHandlerInte
     /**
      * @var EntityManager
      */
-    private $em;
+    protected $em;
 
     /**
      * @var Router
