@@ -7,14 +7,14 @@
  * @since     1.0.0
  */
 
-namespace Chaplean\Bundle\UserBundle\Tests\Doctrine;
+namespace Tests\Chaplean\Bundle\UserBundle\Doctrine;
 
 use Chaplean\Bundle\UserBundle\Model\AbstractUser;
 use Chaplean\Bundle\UserBundle\Doctrine\UserManager;
 
 class UserManagerTest extends \PHPUnit_Framework_TestCase
 {
-    const USER_CLASS = 'Chaplean\Bundle\UserBundle\Tests\Doctrine\DummyUser';
+    const USER_CLASS = 'Tests\Chaplean\Bundle\UserBundle\Doctrine\DummyUser';
 
     /** @var UserManager */
     protected $userManager;

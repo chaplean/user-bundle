@@ -4,10 +4,10 @@ imports:
     - { resource: @ChapleanUserBundle/Resources/config/config.yml }
 
 framework:
-    translator:      { fallback: "%locale%" }
-    secret:          "S€cR3t"
+    translator:      { fallback: '%locale%' }
+    secret:          'S€cR3t'
     router:
-        resource: "%kernel.root_dir%/config/routing.yml"
+        resource: '%kernel.root_dir%/config/routing.yml'
         strict_requirements: true
     form:            ~
     csrf_protection: ~
@@ -15,7 +15,7 @@ framework:
     templating:
         engines: ['twig']
         #assets_version: SomeVersionScheme
-    default_locale:  "%locale%"
+    default_locale:  '%locale%'
     trusted_hosts:   ~
     trusted_proxies: ~
     session:
@@ -30,20 +30,20 @@ framework:
 
 # Twig Configuration
 twig:
-    debug:            "%kernel.debug%"
-    strict_variables: "%kernel.debug%"
+    debug:            '%kernel.debug%'
+    strict_variables: '%kernel.debug%'
 
 # Assetic Configuration
 assetic:
-    debug:          "%use_assetic_debug%"
-    use_controller: "%use_assetic_controller%"
+    debug:          '%use_assetic_debug%'
+    use_controller: '%use_assetic_controller%'
     bundles:        []
     ruby: %ruby.bin%
     filters:
         cssrewrite: ~
         sass:
             bin: %sass.bin%
-            apply_to: "\.scss"
+            apply_to: '\.scss'
         compass:
             bin: %compass.bin%
             no_line_comments: true
@@ -87,7 +87,7 @@ monolog:
     handlers:
         main:
             type:   stream
-            path:   "%kernel.logs_dir%/%kernel.environment%.log"
+            path:   '%kernel.logs_dir%/%kernel.environment%.log'
             level:  info
         console:
             type:   console
@@ -108,7 +108,7 @@ doctrine:
         mapping_types:
             enum: string
     orm:
-        auto_generate_proxy_classes: "%kernel.debug%"
+        auto_generate_proxy_classes: '%kernel.debug%'
         default_entity_manager: user
         entity_managers:
             user:
@@ -117,10 +117,10 @@ doctrine:
 
 # Swiftmailer Configuration
 swiftmailer:
-    transport: "%mailer_transport%"
-    host:      "%mailer_host%"
-    username:  "%mailer_user%"
-    password:  "%mailer_password%"
+    transport: '%mailer_transport%'
+    host:      '%mailer_host%'
+    username:  '%mailer_user%'
+    password:  '%mailer_password%'
     spool:     { type: memory }
 
 chaplean_user:
