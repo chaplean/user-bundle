@@ -7,7 +7,7 @@
  * @since     1.0.0
  */
 
-namespace Chaplean\Bundle\UserBundle\Tests\Model;
+namespace Tests\Chaplean\Bundle\UserBundle\Model;
 
 use Chaplean\Bundle\UserBundle\Doctrine\User;
 

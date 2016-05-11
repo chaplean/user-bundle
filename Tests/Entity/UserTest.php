@@ -1,6 +1,6 @@
 <?php
 
-namespace Chaplean\Bundle\UserBundle\Tests\Entity;
+namespace Tests\Chaplean\Bundle\UserBundle\Entity;
 
 use Chaplean\Bundle\UserBundle\Model\AbstractUser;
 
@@ -106,7 +106,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
 /**
  * Class DummyUser.
  *
- * @package   Chaplean\Bundle\UserBundle\Tests\Entity
+ * @package   Tests\Chaplean\Bundle\UserBundle\Entity
  * @author    Valentin - Chaplean <valentin@chaplean.com>
  * @copyright 2014 - 2015 Chaplean (http://www.chaplean.com)
  * @since     1.0.0
