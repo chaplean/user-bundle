@@ -5,20 +5,12 @@ Getting Started With ChapleanUserBundle
 
 This version of the bundle requires Symfony 2.8+.
 
-### Add ChapleanUserBundle
+### Installation
 
 Include ChapleanUserBundle in `composer.json`
 
 ``` json
-{
-"prefer-stable": true,
-"minimum-stability": "dev",
-...
-"require": {
-        "chaplean/user-bundle": "^2.0"
-        ...
-        }
-}
+composer require chaplean/user-bundle
 ```
 
 Add bundle in `AppKernel.php`
@@ -89,7 +81,7 @@ chaplean_user:
 In `app/config/security.yml`:
 ```yaml
 imports:
-    - { resource: @ChapleanUserBundle/Resources/config/security.yml }
+    - { resource: '@ChapleanUserBundle/Resources/config/security.yml' }
     
 security:
     access_control:
@@ -119,8 +111,8 @@ security:
 In `app/config/routing.yml`:
 ```yaml
 fos_user:
-    resource: @FOSUserBundle/Resources/config/routing/all.xml
+    resource: '@FOSUserBundle/Resources/config/routing/all.xml'
 
 chaplean_user:
-    resource: @ChapleanUserBundle/Resources/config/routing.yml
+    resource: '@ChapleanUserBundle/Resources/config/routing.yml'
 ```

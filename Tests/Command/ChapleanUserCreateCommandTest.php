@@ -1,26 +1,19 @@
 <?php
 
-namespace Chaplean\Bundle\UserBundle\Tests\Command;
+namespace Tests\Chaplean\Bundle\UserBundle\Command;
 
 use Chaplean\Bundle\UnitBundle\Test\LogicalTest;
 
 /**
  * Class ChapleanUserCreateCommandTest.
  *
- * @package   Chaplean\Bundle\UserBundle\Tests\Command
+ * @package   Tests\Chaplean\Bundle\UserBundle\Command
  * @author    Valentin - Chaplean <valentin@chaplean.com>
  * @copyright 2014 - 2015 Chaplean (http://www.chaplean.com)
  * @since     2.0.0
  */
 class ChapleanUserCreateCommandTest extends LogicalTest
 {
-    /**
-     * @return void
-     */
-//    public static function setUpBeforeClass()
-//    {
-//    }
-
     /**
      * @return void
      */

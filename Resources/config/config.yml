@@ -1,7 +1,7 @@
 fos_user:
     db_driver: orm
     firewall_name: main
-    user_class: %chaplean_user.entity.user.class%
+    user_class: '%chaplean_user.entity.user.class%'
 
 chaplean_user:
     controller:

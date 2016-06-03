@@ -22,7 +22,7 @@ abstract class AbstractUser implements ChapleanUserInterface
      * @var integer
      *
      * @ORM\Id
-     * @ORM\Column(name="id", type="integer", nullable=true)
+     * @ORM\Column(type="integer", name="id")
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     protected $id;
@@ -30,21 +30,21 @@ abstract class AbstractUser implements ChapleanUserInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=250, nullable=false)
+     * @ORM\Column(type="string", length=250, nullable=false, name="email")
      */
     protected $email;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="firstname", type="string", length=250, nullable=false)
+     * @ORM\Column(type="string", length=250, nullable=false, name="firstname")
      */
     protected $firstname;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="lastname", type="string", length=250, nullable=false)
+     * @ORM\Column(type="string", length=250, nullable=false, name="lastname")
      */
     protected $lastname;
 
@@ -53,7 +53,7 @@ abstract class AbstractUser implements ChapleanUserInterface
      *
      * @var string
      *
-     * @ORM\Column(name="password_salt", type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255, nullable=false, name="password_salt")
      */
     protected $passwordSalt;
 
@@ -62,7 +62,7 @@ abstract class AbstractUser implements ChapleanUserInterface
      *
      * @var string
      *
-     * @ORM\Column(name="password", type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255, nullable=false, name="password")
      */
     protected $password;
 
@@ -76,28 +76,28 @@ abstract class AbstractUser implements ChapleanUserInterface
     /**
      * @var boolean
      *
-     * @ORM\Column(name="is_enabled", type="boolean", nullable=false)
+     * @ORM\Column(type="boolean", nullable=false, name="is_enabled")
      */
     protected $enabled = false;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="is_locked", type="boolean", nullable=false)
+     * @ORM\Column(type="boolean", nullable=false, name="is_locked")
      */
     protected $locked = false;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="is_expired", type="boolean", nullable=false)
+     * @ORM\Column(type="boolean", nullable=false, name="is_expired")
      */
     protected $expired = false;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="is_credential_expired", type="boolean", nullable=false)
+     * @ORM\Column(type="boolean", nullable=false, name="is_credential_expired")
      */
     protected $credentialExpired;
 
@@ -106,56 +106,56 @@ abstract class AbstractUser implements ChapleanUserInterface
      *
      * @var string
      *
-     * @ORM\Column(name="confirmation_token", type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true, name="confirmation_token")
      */
     protected $confirmationToken;
 
     /**
      * @var array
      *
-     * @ORM\Column(name="roles", type="array", nullable=false)
+     * @ORM\Column(type="array", nullable=false, name="roles")
      */
     protected $roles;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_add", type="datetime", nullable=false)
+     * @ORM\Column(type="datetime", nullable=false, name="date_add")
      */
     protected $dateAdd;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_update", type="datetime", nullable=true)
+     * @ORM\Column(type="datetime", nullable=true, name="date_update")
      */
     protected $dateUpdate;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_lastlogin", type="datetime", nullable=true)
+     * @ORM\Column(type="datetime", nullable=true, name="date_lastlogin")
      */
     protected $dateLastlogin;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_password_request", type="datetime", nullable=true)
+     * @ORM\Column(type="datetime", nullable=true, name="date_password_request")
      */
     protected $datePasswordRequest;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_expired", type="datetime", nullable=true)
+     * @ORM\Column(type="datetime", nullable=true, name="date_expired")
      */
     protected $dateExpired;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_credential_expired", type="datetime", nullable=true)
+     * @ORM\Column(type="datetime", nullable=true, name="date_credential_expired")
      */
     protected $dateCredentialExpired;
 
