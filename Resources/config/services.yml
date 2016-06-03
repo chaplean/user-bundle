@@ -4,17 +4,17 @@ parameters:
 services:
     chaplean_user.user.manager:
         class: Doctrine\ORM\EntityManager
-        factory: [@doctrine, getManagerForClass]
-        arguments: [%chaplean_user.entity.user.class%]
+        factory: ['@doctrine', getManagerForClass]
+        arguments: ['%chaplean_user.entity.user.class%']
 
     chaplean_user.user.repository:
         class: Chaplean\Bundle\UserBundle\Repository\UserRepository
-        factory: [@chaplean_user.user.manager, getRepository]
-        arguments: [%chaplean_user.entity.user.class%]
+        factory: ['@chaplean_user.user.manager', getRepository]
+        arguments: ['%chaplean_user.entity.user.class%']
 
     chaplean_user.user.provider:
         class: %chaplean_user.user.provider.class%
-        arguments: [@chaplean_user.user.repository]
+        arguments: ['@chaplean_user.user.repository']
 
     chaplean_user.registration.form.type:
         class: Chaplean\Bundle\UserBundle\Form\Type\RegistrationFormType
@@ -23,23 +23,23 @@ services:
 
     chaplean_user.user_manager:
         class: Chaplean\Bundle\UserBundle\Doctrine\UserManager
-        arguments: [@security.encoder_factory, @fos_user.util.email_canonicalizer, @fos_user.util.username_canonicalizer, @fos_user.entity_manager, %fos_user.model.user.class%]
+        arguments: ['@security.encoder_factory', '@fos_user.util.email_canonicalizer', '@fos_user.util.username_canonicalizer', '@fos_user.entity_manager', '%fos_user.model.user.class%']
 
     chaplean_user.registration:
         class: Chaplean\Bundle\UserBundle\Utility\Registration
-        arguments: [@service_container]
+        arguments: ['@service_container']
 
     chaplean_user.security:
         class: Chaplean\Bundle\UserBundle\Utility\Security
-        arguments: [@service_container]
+        arguments: ['@service_container']
 
     chaplean_user.authentication.handler_http:
             class:  Chaplean\Bundle\UserBundle\Handler\AuthenticationHandlerHttp
-            arguments:  [@doctrine, @router.default, @session, @chaplean_user.user_manager, @translator.default, @templating.engine.twig, %chaplean_user%]
+            arguments:  ['@doctrine', '@router.default', '@session', '@chaplean_user.user_manager', '@translator.default', '@templating.engine.twig', '%chaplean_user%']
 
     chaplean_user.authentication.handler_json:
             class:  Chaplean\Bundle\UserBundle\Handler\AuthenticationHandlerJson
-            arguments:  [@doctrine, @router.default, @session, @chaplean_user.user_manager, @translator.default, @templating.engine.twig, %chaplean_user%]
+            arguments:  ['@doctrine', '@router.default', '@session', '@chaplean_user.user_manager', '@translator.default', '@templating.engine.twig', '%chaplean_user%']
 
     chaplean_user.encoder.password:
         class: Chaplean\Bundle\UserBundle\Encoder\PasswordEncoder

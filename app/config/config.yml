@@ -1,7 +1,7 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
-    - { resource: @ChapleanUserBundle/Resources/config/config.yml }
+    - { resource: '@ChapleanUserBundle/Resources/config/config.yml' }
 
 framework:
     translator:      { fallback: '%locale%' }
@@ -38,14 +38,14 @@ assetic:
     debug:          '%use_assetic_debug%'
     use_controller: '%use_assetic_controller%'
     bundles:        []
-    ruby: %ruby.bin%
+    ruby: '%ruby.bin%'
     filters:
         cssrewrite: ~
         sass:
-            bin: %sass.bin%
+            bin: '%sass.bin%'
             apply_to: '\.scss'
         compass:
-            bin: %compass.bin%
+            bin: '%compass.bin%'
             no_line_comments: true
     assets:
         bootstrap_fonts_woff:
@@ -98,11 +98,11 @@ monolog:
 doctrine:
     dbal:
         driver:   pdo_mysql
-        host:     127.0.0.1
+        host:     localhost
         port:     3306
         dbname:   test_database
         user:     root
-        password: %database_password%
+        password: '%database_password%'
         charset:  UTF8
         server_version: 5.5
         mapping_types:
