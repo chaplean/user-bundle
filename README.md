@@ -1,34 +1,27 @@
-Getting Started With ChapleanUserBundle
-=======================================
+Getting Started With Chaplean User Bundle
+=========================================
 
 # Prerequisites
 
 This version of the bundle requires Symfony 2.8+.
 
-### Installation
+# Installation
 
-Include ChapleanUserBundle in `composer.json`
+## 1. Composer
 
-``` json
+```
 composer require chaplean/user-bundle
 ```
 
-Add bundle in `AppKernel.php`
+## 2. AppKernel.php
 
-```php
-<?php
-    //...
-    public function registerBundles()
-    {
-        return array (
-            //...
+Add
+```
             new FOS\UserBundle\FOSUserBundle(),
             new Chaplean\Bundle\UserBundle\ChapleanUserBundle(),
-        );
-    }
 ```
 
-### Define User entity
+## 3. Define User entity
 
 Create a User class with doctrine information.
 
@@ -51,7 +44,7 @@ class User extends BaseUser {
 ###### Note:
 If you want add method in user repository, just extends your repository with `Chaplean\Bundle\UserBundle\Repository\UserRepository`.
 
-### Configuration minimal
+## 4. Configuration minimal
 
 Define namespace your user entity in `parameters.yml`:
 
@@ -76,7 +69,7 @@ chaplean_user:
         index_route: <YourRouteNameForIndex>
 ```
 
-### Configure security
+## 5. Configure security
 
 In `app/config/security.yml`:
 ```yaml
@@ -104,9 +97,7 @@ security:
                 failure_handler: chaplean_user.authentication.handler_<http|json>
 ```
 
-
-
-### Import routing.yml
+## 6. Import routing.yml
 
 In `app/config/routing.yml`:
 ```yaml

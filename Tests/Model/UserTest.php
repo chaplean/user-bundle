@@ -1,4 +1,10 @@
 <?php
+
+namespace Tests\Chaplean\Bundle\UserBundle\Model;
+
+use Chaplean\Bundle\UnitBundle\Test\LogicalTestCase;
+use Chaplean\Bundle\UserBundle\Doctrine\User;
+
 /**
  * UserTest.php.
  *
@@ -6,13 +12,11 @@
  * @copyright 2014 - 2015 Chaplean (http://www.chaplean.com)
  * @since     1.0.0
  */
-
-namespace Tests\Chaplean\Bundle\UserBundle\Model;
-
-use Chaplean\Bundle\UserBundle\Doctrine\User;
-
-class UserTest extends \PHPUnit_Framework_TestCase {
-
+class UserTest extends LogicalTestCase
+{
+    /**
+     * @return void
+     */
     public function testEmail()
     {
         $user = $this->getUser();
@@ -22,6 +26,9 @@ class UserTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals('john@chaplean.com', $user->getEmail());
     }
 
+    /**
+     * @return void
+     */
     public function testIsPasswordRequestAtCleared()
     {
         $user = $this->getUser();
@@ -34,6 +41,9 @@ class UserTest extends \PHPUnit_Framework_TestCase {
         $this->assertTrue($user->isPasswordRequestNonExpired(5));
     }
 
+    /**
+     * @return void
+     */
     public function testTrueHasRole()
     {
         $user = $this->getUser();
@@ -46,6 +56,9 @@ class UserTest extends \PHPUnit_Framework_TestCase {
         $this->assertTrue($user->hasRole($newrole));
     }
 
+    /**
+     * @return void
+     */
     public function testFalseHasRole()
     {
         $user = $this->getUser();
@@ -55,6 +68,9 @@ class UserTest extends \PHPUnit_Framework_TestCase {
         $this->assertTrue($user->hasRole($newrole));
     }
 
+    /**
+     * @return void
+     */
     public function testpasswordSaltElevenChars()
     {
         $user = $this->getUser();
