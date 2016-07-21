@@ -2,8 +2,8 @@
 
 namespace Chaplean\Bundle\UserBundle\Command;
 
+use Chaplean\Bundle\UserBundle\Doctrine\User;
 use Chaplean\Bundle\UserBundle\Doctrine\UserManager;
-use Chaplean\Bundle\UserBundle\Model\AbstractUser;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -50,8 +50,9 @@ class ChapleanUserCreateCommand extends ContainerAwareCommand
         /** @var UserManager $userManager */
         $userManager = $this->getContainer()->get('chaplean_user.user_manager');
 
-        /** @var AbstractUser $user */
+        /** @var User $user */
         $user = $userManager->createUser();
+
         $user->setEmail($email);
         $user->setFirstname($firstname);
         $user->setLastname($lastname);

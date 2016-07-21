@@ -2,7 +2,7 @@
 
 namespace Tests\Chaplean\Bundle\UserBundle\Command;
 
-use Chaplean\Bundle\UnitBundle\Test\LogicalTest;
+use Chaplean\Bundle\UnitBundle\Test\LogicalTestCase;
 
 /**
  * Class ChapleanUserCreateCommandTest.
@@ -12,15 +12,8 @@ use Chaplean\Bundle\UnitBundle\Test\LogicalTest;
  * @copyright 2014 - 2015 Chaplean (http://www.chaplean.com)
  * @since     2.0.0
  */
-class ChapleanUserCreateCommandTest extends LogicalTest
+class ChapleanUserCreateCommandTest extends LogicalTestCase
 {
-    /**
-     * @return void
-     */
-    public function setUp()
-    {
-    }
-
     /**
      * @return void
      */
@@ -35,10 +28,10 @@ class ChapleanUserCreateCommandTest extends LogicalTest
                 'password'  => 'test',
                 'firstname' => 'foo',
                 'lastname'  => 'bar',
-            )
+            ),
+            true
         );
 
-//        $this->assertEquals('Created user test@test.com', $response);
         $this->assertCount(1, $this->em->getRepository('ChapleanUserBundle:DummyUser')->findAll());
     }
 }

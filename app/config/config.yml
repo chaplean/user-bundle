@@ -4,8 +4,9 @@ imports:
     - { resource: '@ChapleanUserBundle/Resources/config/config.yml' }
 
 framework:
+    test: ~
     translator:      { fallback: '%locale%' }
-    secret:          'S€cR3t'
+    secret:          '%secret%'
     router:
         resource: '%kernel.root_dir%/config/routing.yml'
         strict_requirements: true
@@ -14,7 +15,6 @@ framework:
     validation:      { enable_annotations: true }
     templating:
         engines: ['twig']
-        #assets_version: SomeVersionScheme
     default_locale:  '%locale%'
     trusted_hosts:   ~
     trusted_proxies: ~
@@ -86,27 +86,32 @@ assetic:
 monolog:
     handlers:
         main:
+            type:         fingers_crossed
+            action_level: error
+            handler:      nested
+        nested:
             type:   stream
             path:   '%kernel.logs_dir%/%kernel.environment%.log'
             level:  info
         console:
             type:   console
-            bubble: false
-
 
 # Doctrine Configuration
 doctrine:
     dbal:
-        driver:   pdo_mysql
-        host:     localhost
-        port:     3306
-        dbname:   test_database
-        user:     root
-        password: '%database_password%'
-        charset:  UTF8
-        server_version: 5.5
-        mapping_types:
-            enum: string
+        default_connection: default
+        connections:
+            default:
+                driver:   '%database_driver%'
+                host:     '%database_host%'
+                port:     '%database_port%'
+                dbname:   '%database_name%'
+                user:     '%database_user%'
+                password: '%database_password%'
+                charset:  UTF8
+                server_version: 5.6
+            logging: null
+            profiling: null
     orm:
         auto_generate_proxy_classes: '%kernel.debug%'
         default_entity_manager: user

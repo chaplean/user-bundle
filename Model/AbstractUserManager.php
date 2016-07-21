@@ -1,6 +1,7 @@
 <?php
 namespace Chaplean\Bundle\UserBundle\Model;
 
+use Chaplean\Bundle\UserBundle\Doctrine\User;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
@@ -41,9 +42,8 @@ abstract class AbstractUserManager implements UserManagerInterface, UserProvider
     public function createUser()
     {
         $class = $this->getClass();
-        $user = new $class;
 
-        return $user;
+        return new $class;
     }
 
     /**
@@ -78,17 +78,12 @@ abstract class AbstractUserManager implements UserManagerInterface, UserProvider
      *
      * @param string $username The username
      *
-     * @return UserInterface
-     *
-     * @see UsernameNotFoundException
-     *
-     * @throws UsernameNotFoundException if the user is not found
+     * @return void
      *
      * @deprecated Username is identified by email
      */
     public function loadUserByUsername($username)
     {
-        $username = null;
         return;
     }
 
@@ -178,7 +173,8 @@ abstract class AbstractUserManager implements UserManagerInterface, UserProvider
      *
      * @param string $class
      *
-     * @return bool
+     * @return boolean
+     *
      * @deprecated Use FOS\UserBundle\Security\UserProvider instead
      */
     public function supportsClass($class)

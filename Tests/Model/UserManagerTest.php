@@ -1,25 +1,38 @@
 <?php
 
-/*
- * This file is part of the FOSUserBundle package.
- *
- * (c) FriendsOfSymfony <http://friendsofsymfony.github.com/>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 namespace Tests\Chaplean\Bundle\UserBundle\Model;
 
+use Chaplean\Bundle\UnitBundle\Test\LogicalTestCase;
 use Chaplean\Bundle\UserBundle\Doctrine\User;
+use Chaplean\Bundle\UserBundle\Model\AbstractUserManager;
 
-class UserManagerTest extends \PHPUnit_Framework_TestCase
+/**
+ * Class UserManagerTest.
+ *
+ * @package Tests\Chaplean\Bundle\UserBundle\Model
+ * @author    Tom - Chaplean <tom@chaplean.com>
+ * @copyright 2014 - 2016 Chaplean (http://www.chaplean.com)
+ * @since     1.0.0
+ */
+class UserManagerTest extends LogicalTestCase
 {
+    /**
+     * @var \PHPUnit_Framework_MockObject_MockObject|AbstractUserManager
+     */
     private $manager;
+
+    /**
+     * @var \PHPUnit_Framework_MockObject_MockObject
+     */
     private $encoderFactory;
 
-    protected function setUp()
+    /**
+     * @return void
+     */
+    public function setUp()
     {
+        parent::setUp();
+
         $this->encoderFactory = $this->getMockEncoderFactory();
 
         $this->manager = $this->getUserManager(array(
@@ -27,6 +40,9 @@ class UserManagerTest extends \PHPUnit_Framework_TestCase
         ));
     }
 
+    /**
+     * @return void
+     */
     public function testUpdatePassword()
     {
         $encoder = $this->getMockPasswordEncoder();
@@ -48,6 +64,9 @@ class UserManagerTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($user->getPlainPassword(), '->updatePassword() erases credentials');
     }
 
+    /**
+     * @return void
+     */
     public function testFindUserByEmail()
     {
         $this->manager->expects($this->once())
@@ -57,6 +76,9 @@ class UserManagerTest extends \PHPUnit_Framework_TestCase
         $this->manager->findUserByEmail('jack@email.org');
     }
 
+    /**
+     * @return void
+     */
     public function testFindUserByEmailLowercasesTheEmail()
     {
         $this->manager->expects($this->once())
@@ -71,7 +93,7 @@ class UserManagerTest extends \PHPUnit_Framework_TestCase
      */
     private function getMockEncoderFactory()
     {
-        return $this->getMock('Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface');
+        return $this->getMockBuilder('Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface')->getMock();
     }
 
     /**
@@ -79,7 +101,7 @@ class UserManagerTest extends \PHPUnit_Framework_TestCase
      */
     private function getMockPasswordEncoder()
     {
-        return $this->getMock('Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface');
+        return $this->getMockBuilder('Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface')->getMock();
     }
 
     /**

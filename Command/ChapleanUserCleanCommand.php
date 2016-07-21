@@ -2,8 +2,8 @@
 
 namespace Chaplean\Bundle\UserBundle\Command;
 
+use Chaplean\Bundle\UserBundle\Doctrine\User;
 use Chaplean\Bundle\UserBundle\Doctrine\UserManager;
-use Chaplean\Bundle\UserBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -32,7 +32,7 @@ class ChapleanUserCleanCommand extends ContainerAwareCommand
      * @param InputInterface  $input
      * @param OutputInterface $output
      *
-     * @return int|null|void
+     * @return void
      * @throws \Exception
      */
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -49,7 +49,7 @@ class ChapleanUserCleanCommand extends ContainerAwareCommand
         /** @var User $user */
         foreach ($users as $user) {
             if ($user->isAccountExpired($time)) {
-                $userManager->removeUser($user);
+                $userManager->deleteUser($user);
             }
         }
 

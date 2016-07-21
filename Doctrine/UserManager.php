@@ -1,4 +1,12 @@
 <?php
+
+namespace Chaplean\Bundle\UserBundle\Doctrine;
+
+use Chaplean\Bundle\UserBundle\Model\AbstractUserManager;
+use Chaplean\Bundle\UserBundle\Model\UserInterface;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
+
 /**
  * UserManager
  *
@@ -6,18 +14,9 @@
  * @copyright 2014 - 2015 Chaplean (http://www.chaplean.com)
  * @since     1.0.0
  */
-
-namespace Chaplean\Bundle\UserBundle\Doctrine;
-
-use Chaplean\Bundle\UserBundle\Model\AbstractUserManager;
-use Doctrine\Common\Persistence\ObjectManager;
-use Chaplean\Bundle\UserBundle\Model\UserInterface;
-use FOS\UserBundle\Util\CanonicalizerInterface;
-use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
-
 class UserManager extends AbstractUserManager
 {
-    private $objectManager;
+    private $em;
     private $repository;
     private $class;
 
@@ -25,19 +24,17 @@ class UserManager extends AbstractUserManager
      * Constructor.
      *
      * @param EncoderFactoryInterface $encoderFactory
-     * @param CanonicalizerInterface  $usernameCanonicalizer
-     * @param CanonicalizerInterface  $emailCanonicalizer
-     * @param ObjectManager           $om
+     * @param EntityManagerInterface  $em
      * @param string                  $class
      */
-    public function __construct(EncoderFactoryInterface $encoderFactory, CanonicalizerInterface $usernameCanonicalizer, CanonicalizerInterface $emailCanonicalizer, ObjectManager $om, $class)
+    public function __construct(EncoderFactoryInterface $encoderFactory, EntityManagerInterface $em, $class)
     {
-        parent::__construct($encoderFactory, $usernameCanonicalizer, $emailCanonicalizer);
+        parent::__construct($encoderFactory);
 
-        $this->objectManager = $om;
-        $this->repository = $om->getRepository($class);
+        $this->em = $em;
+        $this->repository = $em->getRepository($class);
 
-        $metadata = $om->getClassMetadata($class);
+        $metadata = $em->getClassMetadata($class);
         $this->class = $metadata->getName();
     }
 
@@ -48,8 +45,8 @@ class UserManager extends AbstractUserManager
      */
     public function deleteUser(UserInterface $user)
     {
-        $this->objectManager->remove($user);
-        $this->objectManager->flush();
+        $this->em->remove($user);
+        $this->em->flush();
     }
 
     /**
@@ -103,7 +100,7 @@ class UserManager extends AbstractUserManager
      */
     public function reloadUser(UserInterface $user)
     {
-        $this->objectManager->refresh($user);
+        $this->em->refresh($user);
     }
 
     /**
@@ -136,7 +133,7 @@ class UserManager extends AbstractUserManager
      * Updates a user.
      *
      * @param UserInterface $user
-     * @param Boolean       $andFlush Whether to flush the changes (default true)
+     * @param boolean       $andFlush Whether to flush the changes (default true)
      *
      * @return void
      */
@@ -144,9 +141,10 @@ class UserManager extends AbstractUserManager
     {
         $this->updatePassword($user);
 
-        $this->objectManager->persist($user);
+        $this->em->persist($user);
+
         if ($andFlush) {
-            $this->objectManager->flush();
+            $this->em->flush();
         }
     }
 
@@ -156,10 +154,10 @@ class UserManager extends AbstractUserManager
      * @param UserInterface $user
      *
      * @return void
+     * @deprecated use deleteUser()
      */
     public function removeUser(UserInterface $user)
     {
-        $this->objectManager->remove($user);
-        $this->objectManager->flush();
+        $this->deleteUser($user);
     }
 }

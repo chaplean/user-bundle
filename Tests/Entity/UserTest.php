@@ -2,6 +2,7 @@
 
 namespace Tests\Chaplean\Bundle\UserBundle\Entity;
 
+use Chaplean\Bundle\UnitBundle\Test\LogicalTestCase;
 use Chaplean\Bundle\UserBundle\Model\AbstractUser;
 
 /**
@@ -11,7 +12,7 @@ use Chaplean\Bundle\UserBundle\Model\AbstractUser;
  * @copyright 2014 - 2015 Chaplean (http://www.chaplean.com)
  * @since     1.0.0
  */
-class UserTest extends \PHPUnit_Framework_TestCase
+class UserTest extends LogicalTestCase
 {
     /**
      * @return void
