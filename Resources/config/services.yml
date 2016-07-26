@@ -23,7 +23,7 @@ services:
 
     chaplean_user.user_manager:
         class: Chaplean\Bundle\UserBundle\Doctrine\UserManager
-        arguments: ['@security.encoder_factory', '@doctrine.orm.entity_manager', '%fos_user.model.user.class%']
+        arguments: ['@security.encoder_factory', '@doctrine', '%fos_user.model.user.class%']
         shared: false
 
     chaplean_user.registration:

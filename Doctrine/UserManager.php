@@ -4,7 +4,7 @@ namespace Chaplean\Bundle\UserBundle\Doctrine;
 
 use Chaplean\Bundle\UserBundle\Model\AbstractUserManager;
 use Chaplean\Bundle\UserBundle\Model\UserInterface;
-use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Bundle\DoctrineBundle\Registry;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 
 /**
@@ -24,17 +24,17 @@ class UserManager extends AbstractUserManager
      * Constructor.
      *
      * @param EncoderFactoryInterface $encoderFactory
-     * @param EntityManagerInterface  $em
+     * @param Registry                $registry
      * @param string                  $class
      */
-    public function __construct(EncoderFactoryInterface $encoderFactory, EntityManagerInterface $em, $class)
+    public function __construct(EncoderFactoryInterface $encoderFactory, Registry $registry, $class)
     {
         parent::__construct($encoderFactory);
 
-        $this->em = $em;
-        $this->repository = $em->getRepository($class);
+        $this->em = $registry->getManager();
+        $this->repository = $this->em->getRepository($class);
 
-        $metadata = $em->getClassMetadata($class);
+        $metadata = $this->em->getClassMetadata($class);
         $this->class = $metadata->getName();
     }
 
