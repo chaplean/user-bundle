@@ -24,3 +24,11 @@ chaplean_user_login:
 chaplean_user_profile:
     path: /profile
     defaults: { _controller: ChapleanUserBundle:Profile:index }
+
+chaplean_user_password_request_reset:
+    path: /password/request_reset
+    defaults: { _controller: ChapleanUserBundle:Password:requestResetPasswordForm }
+
+chaplean_user_password_set_passwerd:
+    path: /password/set
+    defaults: { _controller: ChapleanUserBundle:Password:setPasswordForm }

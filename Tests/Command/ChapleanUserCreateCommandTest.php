@@ -17,6 +17,15 @@ class ChapleanUserCreateCommandTest extends LogicalTestCase
     /**
      * @return void
      */
+    public static function setUpBeforeClass()
+    {
+        static::$withDefaultData = false;
+        parent::setUpBeforeClass();
+    }
+
+    /**
+     * @return void
+     */
     public function testCreateUser()
     {
         $this->assertCount(0, $this->em->getRepository('ChapleanUserBundle:DummyUser')->findAll());

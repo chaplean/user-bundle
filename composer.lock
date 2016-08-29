@@ -4,9 +4,68 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "659cc80149e5ebfea6396a656009e9aa",
-    "content-hash": "212afe06e96f248cfb4acdd4c8e0200a",
+    "hash": "f3a193a921478f52889dc4aa3ab7c791",
+    "content-hash": "23a79d50df818446f3a9b454498df270",
     "packages": [
+        {
+            "name": "chaplean/mailer-bundle",
+            "version": "v3.0.1",
+            "source": {
+                "type": "git",
+                "url": "git@bitbucket.org:chaplean/mailer-bundle.git",
+                "reference": "75493521a09deda58d83b34a02172bb3b40b0f0c"
+            },
+            "require": {
+                "doctrine/doctrine-bundle": "~1.4",
+                "doctrine/orm": "^2.4.8",
+                "php": ">=7.0.8",
+                "sensio/distribution-bundle": "~5.0",
+                "symfony/monolog-bundle": "~2.4",
+                "symfony/swiftmailer-bundle": "~2.3",
+                "symfony/symfony": "2.8.*"
+            },
+            "require-dev": {
+                "chaplean/coding-standard": "1.1.*",
+                "chaplean/unit-bundle": "^4.0",
+                "satooshi/php-coveralls": "^1.0"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "symfony-app-dir": "app",
+                "symfony-bin-dir": "bin",
+                "symfony-var-dir": "var",
+                "symfony-web-dir": "web",
+                "symfony-assets-install": "relative"
+            },
+            "autoload": {
+                "psr-4": {
+                    "Chaplean\\Bundle\\MailerBundle\\": ""
+                }
+            },
+            "scripts": {
+                "post-install-cmd": [
+                    "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+                    "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+                    "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
+                ],
+                "post-update-cmd": [
+                    "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+                    "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+                    "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Chaplean",
+                    "homepage": "http://www.chaplean.com"
+                }
+            ],
+            "description": "Contains utilities for mailer",
+            "time": "2016-07-27 08:30:45"
+        },
         {
             "name": "doctrine/annotations",
             "version": "v1.2.7",

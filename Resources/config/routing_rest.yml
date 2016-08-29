@@ -1,0 +1,6 @@
+chaplean_user_api:
+    type: rest
+    resource: Chaplean\Bundle\UserBundle\Controller\Rest\PasswordController
+    name_prefix: chaplean_user_api_password_
+    options:
+        expose: true
