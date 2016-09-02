@@ -66,16 +66,13 @@ class Registration
      */
     private function sendMail($subject, $user, $view)
     {
-        // set a token for user
-        $token = $this->serviceContainer->get('fos_user.util.token_generator.default')->generateToken();
-        $user->setConfirmationToken($token);
+        $token = $user->getConfirmationToken();
 
         /** @var Twig $templateRenderer */
         $templateRenderer = $this->serviceContainer->get('templating');
 
         /** @var Router $router */
-        $router = $this->serviceContainer->get('router.default');
-
+        $router = $this->serviceContainer->get('router');
 
         $chapleanMailerConfig = $this->serviceContainer->getParameter('chaplean_mailer');
         $message = new Message($chapleanMailerConfig);
@@ -86,10 +83,10 @@ class Registration
                 $templateRenderer->render(
                     $view,
                     array(
-                        'link'      => $router->generate('chaplean_user_confirm', array('token' => $token), true)
+                        'link' => $router->generate('chaplean_user_password_set_password', array('token' => $token), true)
                     )
                 )
             );
-        $this->serviceContainer->get('swiftmailer.mailer.abstract')->send($message);
+        $this->serviceContainer->get('swiftmailer.mailer')->send($message);
     }
 }

@@ -30,6 +30,10 @@ services:
         class: Chaplean\Bundle\UserBundle\Utility\Registration
         arguments: ['@service_container']
 
+    chaplean_user.password_utility:
+        class: Chaplean\Bundle\UserBundle\Utility\PasswordUtility
+        arguments: ['@chaplean_user.user_manager', '@fos_user.util.token_generator']
+
     chaplean_user.security:
         class: Chaplean\Bundle\UserBundle\Utility\Security
         arguments: ['@service_container']
@@ -44,3 +48,7 @@ services:
 
     chaplean_user.encoder.password:
         class: Chaplean\Bundle\UserBundle\Encoder\PasswordEncoder
+
+    # Needed because those services are private
+    fos_user.util.token_generator:
+        alias: fos_user.util.token_generator.default

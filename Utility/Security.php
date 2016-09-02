@@ -11,11 +11,6 @@
 namespace Chaplean\Bundle\UserBundle\Utility;
 
 use Symfony\Component\DependencyInjection\Container;
-use Symfony\Component\Form\Extension\Csrf\CsrfProvider\SessionCsrfProvider;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\Security\Core\Exception\AuthenticationException;
-use Symfony\Component\Security\Core\Security as SecurityContext;
 
 class Security
 {

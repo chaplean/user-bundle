@@ -36,7 +36,8 @@
         "friendsofsymfony/user-bundle": "~2.0@dev",
         "twig/extensions": "~1.0",
         "friendsofsymfony/jsrouting-bundle": "~1.5",
-        "friendsofsymfony/rest-bundle": "~1.7"
+        "friendsofsymfony/rest-bundle": "~1.7",
+        "chaplean/mailer-bundle": "^3.0"
     },
     "require-dev": {
         "chaplean/coding-standard": "1.1.*",

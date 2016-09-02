@@ -32,6 +32,8 @@ class AppKernel extends Kernel
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
             new FOS\UserBundle\FOSUserBundle(),
+            new FOS\RestBundle\FOSRestBundle(),
+            new Chaplean\Bundle\MailerBundle\ChapleanMailerBundle(),
             new Chaplean\Bundle\UserBundle\ChapleanUserBundle(),
         );
 
