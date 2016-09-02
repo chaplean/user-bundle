@@ -29,6 +29,6 @@ chaplean_user_password_request_reset:
     path: /password/request_reset
     defaults: { _controller: ChapleanUserBundle:Password:requestResetPasswordForm }
 
-chaplean_user_password_set_passwerd:
+chaplean_user_password_set_password:
     path: /password/set
     defaults: { _controller: ChapleanUserBundle:Password:setPasswordForm }
