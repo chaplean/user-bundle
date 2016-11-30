@@ -22,4 +22,4 @@ parameters:
 
     chaplean_user.entity.user.class: Chaplean\Bundle\UserBundle\Entity\DummyUser
 
-    data_fixtures_namespace: false
+    data_fixtures_namespace: Chaplean\Bundle\UserBundle\

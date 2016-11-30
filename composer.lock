@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f3a193a921478f52889dc4aa3ab7c791",
-    "content-hash": "23a79d50df818446f3a9b454498df270",
+    "hash": "fbfaf295a5f8b848353d75af4993566f",
+    "content-hash": "2a3b8ba0a6ef9e89000731b885bfc205",
     "packages": [
         {
             "name": "chaplean/mailer-bundle",
@@ -4925,9 +4925,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "friendsofsymfony/user-bundle": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
