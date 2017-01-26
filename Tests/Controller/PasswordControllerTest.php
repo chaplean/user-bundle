@@ -3,7 +3,7 @@
 namespace Tests\Chaplean\Bundle\UserBundle\Controller;
 
 use Chaplean\Bundle\UnitBundle\Test\LogicalTestCase;
-use FOS\RestBundle\Util\Codes;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class PasswordControllerTest.
@@ -34,7 +34,7 @@ class PasswordControllerTest extends LogicalTestCase
             '/password/request_reset'
         );
 
-        $this->assertEquals(Codes::HTTP_OK, $client->getResponse()->getStatusCode());
+        $this->assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode());
     }
 
     /**
@@ -51,7 +51,7 @@ class PasswordControllerTest extends LogicalTestCase
             '/password/request_reset'
         );
 
-        $this->assertEquals(Codes::HTTP_FORBIDDEN, $client->getResponse()->getStatusCode());
+        $this->assertEquals(Response::HTTP_FORBIDDEN, $client->getResponse()->getStatusCode());
     }
 
     /**
@@ -69,7 +69,7 @@ class PasswordControllerTest extends LogicalTestCase
             )
         );
 
-        $this->assertEquals(Codes::HTTP_OK, $client->getResponse()->getStatusCode());
+        $this->assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode());
     }
 
     /**
@@ -87,7 +87,7 @@ class PasswordControllerTest extends LogicalTestCase
             )
         );
 
-        $this->assertEquals(Codes::HTTP_FORBIDDEN, $client->getResponse()->getStatusCode());
+        $this->assertEquals(Response::HTTP_FORBIDDEN, $client->getResponse()->getStatusCode());
     }
 
     /**
@@ -108,6 +108,6 @@ class PasswordControllerTest extends LogicalTestCase
             )
         );
 
-        $this->assertEquals(Codes::HTTP_FORBIDDEN, $client->getResponse()->getStatusCode());
+        $this->assertEquals(Response::HTTP_FORBIDDEN, $client->getResponse()->getStatusCode());
     }
 }

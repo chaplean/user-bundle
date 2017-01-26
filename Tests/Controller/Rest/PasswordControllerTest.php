@@ -3,7 +3,7 @@
 namespace Tests\Chaplean\Bundle\UserBundle\Controller\Rest;
 
 use Chaplean\Bundle\UnitBundle\Test\LogicalTestCase;
-use FOS\RestBundle\Util\Codes;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class PasswordControllerTest.
@@ -34,7 +34,7 @@ class PasswordControllerTest extends LogicalTestCase
             )
         );
 
-        $this->assertEquals(Codes::HTTP_NO_CONTENT, $response->getStatusCode());
+        $this->assertEquals(Response::HTTP_NO_CONTENT, $response->getStatusCode());
 
         $messages = $this->readMessages();
         $this->assertCount(1, $messages);
@@ -60,7 +60,7 @@ class PasswordControllerTest extends LogicalTestCase
             )
         );
 
-        $this->assertEquals(Codes::HTTP_FORBIDDEN, $response->getStatusCode());
+        $this->assertEquals(Response::HTTP_FORBIDDEN, $response->getStatusCode());
     }
 
     /**
@@ -82,7 +82,7 @@ class PasswordControllerTest extends LogicalTestCase
             )
         );
 
-        $this->assertEquals(Codes::HTTP_NO_CONTENT, $response->getStatusCode());
+        $this->assertEquals(Response::HTTP_NO_CONTENT, $response->getStatusCode());
 
         $messages = $this->readMessages();
         $this->assertEmpty($messages);
@@ -111,7 +111,7 @@ class PasswordControllerTest extends LogicalTestCase
             )
         );
 
-        $this->assertEquals(Codes::HTTP_NO_CONTENT, $response->getStatusCode());
+        $this->assertEquals(Response::HTTP_NO_CONTENT, $response->getStatusCode());
     }
 
     /**
@@ -138,7 +138,7 @@ class PasswordControllerTest extends LogicalTestCase
             )
         );
 
-        $this->assertEquals(Codes::HTTP_FORBIDDEN, $response->getStatusCode());
+        $this->assertEquals(Response::HTTP_FORBIDDEN, $response->getStatusCode());
     }
 
     /**
@@ -164,7 +164,7 @@ class PasswordControllerTest extends LogicalTestCase
             )
         );
 
-        $this->assertEquals(Codes::HTTP_FORBIDDEN, $response->getStatusCode());
+        $this->assertEquals(Response::HTTP_FORBIDDEN, $response->getStatusCode());
     }
 
     /**
@@ -190,7 +190,7 @@ class PasswordControllerTest extends LogicalTestCase
             )
         );
 
-        $this->assertEquals(Codes::HTTP_BAD_REQUEST, $response->getStatusCode());
+        $this->assertEquals(Response::HTTP_BAD_REQUEST, $response->getStatusCode());
     }
 
     /**
@@ -216,6 +216,6 @@ class PasswordControllerTest extends LogicalTestCase
             )
         );
 
-        $this->assertEquals(Codes::HTTP_BAD_REQUEST, $response->getStatusCode());
+        $this->assertEquals(Response::HTTP_BAD_REQUEST, $response->getStatusCode());
     }
 }
