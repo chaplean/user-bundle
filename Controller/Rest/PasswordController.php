@@ -7,7 +7,6 @@ use Chaplean\Bundle\UserBundle\Form\Type\SetPasswordType;
 use Chaplean\Bundle\UserBundle\Model\SetPasswordModel;
 use FOS\RestBundle\Controller\Annotations;
 use FOS\RestBundle\Controller\FOSRestController;
-use FOS\RestBundle\Util\Codes;
 use FOS\RestBundle\View\View;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -41,7 +40,7 @@ class PasswordController extends FOSRestController
         $form->submit($request->request->all());
 
         if ($this->getUser() !== null) {
-            return $this->handleView(new View('', Codes::HTTP_FORBIDDEN));
+            return $this->handleView(new View('', Response::HTTP_FORBIDDEN));
         }
 
         if ($form->isValid()) {
@@ -78,11 +77,11 @@ class PasswordController extends FOSRestController
         $form->submit($request->request->all());
 
         if ($this->getUser() !== null) {
-            return $this->handleView(new View('', Codes::HTTP_FORBIDDEN));
+            return $this->handleView(new View('', Response::HTTP_FORBIDDEN));
         }
 
         if (!$form->isValid()) {
-            return $this->handleView(new View('', Codes::HTTP_BAD_REQUEST));
+            return $this->handleView(new View('', Response::HTTP_BAD_REQUEST));
         }
 
         $formData = $form->getData();
@@ -91,7 +90,7 @@ class PasswordController extends FOSRestController
 
         $user = $userManager->findUserBy(array('confirmationToken' => $formData->getToken()));
         if ($user === null || !$passwordUtility->isTokenValid($formData->getToken())) {
-            return $this->handleView(new View('', Codes::HTTP_FORBIDDEN));
+            return $this->handleView(new View('', Response::HTTP_FORBIDDEN));
         }
 
         $passwordUtility->setPassword($user, $formData->getPassword());
