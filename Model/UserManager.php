@@ -9,7 +9,7 @@
 
 namespace Chaplean\Bundle\UserBundle\Model;
 
-use FOS\UserBundle\Model\UserInterface;
+use FOS\UserBundle\Model\UserInterface as FOSUserInterface;
 use FOS\UserBundle\Model\UserManagerInterface;
 use FOS\UserBundle\Util\CanonicalizerInterface;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
@@ -53,7 +53,7 @@ abstract class UserManager implements UserManagerInterface, UserProviderInterfac
     /**
      * Returns an empty user instance
      *
-     * @return UserInterface
+     * @return FOSUserInterface
      */
     public function createUser()
     {
@@ -68,7 +68,7 @@ abstract class UserManager implements UserManagerInterface, UserProviderInterfac
      *
      * @param string $email
      *
-     * @return UserInterface
+     * @return FOSUserInterface
      */
     public function findUserByEmail($email)
     {
@@ -80,7 +80,7 @@ abstract class UserManager implements UserManagerInterface, UserProviderInterfac
      *
      * @param string $username
      *
-     * @return UserInterface
+     * @return FOSUserInterface
      */
     public function findUserByUsername($username)
     {
@@ -92,7 +92,7 @@ abstract class UserManager implements UserManagerInterface, UserProviderInterfac
      *
      * @param string $usernameOrEmail
      *
-     * @return UserInterface
+     * @return FOSUserInterface
      */
     public function findUserByUsernameOrEmail($usernameOrEmail)
     {
@@ -112,7 +112,7 @@ abstract class UserManager implements UserManagerInterface, UserProviderInterfac
      *
      * @param string $token
      *
-     * @return UserInterface
+     * @return FOSUserInterface
      */
     public function findUserByConfirmationToken($token)
     {
@@ -132,7 +132,7 @@ abstract class UserManager implements UserManagerInterface, UserProviderInterfac
      *
      * @param SecurityUserInterface $user
      *
-     * @return UserInterface
+     * @return FOSUserInterface
      */
     public function refreshUser(SecurityUserInterface $user)
     {
@@ -164,7 +164,7 @@ abstract class UserManager implements UserManagerInterface, UserProviderInterfac
      *
      * @param string $username
      *
-     * @return UserInterface
+     * @return FOSUserInterface
      */
     public function loadUserByUsername($username)
     {
@@ -186,7 +186,7 @@ abstract class UserManager implements UserManagerInterface, UserProviderInterfac
     /**
      * {@inheritDoc}
      */
-    public function updatePassword(UserInterface $user)
+    public function updatePassword(FOSUserInterface $user)
     {
         if (0 !== strlen($password = $user->getPlainPassword())) {
             $encoder = $this->getEncoder($user);
@@ -196,7 +196,7 @@ abstract class UserManager implements UserManagerInterface, UserProviderInterfac
     }
 
     /**
-     * @param UserInterface $user
+     * @param FOSUserInterface $user
      *
      * @return PasswordEncoderInterface
      */
