@@ -40,13 +40,17 @@ class UserManager extends AbstractUserManager
 
     /**
      * @param UserInterface $user
+     * @param boolean       $andFlush Whether to flush the changes (default true)
      *
      * @return void
      */
-    public function deleteUser(UserInterface $user)
+    public function deleteUser(UserInterface $user, $andFlush = true)
     {
         $this->em->remove($user);
-        $this->em->flush();
+
+        if ($andFlush) {
+            $this->em->flush();
+        }
     }
 
     /**
