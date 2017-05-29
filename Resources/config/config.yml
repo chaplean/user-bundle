@@ -2,6 +2,9 @@ fos_user:
     db_driver: orm
     firewall_name: main
     user_class: '%chaplean_user.entity.user.class%'
+    from_email:
+        address: '%chaplean_mailer.sender_address%'
+        sender_name: '%chaplean_mailer.sender_name%'
 
 chaplean_user:
     controller:

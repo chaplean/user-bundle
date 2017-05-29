@@ -239,8 +239,17 @@ abstract class AbstractUser implements ChapleanUserInterface
      */
     public function getSalt()
     {
-        //var_dump($this->passwordSalt);
-        return $this->passwordSalt;
+        return $this->getPasswordSalt();
+    }
+
+    /**
+     * @param string|null $salt
+     *
+     * @return self
+     */
+    public function setSalt($salt)
+    {
+        return $this->setPasswordSalt($salt);
     }
 
     /**

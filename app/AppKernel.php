@@ -31,9 +31,9 @@ class AppKernel extends Kernel
             new Liip\FunctionalTestBundle\LiipFunctionalTestBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
+            new Chaplean\Bundle\MailerBundle\ChapleanMailerBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new FOS\RestBundle\FOSRestBundle(),
-            new Chaplean\Bundle\MailerBundle\ChapleanMailerBundle(),
             new Chaplean\Bundle\UserBundle\ChapleanUserBundle(),
         );
 
