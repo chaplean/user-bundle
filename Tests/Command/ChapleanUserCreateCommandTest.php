@@ -24,6 +24,9 @@ class ChapleanUserCreateCommandTest extends LogicalTestCase
     }
 
     /**
+     * @covers \Chaplean\Bundle\UserBundle\Command\ChapleanUserCreateCommand::configure
+     * @covers \Chaplean\Bundle\UserBundle\Command\ChapleanUserCreateCommand::execute
+     *
      * @return void
      */
     public function testCreateUser()

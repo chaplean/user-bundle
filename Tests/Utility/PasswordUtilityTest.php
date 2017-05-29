@@ -15,6 +15,8 @@ use Chaplean\Bundle\UnitBundle\Test\LogicalTestCase;
 class PasswordUtilityTest extends LogicalTestCase
 {
     /**
+     * @covers \Chaplean\Bundle\UserBundle\Utility\PasswordUtility::isTokenValid
+     *
      * @return void
      */
     public function testIsTokenValidValidToken()
@@ -24,6 +26,8 @@ class PasswordUtilityTest extends LogicalTestCase
     }
 
     /**
+     * @covers \Chaplean\Bundle\UserBundle\Utility\PasswordUtility::isTokenValid
+     *
      * @return void
      */
     public function testIsTokenValidInvalidToken()

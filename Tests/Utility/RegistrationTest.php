@@ -15,6 +15,8 @@ use Chaplean\Bundle\UnitBundle\Test\LogicalTestCase;
 class RegistrationTest extends LogicalTestCase
 {
     /**
+     * @covers \Chaplean\Bundle\UserBundle\Utility\Registration::sendResettingMailForUser
+     *
      * @return void
      */
     public function testSendRegistrationMailForUser()
@@ -28,6 +30,8 @@ class RegistrationTest extends LogicalTestCase
     }
 
     /**
+     * @covers \Chaplean\Bundle\UserBundle\Utility\Registration::sendResettingMailForUser
+     *
      * @return void
      */
     public function testSendResettingMailForUser()

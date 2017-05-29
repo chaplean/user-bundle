@@ -16,14 +16,8 @@ use Symfony\Component\HttpFoundation\Response;
 class PasswordControllerTest extends LogicalTestCase
 {
     /**
-     * @return void
-     */
-    public static function setUpBeforeClass()
-    {
-        parent::setUpBeforeClass();
-    }
-
-    /**
+     * @covers \Chaplean\Bundle\UserBundle\Controller\PasswordController::requestResetPasswordFormAction
+     *
      * @return void
      */
     public function testCanSeeRequestPasswordResetPageNotLoggedIn()
@@ -38,6 +32,8 @@ class PasswordControllerTest extends LogicalTestCase
     }
 
     /**
+     * @covers \Chaplean\Bundle\UserBundle\Controller\PasswordController::requestResetPasswordFormAction
+     *
      * @return void
      */
     public function testCantSeeRequestPasswordResetPageLoggedIn()
@@ -55,6 +51,8 @@ class PasswordControllerTest extends LogicalTestCase
     }
 
     /**
+     * @covers \Chaplean\Bundle\UserBundle\Controller\PasswordController::requestResetPasswordFormAction
+     *
      * @return void
      */
     public function testCanSeeSetPasswordPageNotLoggedInWithValidToken()
@@ -73,6 +71,8 @@ class PasswordControllerTest extends LogicalTestCase
     }
 
     /**
+     * @covers \Chaplean\Bundle\UserBundle\Controller\PasswordController::setPasswordFormAction
+     *
      * @return void
      */
     public function testCantSeeSetPasswordPageNotLoggedInWithInvalidToken()
@@ -91,6 +91,8 @@ class PasswordControllerTest extends LogicalTestCase
     }
 
     /**
+     * @covers \Chaplean\Bundle\UserBundle\Controller\PasswordController::setPasswordFormAction
+     *
      * @return void
      */
     public function testCantSeeSetPasswordPageLoggedInWithValidToken()
