@@ -3,7 +3,7 @@
 namespace Chaplean\Bundle\UserBundle\Utility;
 
 use Chaplean\Bundle\UserBundle\Model\UserInterface;
-use Chaplean\Bundle\UserBundle\Model\UserManagerInterface;
+use FOS\UserBundle\Model\UserManagerInterface;
 use FOS\UserBundle\Util\TokenGeneratorInterface;
 use Symfony\Component\DependencyInjection\Container;
 
@@ -44,7 +44,7 @@ class PasswordUtility
     public function isTokenValid($token)
     {
         $user = $this->userManager->findOneBy(array('confirmationToken' => $token));
-        
+
         // Token found and not requested more than 48h ago
         return $user !== null && $user->isPasswordRequestNonExpired(48 * 3600);
     }

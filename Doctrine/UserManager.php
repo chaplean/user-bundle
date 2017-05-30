@@ -159,4 +159,37 @@ class UserManager extends AbstractUserManager
     {
         $this->deleteUser($user);
     }
+
+    /**
+     * Find a user by its username.
+     *
+     * @param string $username
+     *
+     * @return UserInterface or null if user does not exist
+     */
+    public function findUserByUsername($username)
+    {
+        return $this->findUserByEmail($username);
+    }
+
+    /**
+     * Finds a user by its username or email.
+     *
+     * @param string $usernameOrEmail
+     *
+     * @return UserInterface or null if user does not exist
+     */
+    public function findUserByUsernameOrEmail($usernameOrEmail)
+    {
+        return $this->findUserByEmail($usernameOrEmail);
+    }
+
+    /**
+     * Updates the canonical username and email fields for a user.
+     *
+     * @param UserInterface $user
+     */
+    public function updateCanonicalFields(UserInterface $user)
+    {
+    }
 }

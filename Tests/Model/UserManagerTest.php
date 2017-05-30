@@ -41,7 +41,7 @@ class UserManagerTest extends LogicalTestCase
     }
 
     /**
-     * @covers \Chaplean\Bundle\UserBundle\Model\UserManager::updatePassword
+     * @covers \Chaplean\Bundle\UserBundle\Model\AbstractUserManager::updatePassword
      *
      * @return void
      */
@@ -67,7 +67,7 @@ class UserManagerTest extends LogicalTestCase
     }
 
     /**
-     * @covers \Chaplean\Bundle\UserBundle\Model\UserManager::findUserByEmail
+     * @covers \Chaplean\Bundle\UserBundle\Model\AbstractUserManager::findUserByEmail
      *
      * @return void
      */
@@ -81,7 +81,7 @@ class UserManagerTest extends LogicalTestCase
     }
 
     /**
-     * @covers \Chaplean\Bundle\UserBundle\Model\UserManager::findUserByEmail
+     * @covers \Chaplean\Bundle\UserBundle\Model\AbstractUserManager::findUserByEmail
      *
      * @return void
      */
