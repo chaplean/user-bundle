@@ -48,7 +48,7 @@ class ChapleanUserCleanCommand extends ContainerAwareCommand
         // time of expired account (24h => 3 600 sec x 24 = 86 400 sec)
         $time = 86400;
 
-        $dispatcher = new EventDispatcher();
+        $dispatcher = $this->getContainer()->get('event_dispatcher');
 
         /** @var User $user */
         foreach ($users as $user) {

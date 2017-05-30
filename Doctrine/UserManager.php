@@ -3,8 +3,8 @@
 namespace Chaplean\Bundle\UserBundle\Doctrine;
 
 use Chaplean\Bundle\UserBundle\Model\AbstractUserManager;
-use Chaplean\Bundle\UserBundle\Model\UserInterface;
 use Doctrine\Bundle\DoctrineBundle\Registry;
+use FOS\UserBundle\Model\UserInterface;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 
 /**
@@ -40,17 +40,12 @@ class UserManager extends AbstractUserManager
 
     /**
      * @param UserInterface $user
-     * @param boolean       $andFlush Whether to flush the changes (default true)
      *
      * @return void
      */
-    public function deleteUser(UserInterface $user, $andFlush = true)
+    public function deleteUser(UserInterface $user)
     {
         $this->em->remove($user);
-
-        if ($andFlush) {
-            $this->em->flush();
-        }
     }
 
     /**

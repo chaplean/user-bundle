@@ -68,7 +68,7 @@ class ChapleanUserDeleteCommand extends ContainerAwareCommand
         $userManager = $this->getContainer()->get('chaplean_user.user_manager');
         $userManager->deleteUser($user, false);
 
-        $dispatcher = new EventDispatcher();
+        $dispatcher = $this->getContainer()->get('event_dispatcher');
         $dispatcher->dispatch(ChapleanUserDeletedEvent::NAME, new ChapleanUserDeletedEvent($user));
 
         $em->flush();

@@ -2,6 +2,8 @@
 namespace Chaplean\Bundle\UserBundle\Model;
 
 use Chaplean\Bundle\UserBundle\Doctrine\User;
+use FOS\UserBundle\Model\UserManagerInterface;
+use FOS\UserBundle\Model\UserInterface;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;

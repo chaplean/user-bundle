@@ -64,7 +64,7 @@ class ChapleanUserCreateCommand extends ContainerAwareCommand
 
         $userManager->updateUser($user, false);
 
-        $dispatcher = new EventDispatcher();
+        $dispatcher = $this->getContainer()->get('event_dispatcher');
         $dispatcher->dispatch(ChapleanUserCreatedEvent::NAME, new ChapleanUserCreatedEvent($user));
 
         $this->getContainer()->get('doctrine')->getManager()->flush();
