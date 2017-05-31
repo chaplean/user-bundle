@@ -10,7 +10,6 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
-use Symfony\Component\EventDispatcher\EventDispatcher;
 
 /**
  * Class ChapleanUserDeleteCommand.
@@ -45,7 +44,7 @@ class ChapleanUserDeleteCommand extends ContainerAwareCommand
         $em = $this->getContainer()->get('doctrine')->getManager();
 
         $email = $input->getArgument('email');
-        $repository = $em->getRepository(User::class);
+        $repository = $em->getRepository($this->getContainer()->getParameter('chaplean_user.entity.user.class'));
 
         /** @var User $user */
         $user = $repository->findOneBy(['email' => $email]);
@@ -56,7 +55,7 @@ class ChapleanUserDeleteCommand extends ContainerAwareCommand
             return;
         }
 
-        $questionText = 'Are you sure you want to delete the user: ' . (string) $user . " ?\n";
+        $questionText = sprintf("Are you sure you want to delete the user: id %d, email %s, firstname %s, lastname %s?\n", $user->getId(), $user->getEmail(), $user->getFirstname(), $user->getLastname());
         $question = new ConfirmationQuestion($questionText, false, '/^(yes|YES)$/');
 
         if (!$this->getHelper('question')->ask($input, $output, $question)) {
