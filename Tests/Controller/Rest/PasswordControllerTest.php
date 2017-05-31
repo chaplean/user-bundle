@@ -16,6 +16,8 @@ use Symfony\Component\HttpFoundation\Response;
 class PasswordControllerTest extends LogicalTestCase
 {
     /**
+     * @covers \Chaplean\Bundle\UserBundle\Controller\Rest\PasswordController::postRequestResetPasswordAction
+     *
      * @return void
      */
     public function testPostRequestResetPasswordActionSendResetEmailIfNotLoggedWithValidEmail()
@@ -41,6 +43,8 @@ class PasswordControllerTest extends LogicalTestCase
     }
 
     /**
+     * @covers \Chaplean\Bundle\UserBundle\Controller\Rest\PasswordController::postRequestResetPasswordAction
+     *
      * @return void
      */
     public function testPostRequestResetPasswordActionFailsIfLoggedWithValidEmail()
@@ -64,6 +68,8 @@ class PasswordControllerTest extends LogicalTestCase
     }
 
     /**
+     * @covers \Chaplean\Bundle\UserBundle\Controller\Rest\PasswordController::postRequestResetPasswordAction
+     *
      * @return void
      */
     public function testPostRequestResetPasswordActionFailsIfNotLoggedWithInvalidEmail()
@@ -89,6 +95,8 @@ class PasswordControllerTest extends LogicalTestCase
     }
 
     /**
+     * @covers \Chaplean\Bundle\UserBundle\Controller\Rest\PasswordController::postSetPasswordAction
+     *
      * @return void
      */
     public function testPostSetPasswordUpdatesPasswordIfValidDataAndNotLoggedIn()
@@ -115,6 +123,8 @@ class PasswordControllerTest extends LogicalTestCase
     }
 
     /**
+     * @covers \Chaplean\Bundle\UserBundle\Controller\Rest\PasswordController::postSetPasswordAction
+     *
      * @return void
      */
     public function testPostSetPasswordFailsIfValidDataAndLoggedIn()
@@ -142,6 +152,8 @@ class PasswordControllerTest extends LogicalTestCase
     }
 
     /**
+     * @covers \Chaplean\Bundle\UserBundle\Controller\Rest\PasswordController::postSetPasswordAction
+     *
      * @return void
      */
     public function testPostSetPasswordFailsIfInvalidTokenAndNotLoggedIn()
@@ -168,6 +180,8 @@ class PasswordControllerTest extends LogicalTestCase
     }
 
     /**
+     * @covers \Chaplean\Bundle\UserBundle\Controller\Rest\PasswordController::postSetPasswordAction
+     *
      * @return void
      */
     public function testPostSetPasswordFailsIfDifferentPasswordsAndNotLoggedIn()
@@ -194,6 +208,8 @@ class PasswordControllerTest extends LogicalTestCase
     }
 
     /**
+     * @covers \Chaplean\Bundle\UserBundle\Controller\Rest\PasswordController::postSetPasswordAction
+     *
      * @return void
      */
     public function testPostSetPasswordFailsIfInvalidPasswordAndNotLoggedIn()

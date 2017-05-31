@@ -15,6 +15,9 @@ use Chaplean\Bundle\UserBundle\Model\AbstractUser;
 class UserTest extends LogicalTestCase
 {
     /**
+     * @covers \Chaplean\Bundle\UserBundle\Doctrine\User::getEmail
+     * @covers \Chaplean\Bundle\UserBundle\Doctrine\User::setEmail
+     *
      * @return void
      */
     public function testEmail()
@@ -27,6 +30,11 @@ class UserTest extends LogicalTestCase
     }
 
     /**
+     * @covers \Chaplean\Bundle\UserBundle\Doctrine\User::getPasswordRequestedAt
+     * @covers \Chaplean\Bundle\UserBundle\Doctrine\User::setPasswordRequestedAt
+     * @covers \Chaplean\Bundle\UserBundle\Doctrine\User::isPasswordRequestNonExpired
+     * @covers \Chaplean\Bundle\UserBundle\Doctrine\User::setEnabled
+     *
      * @return void
      */
     public function testIsPasswordRequestNonExpired()
@@ -44,6 +52,9 @@ class UserTest extends LogicalTestCase
     }
 
     /**
+     * @covers \Chaplean\Bundle\UserBundle\Doctrine\User::setPasswordRequestedAt
+     * @covers \Chaplean\Bundle\UserBundle\Doctrine\User::isPasswordRequestNonExpired
+     *
      * @return void
      */
     public function testIsPasswordRequestAtCleared()
@@ -59,6 +70,9 @@ class UserTest extends LogicalTestCase
     }
 
     /**
+     * @covers \Chaplean\Bundle\UserBundle\Doctrine\User::hasRole
+     * @covers \Chaplean\Bundle\UserBundle\Doctrine\User::addRole
+     *
      * @return void
      */
     public function testTrueHasRole()
@@ -74,6 +88,9 @@ class UserTest extends LogicalTestCase
     }
 
     /**
+     * @covers \Chaplean\Bundle\UserBundle\Doctrine\User::hasRole
+     * @covers \Chaplean\Bundle\UserBundle\Doctrine\User::addRole
+     *
      * @return void
      */
     public function testFalseHasRole()
@@ -86,6 +103,8 @@ class UserTest extends LogicalTestCase
     }
 
     /**
+     * @covers \Chaplean\Bundle\UserBundle\Doctrine\User::getSalt
+     *
      * @return void
      */
     public function testpasswordSaltElevenChars()

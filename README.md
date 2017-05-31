@@ -107,3 +107,10 @@ fos_user:
 chaplean_user:
     resource: '@ChapleanUserBundle/Resources/config/routing.yml'
 ```
+
+# Events
+
+The UserBundle defines some events to allow you to hook in your own logic:
+
+- ChapleanUserCreatedEvent : Dispatched after a user is created. Use getUser() to retreive the entity.
+- ChapleanUserDeletedEvent : Dispatched before a user is deleted. Use getUser() to retreive the entity.

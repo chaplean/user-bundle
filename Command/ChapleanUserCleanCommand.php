@@ -4,9 +4,11 @@ namespace Chaplean\Bundle\UserBundle\Command;
 
 use Chaplean\Bundle\UserBundle\Doctrine\User;
 use Chaplean\Bundle\UserBundle\Doctrine\UserManager;
+use Chaplean\Bundle\UserBundle\Event\ChapleanUserDeletedEvent;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 
 /**
  * Class UserCommand.
@@ -46,12 +48,18 @@ class ChapleanUserCleanCommand extends ContainerAwareCommand
         // time of expired account (24h => 3 600 sec x 24 = 86 400 sec)
         $time = 86400;
 
+        $dispatcher = $this->getContainer()->get('event_dispatcher');
+
         /** @var User $user */
         foreach ($users as $user) {
             if ($user->isAccountExpired($time)) {
-                $userManager->deleteUser($user);
+                $userManager->deleteUser($user, false);
+
+                $dispatcher->dispatch(ChapleanUserDeletedEvent::NAME, new ChapleanUserDeletedEvent($user));
             }
         }
+
+        $this->getContainer()->get('doctrine')->getManager()->flush();
 
         $output->writeln('Clean done.');
     }
