@@ -10,8 +10,8 @@ use Symfony\Component\Security\Core\Role\Role;
  * AbstractUser.php
  *
  * @package   Chaplean\Bundle\UserBundle\Model
- * @author    Benoit - Chaplean <benoit@chaplean.com>
- * @copyright 2014 - 2015 Chaplean (http://www.chaplean.com)
+ * @author    Benoit - Chaplean <benoit@chaplean.coop>
+ * @copyright 2014 - 2015 Chaplean (http://www.chaplean.coop)
  * @since     1.0.0
  *
  * @ORM\MappedSuperclass
@@ -239,8 +239,17 @@ abstract class AbstractUser implements ChapleanUserInterface
      */
     public function getSalt()
     {
-        //var_dump($this->passwordSalt);
-        return $this->passwordSalt;
+        return $this->getPasswordSalt();
+    }
+
+    /**
+     * @param string|null $salt
+     *
+     * @return self
+     */
+    public function setSalt($salt)
+    {
+        return $this->setPasswordSalt($salt);
     }
 
     /**

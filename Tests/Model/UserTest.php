@@ -8,13 +8,15 @@ use Chaplean\Bundle\UserBundle\Doctrine\User;
 /**
  * UserTest.php.
  *
- * @author    Tom - Chaplean <tom@chaplean.com>
- * @copyright 2014 - 2015 Chaplean (http://www.chaplean.com)
+ * @author    Tom - Chaplean <tom@chaplean.coop>
+ * @copyright 2014 - 2015 Chaplean (http://www.chaplean.coop)
  * @since     1.0.0
  */
 class UserTest extends LogicalTestCase
 {
     /**
+     * @covers \Chaplean\Bundle\UserBundle\Model\AbstractUser::getEmail
+     *
      * @return void
      */
     public function testEmail()
@@ -22,11 +24,14 @@ class UserTest extends LogicalTestCase
         $user = $this->getUser();
         $this->assertNull($user->getEmail());
 
-        $user->setEmail('john@chaplean.com');
-        $this->assertEquals('john@chaplean.com', $user->getEmail());
+        $user->setEmail('john@chaplean.coop');
+        $this->assertEquals('john@chaplean.coop', $user->getEmail());
     }
 
     /**
+     * @covers \Chaplean\Bundle\UserBundle\Model\AbstractUser::setPasswordRequestedAt
+     * @covers \Chaplean\Bundle\UserBundle\Model\AbstractUser::isPasswordRequestNonExpired
+     *
      * @return void
      */
     public function testIsPasswordRequestAtCleared()
@@ -42,6 +47,9 @@ class UserTest extends LogicalTestCase
     }
 
     /**
+     * @covers \Chaplean\Bundle\UserBundle\Model\AbstractUser::hasRole
+     * @covers \Chaplean\Bundle\UserBundle\Model\AbstractUser::addRole
+     *
      * @return void
      */
     public function testTrueHasRole()
@@ -57,6 +65,9 @@ class UserTest extends LogicalTestCase
     }
 
     /**
+     * @covers \Chaplean\Bundle\UserBundle\Model\AbstractUser::hasRole
+     * @covers \Chaplean\Bundle\UserBundle\Model\AbstractUser::addRole
+     *
      * @return void
      */
     public function testFalseHasRole()
@@ -69,6 +80,9 @@ class UserTest extends LogicalTestCase
     }
 
     /**
+     * @covers \Chaplean\Bundle\UserBundle\Model\AbstractUser::hasRole
+     * @covers \Chaplean\Bundle\UserBundle\Model\AbstractUser::addRole
+     *
      * @return void
      */
     public function testpasswordSaltElevenChars()

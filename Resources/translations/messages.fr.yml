@@ -68,3 +68,9 @@ forgot:
             La durée de validité de ce lien est de 24h. Passé ce délai, ou dans le cas d'une connexion à votre compte, celui-ci ne sera plus valide.<br />
             <br />
             <i>Merci de ne pas répondre à cet email.</i>
+
+form:
+    set_password:
+        error:
+            too_short: Le mot de passe doit au moins faire 6 charactères
+            no_special_characters: Le mot de passe doit contenir au moins un charactère spécial (autre que lettre ou chiffre)

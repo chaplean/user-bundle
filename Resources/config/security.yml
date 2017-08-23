@@ -20,7 +20,7 @@ security:
                 use_referer: true
                 success_handler: chaplean_user.authentication.handler_http
                 failure_handler: chaplean_user.authentication.handler_http
-                csrf_provider: security.csrf.token_manager
+                csrf_token_generator: security.csrf.token_manager
             logout:
                 path: /logout
                 target: /

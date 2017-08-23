@@ -11,8 +11,8 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 /**
  * UserProvider.php.
  *
- * @author    Valentin - Chaplean <valentin@chaplean.com>
- * @copyright 2014 - 2015 Chaplean (http://www.chaplean.com)
+ * @author    Valentin - Chaplean <valentin@chaplean.coop>
+ * @copyright 2014 - 2015 Chaplean (http://www.chaplean.coop)
  * @since     1.0.0
  */
 class UserProvider implements UserProviderInterface
@@ -50,10 +50,14 @@ class UserProvider implements UserProviderInterface
      */
     public function loadUserByUsername($username)
     {
+        /** @var UserInterface $user */
         $user = $this->userRepository->findOneBy(array('email' => $username));
 
         if (!$user) {
-            throw new UsernameNotFoundException();
+            $exception = new UsernameNotFoundException();
+            $exception->setUsername($username);
+
+            throw $exception;
         }
 
         return $user;
@@ -69,13 +73,14 @@ class UserProvider implements UserProviderInterface
      *
      * @param UserInterface $user
      *
-     * @return UserInterface
+     * @return null|object
      *
      * @throws UnsupportedUserException if the account is not supported
      */
     public function refreshUser(UserInterface $user)
     {
         $class = get_class($user);
+
         if (!$this->supportsClass($class)) {
             throw new UnsupportedUserException(
                 sprintf(

@@ -8,13 +8,16 @@ use Chaplean\Bundle\UserBundle\Model\AbstractUser;
 /**
  * UserTest.php.
  *
- * @author    Tom - Chaplean <tom@chaplean.com>
- * @copyright 2014 - 2015 Chaplean (http://www.chaplean.com)
+ * @author    Tom - Chaplean <tom@chaplean.coop>
+ * @copyright 2014 - 2015 Chaplean (http://www.chaplean.coop)
  * @since     1.0.0
  */
 class UserTest extends LogicalTestCase
 {
     /**
+     * @covers \Chaplean\Bundle\UserBundle\Doctrine\User::getEmail
+     * @covers \Chaplean\Bundle\UserBundle\Doctrine\User::setEmail
+     *
      * @return void
      */
     public function testEmail()
@@ -22,11 +25,16 @@ class UserTest extends LogicalTestCase
         $user = $this->getUser();
         $this->assertNull($user->getEmail());
 
-        $user->setEmail('john@chaplean.com');
-        $this->assertEquals('john@chaplean.com', $user->getEmail());
+        $user->setEmail('john@chaplean.coop');
+        $this->assertEquals('john@chaplean.coop', $user->getEmail());
     }
 
     /**
+     * @covers \Chaplean\Bundle\UserBundle\Doctrine\User::getPasswordRequestedAt
+     * @covers \Chaplean\Bundle\UserBundle\Doctrine\User::setPasswordRequestedAt
+     * @covers \Chaplean\Bundle\UserBundle\Doctrine\User::isPasswordRequestNonExpired
+     * @covers \Chaplean\Bundle\UserBundle\Doctrine\User::setEnabled
+     *
      * @return void
      */
     public function testIsPasswordRequestNonExpired()
@@ -44,6 +52,9 @@ class UserTest extends LogicalTestCase
     }
 
     /**
+     * @covers \Chaplean\Bundle\UserBundle\Doctrine\User::setPasswordRequestedAt
+     * @covers \Chaplean\Bundle\UserBundle\Doctrine\User::isPasswordRequestNonExpired
+     *
      * @return void
      */
     public function testIsPasswordRequestAtCleared()
@@ -59,6 +70,9 @@ class UserTest extends LogicalTestCase
     }
 
     /**
+     * @covers \Chaplean\Bundle\UserBundle\Doctrine\User::hasRole
+     * @covers \Chaplean\Bundle\UserBundle\Doctrine\User::addRole
+     *
      * @return void
      */
     public function testTrueHasRole()
@@ -74,6 +88,9 @@ class UserTest extends LogicalTestCase
     }
 
     /**
+     * @covers \Chaplean\Bundle\UserBundle\Doctrine\User::hasRole
+     * @covers \Chaplean\Bundle\UserBundle\Doctrine\User::addRole
+     *
      * @return void
      */
     public function testFalseHasRole()
@@ -86,6 +103,8 @@ class UserTest extends LogicalTestCase
     }
 
     /**
+     * @covers \Chaplean\Bundle\UserBundle\Doctrine\User::getSalt
+     *
      * @return void
      */
     public function testpasswordSaltElevenChars()
@@ -108,8 +127,8 @@ class UserTest extends LogicalTestCase
  * Class DummyUser.
  *
  * @package   Tests\Chaplean\Bundle\UserBundle\Entity
- * @author    Valentin - Chaplean <valentin@chaplean.com>
- * @copyright 2014 - 2015 Chaplean (http://www.chaplean.com)
+ * @author    Valentin - Chaplean <valentin@chaplean.coop>
+ * @copyright 2014 - 2015 Chaplean (http://www.chaplean.coop)
  * @since     1.0.0
  */
 class DummyUser extends AbstractUser

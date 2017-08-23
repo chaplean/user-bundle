@@ -10,8 +10,8 @@ use Chaplean\Bundle\UserBundle\Model\AbstractUserManager;
  * Class UserManagerTest.
  *
  * @package Tests\Chaplean\Bundle\UserBundle\Model
- * @author    Tom - Chaplean <tom@chaplean.com>
- * @copyright 2014 - 2016 Chaplean (http://www.chaplean.com)
+ * @author    Tom - Chaplean <tom@chaplean.coop>
+ * @copyright 2014 - 2016 Chaplean (http://www.chaplean.coop)
  * @since     1.0.0
  */
 class UserManagerTest extends LogicalTestCase
@@ -41,6 +41,8 @@ class UserManagerTest extends LogicalTestCase
     }
 
     /**
+     * @covers \Chaplean\Bundle\UserBundle\Model\AbstractUserManager::updatePassword
+     *
      * @return void
      */
     public function testUpdatePassword()
@@ -65,6 +67,8 @@ class UserManagerTest extends LogicalTestCase
     }
 
     /**
+     * @covers \Chaplean\Bundle\UserBundle\Model\AbstractUserManager::findUserByEmail
+     *
      * @return void
      */
     public function testFindUserByEmail()
@@ -77,6 +81,8 @@ class UserManagerTest extends LogicalTestCase
     }
 
     /**
+     * @covers \Chaplean\Bundle\UserBundle\Model\AbstractUserManager::findUserByEmail
+     *
      * @return void
      */
     public function testFindUserByEmailLowercasesTheEmail()

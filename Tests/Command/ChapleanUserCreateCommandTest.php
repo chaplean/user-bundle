@@ -8,13 +8,25 @@ use Chaplean\Bundle\UnitBundle\Test\LogicalTestCase;
  * Class ChapleanUserCreateCommandTest.
  *
  * @package   Tests\Chaplean\Bundle\UserBundle\Command
- * @author    Valentin - Chaplean <valentin@chaplean.com>
- * @copyright 2014 - 2015 Chaplean (http://www.chaplean.com)
+ * @author    Valentin - Chaplean <valentin@chaplean.coop>
+ * @copyright 2014 - 2015 Chaplean (http://www.chaplean.coop)
  * @since     2.0.0
  */
 class ChapleanUserCreateCommandTest extends LogicalTestCase
 {
     /**
+     * @return void
+     */
+    public static function setUpBeforeClass()
+    {
+        static::$withDefaultData = false;
+        parent::setUpBeforeClass();
+    }
+
+    /**
+     * @covers \Chaplean\Bundle\UserBundle\Command\ChapleanUserCreateCommand::configure
+     * @covers \Chaplean\Bundle\UserBundle\Command\ChapleanUserCreateCommand::execute
+     *
      * @return void
      */
     public function testCreateUser()
