@@ -9,13 +9,12 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\EventDispatcher\EventDispatcher;
 
 /**
  * ChapleanUserCreateCommand.php.
  *
- * @author    Valentin - Chaplean <valentin@chaplean.com>
- * @copyright 2014 - 2015 Chaplean (http://www.chaplean.com)
+ * @author    Valentin - Chaplean <valentin@chaplean.coop>
+ * @copyright 2014 - 2015 Chaplean (http://www.chaplean.coop)
  * @since     2.0.0
  */
 class ChapleanUserCreateCommand extends ContainerAwareCommand

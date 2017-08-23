@@ -130,8 +130,8 @@ swiftmailer:
     spool:     { type: file }
 
 chaplean_mailer:
-    bcc_address: 'user-bundle@chaplean.com'
-    sender_address: 'user-bundle@chaplean.com'
+    bcc_address: 'user-bundle@chaplean.coop'
+    sender_address: 'user-bundle@chaplean.coop'
     sender_name: 'Chaplean'
     subject:
         prefix: '[TEST]'

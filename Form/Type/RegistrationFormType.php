@@ -2,6 +2,7 @@
 
 namespace Chaplean\Bundle\UserBundle\Form\Type;
 
+use Chaplean\Bundle\UserBundle\Doctrine\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -12,8 +13,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * Class RegistrationFormType.
  *
  * @package   Chaplean\Bundle\UserBundle\Form\Type
- * @author    Valentin - Chaplean <valentin@chaplean.com>
- * @copyright 2014 - 2015 Chaplean (http://www.chaplean.com)
+ * @author    Valentin - Chaplean <valentin@chaplean.coop>
+ * @copyright 2014 - 2015 Chaplean (http://www.chaplean.coop)
  * @since     0.1.0
  */
 class RegistrationFormType extends AbstractType
@@ -26,14 +27,21 @@ class RegistrationFormType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('email', EmailType::class, array(
-                'translation_domain' => 'validators'
-            ))
-            ->add('dateAdd', DateTimeType::class, array(
-                'input' => 'datetime',
-                'data' => new \DateTime('now'),
-            ));
+        $builder->add(
+                'email',
+                EmailType::class,
+                array(
+                    'translation_domain' => 'validators'
+                )
+            )
+            ->add(
+                'dateAdd',
+                DateTimeType::class,
+                array(
+                    'input' => 'datetime',
+                    'data'  => new \DateTime('now'),
+                )
+            );
     }
 
     /**
@@ -45,12 +53,13 @@ class RegistrationFormType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'data_class' => 'Chaplean\Bundle\UserBundle\Doctrine\User',
-                'validation_groups' => array('registration'),
+                'data_class'         => User::class,
+                'validation_groups'  => array('registration'),
                 'translation_domain' => 'messages'
             )
         );
     }
+
     /**
      * @return string
      */

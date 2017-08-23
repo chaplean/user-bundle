@@ -15,8 +15,8 @@ use Symfony\Component\HttpFoundation\Response;
  * Class PasswordController.
  *
  * @package   App\Bundle\RestBundle\Controller
- * @author    Matthias - Chaplean <matthias@chaplean.com>
- * @copyright 2014 - 2016 Chaplean (http://www.chaplean.com)
+ * @author    Matthias - Chaplean <matthias@chaplean.coop>
+ * @copyright 2014 - 2016 Chaplean (http://www.chaplean.coop)
  * @since     4.0.0
  *
  * @Annotations\RouteResource("Password")

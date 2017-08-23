@@ -5,14 +5,13 @@ namespace Chaplean\Bundle\UserBundle\Utility;
 use Chaplean\Bundle\UserBundle\Model\UserInterface;
 use FOS\UserBundle\Model\UserManagerInterface;
 use FOS\UserBundle\Util\TokenGeneratorInterface;
-use Symfony\Component\DependencyInjection\Container;
 
 /**
  * PasswordUtility.php.
  *
  * @package   Chaplean\Bundle\UserBundle\Utility
- * @author    Matthias - Chaplean <matthias@chaplean.com>
- * @copyright 2014 - 2015 Chaplean (http://www.chaplean.com)
+ * @author    Matthias - Chaplean <matthias@chaplean.coop>
+ * @copyright 2014 - 2015 Chaplean (http://www.chaplean.coop)
  * @since     0.1.0
  */
 class PasswordUtility
@@ -26,7 +25,8 @@ class PasswordUtility
     /**
      * Constructor.
      *
-     * @param Container $serviceContainer serviceContainer.
+     * @param \FOS\UserBundle\Model\UserManagerInterface   $userManager
+     * @param \FOS\UserBundle\Util\TokenGeneratorInterface $tokenGenerator
      */
     public function __construct(UserManagerInterface $userManager, TokenGeneratorInterface $tokenGenerator)
     {

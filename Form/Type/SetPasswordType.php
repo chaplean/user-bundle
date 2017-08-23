@@ -2,23 +2,20 @@
 
 namespace Chaplean\Bundle\UserBundle\Form\Type;
 
-use Chaplean\Bundle\UserBundle\Validator\Constraints\MinimalPasswordRequirements;
+use Chaplean\Bundle\UserBundle\Model\SetPasswordModel;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormError;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\CallbackValidator;
-use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
  * Class SetPasswordType.
  *
  * @package   Chaplean\Bundle\UserBundle\Form\Type
- * @author    Matthias - Chaplean <matthias@chaplean.com>
- * @copyright 2014 - 2016 Chaplean (http://www.chaplean.com)
+ * @author    Matthias - Chaplean <matthias@chaplean.coop>
+ * @copyright 2014 - 2016 Chaplean (http://www.chaplean.coop)
  * @since     4.0.0
  */
 class SetPasswordType extends AbstractType
@@ -35,7 +32,7 @@ class SetPasswordType extends AbstractType
             'password',
             RepeatedType::class,
             array(
-                'type'            => 'password',
+                'type'            => PasswordType::class,
                 'first_name'      => 'first',
                 'second_name'     => 'second',
                 'invalid_message' => 'fos_user.password.mismatch',
@@ -62,7 +59,7 @@ class SetPasswordType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'data_class' => 'Chaplean\Bundle\UserBundle\Model\SetPasswordModel',
+                'data_class'         => SetPasswordModel::class,
                 'translation_domain' => 'messages',
                 'csrf_protection'    => false,
             )

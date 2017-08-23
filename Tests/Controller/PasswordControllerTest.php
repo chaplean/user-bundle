@@ -9,8 +9,8 @@ use Symfony\Component\HttpFoundation\Response;
  * Class PasswordControllerTest.
  *
  * @package   Tests\Chaplean\Bundle\UserBundle\Controller
- * @author    Matthias - Chaplean <matthias@chaplean.com>
- * @copyright 2014 - 2016 Chaplean (http://www.chaplean.com)
+ * @author    Matthias - Chaplean <matthias@chaplean.coop>
+ * @copyright 2014 - 2016 Chaplean (http://www.chaplean.coop)
  * @since     4.0.0
  */
 class PasswordControllerTest extends LogicalTestCase

@@ -3,8 +3,8 @@
  * Registration.php.
  *
  * @package   Chaplean\Bundle\UserBundle\Utility
- * @author    Matthias - Chaplean <matthias@chaplean.com>
- * @copyright 2014 - 2015 Chaplean (http://www.chaplean.com)
+ * @author    Matthias - Chaplean <matthias@chaplean.coop>
+ * @copyright 2014 - 2015 Chaplean (http://www.chaplean.coop)
  * @since     0.1.0
  */
 
@@ -62,13 +62,13 @@ class Registration
      * @param User   $user
      * @param string $view
      *
-     * @return Message|null
+     * @return void
      */
     private function sendMail($subject, $user, $view)
     {
         $token = $user->getConfirmationToken();
 
-        /** @var Twig $templateRenderer */
+        /** @var \Symfony\Bundle\TwigBundle\TwigEngine $templateRenderer */
         $templateRenderer = $this->serviceContainer->get('templating');
 
         /** @var Router $router */
@@ -87,6 +87,7 @@ class Registration
                     )
                 )
             );
+
         $this->serviceContainer->get('swiftmailer.mailer')->send($message);
     }
 }

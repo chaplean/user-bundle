@@ -11,8 +11,8 @@ use Symfony\Component\EventDispatcher\Event;
  * This event is dispatched each time before a user is deleted.
  *
  * @package   Chaplean\Bundle\UserBundle\Event
- * @author    Matthias - Chaplean <matthias@chaplean.com>
- * @copyright 2014 - 2017 Chaplean (http://www.chaplean.com)
+ * @author    Matthias - Chaplean <matthias@chaplean.coop>
+ * @copyright 2014 - 2017 Chaplean (http://www.chaplean.coop)
  * @since     5.0.1
  */
 class ChapleanUserDeletedEvent extends Event

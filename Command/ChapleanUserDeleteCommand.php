@@ -15,8 +15,8 @@ use Symfony\Component\Console\Question\ConfirmationQuestion;
  * Class ChapleanUserDeleteCommand.
  *
  * @package   Chaplean\Bundle\UserBundle\Command
- * @author    Matthias - Chaplean <matthias@chaplean.com>
- * @copyright 2014 - 2017 Chaplean (http://www.chaplean.com)
+ * @author    Matthias - Chaplean <matthias@chaplean.coop>
+ * @copyright 2014 - 2017 Chaplean (http://www.chaplean.coop)
  * @since     5.0.1
  */
 class ChapleanUserDeleteCommand extends ContainerAwareCommand
@@ -65,7 +65,7 @@ class ChapleanUserDeleteCommand extends ContainerAwareCommand
         }
 
         $userManager = $this->getContainer()->get('chaplean_user.user_manager');
-        $userManager->deleteUser($user, false);
+        $userManager->deleteUser($user);
 
         $dispatcher = $this->getContainer()->get('event_dispatcher');
         $dispatcher->dispatch(ChapleanUserDeletedEvent::NAME, new ChapleanUserDeletedEvent($user));

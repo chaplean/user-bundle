@@ -2,22 +2,22 @@
 
 namespace Chaplean\Bundle\UserBundle\Model;
 
+use FOS\UserBundle\Model\User;
 use FOS\UserBundle\Model\UserInterface as FOSUserInterface;
 use FOS\UserBundle\Model\UserManagerInterface;
-use FOS\UserBundle\Util\CanonicalizerInterface;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
-use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Core\User\UserInterface as SecurityUserInterface;
+use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 /**
  * Class AbstractUserManager.
  *
  * @package   Chaplean\Bundle\UserBundle\Model
- * @author    Valentin - Chaplean <valentin@chaplean.com>
- * @copyright 2014 - 2015 Chaplean (http://www.chaplean.com)
+ * @author    Valentin - Chaplean <valentin@chaplean.coop>
+ * @copyright 2014 - 2015 Chaplean (http://www.chaplean.coop)
  * @since     2.0.0
  */
 abstract class AbstractUserManager implements UserManagerInterface, UserProviderInterface
@@ -191,7 +191,9 @@ abstract class AbstractUserManager implements UserManagerInterface, UserProvider
     }
 
     /**
-     * {@inheritDoc}
+     * @param \FOS\UserBundle\Model\UserInterface $user
+     *
+     * @return void
      */
     public function updatePassword(FOSUserInterface $user)
     {
@@ -203,18 +205,21 @@ abstract class AbstractUserManager implements UserManagerInterface, UserProvider
     }
 
     /**
-     * @param UserInterface $user
+     * @param FOSUserInterface $user
      *
      * @return PasswordEncoderInterface
      */
-    protected function getEncoder(UserInterface $user)
+    protected function getEncoder(FOSUserInterface $user)
     {
         return $this->encoderFactory->getEncoder($user);
     }
 
     /**
-     * {@inheritDoc}
      * @deprecated Use FOS\UserBundle\Security\UserProvider instead
+     *
+     * @param string $class
+     *
+     * @return bool
      */
     public function supportsClass($class)
     {

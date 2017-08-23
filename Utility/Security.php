@@ -3,8 +3,8 @@
  * Security.php.
  *
  * @package   Chaplean\Bundle\UserBundle\Utility
- * @author    Valentin - Chaplean <valentin@chaplean.com>
- * @copyright 2014 - 2015 Chaplean (http://www.chaplean.com)
+ * @author    Valentin - Chaplean <valentin@chaplean.coop>
+ * @copyright 2014 - 2015 Chaplean (http://www.chaplean.coop)
  * @since     0.1.0
  */
 

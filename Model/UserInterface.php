@@ -8,8 +8,8 @@ use FOS\UserBundle\Model\UserInterface as FOSUserInterface;
  * Interface UserInterface.
  *
  * @package   Chaplean\Bundle\UserBundle\Model
- * @author    Benoit - Chaplean <benoit@chaplean.com>
- * @copyright 2014 - 2015 Chaplean (http://www.chaplean.com)
+ * @author    Benoit - Chaplean <benoit@chaplean.coop>
+ * @copyright 2014 - 2015 Chaplean (http://www.chaplean.coop)
  * @since     1.0.0
  */
 interface UserInterface extends \Serializable, FOSUserInterface

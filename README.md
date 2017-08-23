@@ -51,14 +51,14 @@ Define namespace your user entity in `parameters.yml`:
 ```yaml
 parameters:
 #...
-    chaplean_user.entity.user.class: <NamespaceUserEntity>
+    chaplean_user.entity.user.class: '<NamespaceUserEntity>'
 ```
 
 Import default config in `app/config/config.yml`:
 
 ```yaml
 imports:
-    - { resource: @ChapleanUserBundle/Resources/config/config.yml }
+    - { resource: '@ChapleanUserBundle/Resources/config/config.yml' }
 ```
 
 Define a route name for index path

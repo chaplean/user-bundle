@@ -13,8 +13,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * Class ProfileFormType
  *
  * @package   Chaplean\Bundle\UserBundle\Form\Type
- * @author    Valentin - Chaplean <valentin@chaplean.com>
- * @copyright 2014 - 2015 Chaplean (http://www.chaplean.com)
+ * @author    Valentin - Chaplean <valentin@chaplean.coop>
+ * @copyright 2014 - 2015 Chaplean (http://www.chaplean.coop)
  * @since     0.1.0
  */
 class ProfileFormType extends AbstractType
@@ -28,12 +28,15 @@ class ProfileFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         parent::buildForm($builder, $options);
-            $builder
-                ->remove('dateAdd')
-                ->add('dateUpdate', DateTimeType::class, array(
+        $builder->remove('dateAdd')
+            ->add(
+                'dateUpdate',
+                DateTimeType::class,
+                array(
                     'input' => 'datetime',
-                    'data' => new \DateTime('now'),
-                ));
+                    'data'  => new \DateTime('now'),
+                )
+            );
     }
 
     /**
@@ -45,8 +48,8 @@ class ProfileFormType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'data_class' => 'Chaplean\Bundle\UserBundle\Doctrine\User',
-                'validation_groups' => array('profile'),
+                'data_class'         => User::class,
+                'validation_groups'  => array('profile'),
                 'translation_domain' => 'messages'
             )
         );

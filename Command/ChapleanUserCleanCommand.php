@@ -8,14 +8,13 @@ use Chaplean\Bundle\UserBundle\Event\ChapleanUserDeletedEvent;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\EventDispatcher\EventDispatcher;
 
 /**
  * Class UserCommand.
  *
  * @package   Chaplean\Bundle\UserBundle\Command
- * @author    Valentin - Chaplean <valentin@chaplean.com>
- * @copyright 2014 - 2015 Chaplean (http://www.chaplean.com)
+ * @author    Valentin - Chaplean <valentin@chaplean.coop>
+ * @copyright 2014 - 2015 Chaplean (http://www.chaplean.coop)
  * @since     0.1.0
  */
 class ChapleanUserCleanCommand extends ContainerAwareCommand
@@ -53,7 +52,7 @@ class ChapleanUserCleanCommand extends ContainerAwareCommand
         /** @var User $user */
         foreach ($users as $user) {
             if ($user->isAccountExpired($time)) {
-                $userManager->deleteUser($user, false);
+                $userManager->deleteUser($user);
 
                 $dispatcher->dispatch(ChapleanUserDeletedEvent::NAME, new ChapleanUserDeletedEvent($user));
             }
