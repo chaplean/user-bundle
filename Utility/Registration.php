@@ -1,4 +1,11 @@
 <?php
+
+namespace Chaplean\Bundle\UserBundle\Utility;
+
+use Chaplean\Bundle\UserBundle\Doctrine\User;
+use Symfony\Component\DependencyInjection\Container;
+use Symfony\Component\Routing\Router;
+
 /**
  * Registration.php.
  *
@@ -7,14 +14,6 @@
  * @copyright 2014 - 2015 Chaplean (http://www.chaplean.coop)
  * @since     0.1.0
  */
-
-namespace Chaplean\Bundle\UserBundle\Utility;
-
-use Chaplean\Bundle\MailerBundle\lib\classes\Chaplean\Message;
-use Chaplean\Bundle\UserBundle\Doctrine\User;
-use Symfony\Component\DependencyInjection\Container;
-use Symfony\Component\Routing\Router;
-
 class Registration
 {
     protected $serviceContainer;
@@ -74,19 +73,18 @@ class Registration
         /** @var Router $router */
         $router = $this->serviceContainer->get('router');
 
-        $chapleanMailerConfig = $this->serviceContainer->getParameter('chaplean_mailer');
-        $message = new Message($chapleanMailerConfig);
+        $message = new \Swift_Message();
         $message->setContentType('text/html');
-        $message->setSubject($subject)
-            ->setTo($user->getEmail())
-            ->setBody(
-                $templateRenderer->render(
-                    $view,
-                    array(
-                        'link' => $router->generate('chaplean_user_password_set_password', array('token' => $token), true)
-                    )
+        $message->setSubject($subject);
+        $message->setTo($user->getEmail());
+        $message->setBody(
+            $templateRenderer->render(
+                $view,
+                array(
+                    'link' => $router->generate('chaplean_user_password_set_password', array('token' => $token), true)
                 )
-            );
+            )
+        );
 
         $this->serviceContainer->get('swiftmailer.mailer')->send($message);
     }
