@@ -72,5 +72,5 @@ forgot:
 form:
     set_password:
         error:
-            too_short: Le mot de passe doit au moins faire 6 charactères
-            no_special_characters: Le mot de passe doit contenir au moins un charactère spécial (autre que lettre ou chiffre)
+            too_short: Le mot de passe doit au moins faire 6 caractères
+            no_special_characters: Le mot de passe doit contenir au moins un caractère spécial (autre que lettre ou chiffre)
