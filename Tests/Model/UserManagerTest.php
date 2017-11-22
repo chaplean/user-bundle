@@ -63,7 +63,6 @@ class UserManagerTest extends LogicalTestCase
 
         $this->manager->updatePassword($user);
         $this->assertEquals('encodedPassword', $user->getPassword(), '->updatePassword() sets encoded password');
-        $this->assertNull($user->getPlainPassword(), '->updatePassword() erases credentials');
     }
 
     /**
