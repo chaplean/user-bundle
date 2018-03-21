@@ -12,10 +12,7 @@
     "autoload": {
         "psr-4": {
             "Chaplean\\Bundle\\UserBundle\\": ""
-        },
-        "classmap": [
-            "app/AppKernel.php"
-        ]
+        }
     },
     "autoload-dev": {
         "psr-4": {
