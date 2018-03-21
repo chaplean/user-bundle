@@ -18,7 +18,7 @@
         "psr-4": {
             "Tests\\Chaplean\\Bundle\\UserBundle\\": "Tests/"
         },
-        "files": ["app/AppKernel.php"]
+        "classmap": ["app/AppKernel.php"]
     },
     "repositories": [
         {
