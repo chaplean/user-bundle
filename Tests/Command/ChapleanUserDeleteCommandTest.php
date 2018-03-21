@@ -2,7 +2,7 @@
 
 namespace Tests\Chaplean\Bundle\UserBundle\Command;
 
-use Chaplean\Bundle\UnitBundle\Test\LogicalTestCase;
+use Chaplean\Bundle\UnitBundle\Test\FunctionalTestCase;
 use Chaplean\Bundle\UserBundle\Command\ChapleanUserDeleteCommand;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
@@ -15,7 +15,7 @@ use Symfony\Component\Console\Tester\CommandTester;
  * @copyright 2014 - 2015 Chaplean (http://www.chaplean.coop)
  * @since     2.0.0
  */
-class ChapleanUserDeleteCommandTest extends LogicalTestCase
+class ChapleanUserDeleteCommandTest extends FunctionalTestCase
 {
     /**
      * @covers \Chaplean\Bundle\UserBundle\Command\ChapleanUserDeleteCommand::configure

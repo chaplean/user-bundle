@@ -2,7 +2,7 @@
 
 namespace Tests\Chaplean\Bundle\UserBundle\Controller;
 
-use Chaplean\Bundle\UnitBundle\Test\LogicalTestCase;
+use Chaplean\Bundle\UnitBundle\Test\FunctionalTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
  * @copyright 2014 - 2016 Chaplean (http://www.chaplean.coop)
  * @since     4.0.0
  */
-class PasswordControllerTest extends LogicalTestCase
+class PasswordControllerTest extends FunctionalTestCase
 {
     /**
      * @covers \Chaplean\Bundle\UserBundle\Controller\PasswordController::requestResetPasswordFormAction

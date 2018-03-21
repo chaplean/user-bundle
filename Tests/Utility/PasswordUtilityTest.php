@@ -2,7 +2,7 @@
 
 namespace Tests\Chaplean\Bundle\UserBundle\Utility;
 
-use Chaplean\Bundle\UnitBundle\Test\LogicalTestCase;
+use Chaplean\Bundle\UnitBundle\Test\FunctionalTestCase;
 
 /**
  * Class PasswordUtilityTest.
@@ -12,12 +12,13 @@ use Chaplean\Bundle\UnitBundle\Test\LogicalTestCase;
  * @copyright 2014 - 2016 Chaplean (http://www.chaplean.coop)
  * @since     4.0.0
  */
-class PasswordUtilityTest extends LogicalTestCase
+class PasswordUtilityTest extends FunctionalTestCase
 {
     /**
      * @covers \Chaplean\Bundle\UserBundle\Utility\PasswordUtility::isTokenValid
      *
      * @return void
+     * @throws \Exception
      */
     public function testIsTokenValidValidToken()
     {
@@ -29,6 +30,7 @@ class PasswordUtilityTest extends LogicalTestCase
      * @covers \Chaplean\Bundle\UserBundle\Utility\PasswordUtility::isTokenValid
      *
      * @return void
+     * @throws \Exception
      */
     public function testIsTokenValidInvalidToken()
     {
