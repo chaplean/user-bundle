@@ -2,6 +2,10 @@ parameters:
     chaplean_user.user.provider.class: Chaplean\Bundle\UserBundle\Provider\UserProvider
 
 services:
+     _defaults:
+        autowire: true
+        public: true
+
     chaplean_user.user.manager:
         class: Doctrine\ORM\EntityManager
         factory: ['@doctrine', getManagerForClass]
