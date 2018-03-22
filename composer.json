@@ -31,7 +31,6 @@
         "chaplean/mailer-bundle": "^4.0",
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/orm": "^2.5",
-        "friendsofsymfony/jsrouting-bundle": "^1.5",
         "friendsofsymfony/rest-bundle": "^2.1",
         "friendsofsymfony/user-bundle": "^2.0.0",
         "sensio/distribution-bundle": "^5.0",
