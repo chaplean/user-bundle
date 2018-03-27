@@ -145,6 +145,8 @@ class UserManager extends AbstractUserManager
         if ($andFlush) {
             $this->em->flush();
         }
+
+        $user->eraseCredentials();
     }
 
     /**

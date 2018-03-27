@@ -2,7 +2,7 @@
 
 namespace Tests\Chaplean\Bundle\UserBundle\Entity;
 
-use Chaplean\Bundle\UnitBundle\Test\LogicalTestCase;
+use Chaplean\Bundle\UnitBundle\Test\FunctionalTestCase;
 use Chaplean\Bundle\UserBundle\Model\AbstractUser;
 
 /**
@@ -12,7 +12,7 @@ use Chaplean\Bundle\UserBundle\Model\AbstractUser;
  * @copyright 2014 - 2015 Chaplean (http://www.chaplean.coop)
  * @since     1.0.0
  */
-class UserTest extends LogicalTestCase
+class UserTest extends FunctionalTestCase
 {
     /**
      * @covers \Chaplean\Bundle\UserBundle\Doctrine\User::getEmail

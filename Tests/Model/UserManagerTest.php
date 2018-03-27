@@ -2,7 +2,7 @@
 
 namespace Tests\Chaplean\Bundle\UserBundle\Model;
 
-use Chaplean\Bundle\UnitBundle\Test\LogicalTestCase;
+use Chaplean\Bundle\UnitBundle\Test\FunctionalTestCase;
 use Chaplean\Bundle\UserBundle\Doctrine\User;
 use Chaplean\Bundle\UserBundle\Model\AbstractUserManager;
 
@@ -14,7 +14,7 @@ use Chaplean\Bundle\UserBundle\Model\AbstractUserManager;
  * @copyright 2014 - 2016 Chaplean (http://www.chaplean.coop)
  * @since     1.0.0
  */
-class UserManagerTest extends LogicalTestCase
+class UserManagerTest extends FunctionalTestCase
 {
     /**
      * @var \PHPUnit_Framework_MockObject_MockObject|AbstractUserManager
@@ -63,7 +63,6 @@ class UserManagerTest extends LogicalTestCase
 
         $this->manager->updatePassword($user);
         $this->assertEquals('encodedPassword', $user->getPassword(), '->updatePassword() sets encoded password');
-        $this->assertNull($user->getPlainPassword(), '->updatePassword() erases credentials');
     }
 
     /**

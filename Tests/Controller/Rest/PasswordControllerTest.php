@@ -3,7 +3,8 @@
 namespace Tests\Chaplean\Bundle\UserBundle\Controller\Rest;
 
 use Chaplean\Bundle\UnitBundle\Entity\User;
-use Chaplean\Bundle\UnitBundle\Test\LogicalTestCase;
+use Chaplean\Bundle\UnitBundle\Test\FunctionalTestCase;
+use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -14,8 +15,10 @@ use Symfony\Component\HttpFoundation\Response;
  * @copyright 2014 - 2016 Chaplean (http://www.chaplean.coop)
  * @since     4.0.0
  */
-class PasswordControllerTest extends LogicalTestCase
+class PasswordControllerTest extends FunctionalTestCase
 {
+    use MockeryPHPUnitIntegration;
+
     /**
      * @covers \Chaplean\Bundle\UserBundle\Controller\Rest\PasswordController::postRequestResetPasswordAction
      *
@@ -23,7 +26,12 @@ class PasswordControllerTest extends LogicalTestCase
      */
     public function testPostRequestResetPasswordActionSendResetEmailIfNotLoggedWithValidEmail()
     {
+        $mailer = \Mockery::mock(\Swift_Mailer::class);
         $client = $this->createRestClient();
+
+        $client->getContainer()->set('swiftmailer.mailer', $mailer);
+        $mailer->shouldReceive('send')->once()->andReturnNull();
+
         $response = $client->request(
             'POST',
             '/api/password/request_reset',
@@ -35,9 +43,6 @@ class PasswordControllerTest extends LogicalTestCase
         );
 
         $this->assertEquals(Response::HTTP_NO_CONTENT, $response->getStatusCode());
-
-        $messages = $this->readMessages();
-        $this->assertCount(1, $messages);
     }
 
     /**
@@ -72,7 +77,12 @@ class PasswordControllerTest extends LogicalTestCase
      */
     public function testPostRequestResetPasswordActionFailsIfNotLoggedWithInvalidEmail()
     {
+        $mailer = \Mockery::mock(\Swift_Mailer::class);
         $client = $this->createRestClient();
+
+        $client->getContainer()->set('swiftmailer.mailer', $mailer);
+        $mailer->shouldReceive('send')->never();
+
         $response = $client->request(
             'POST',
             '/api/password/request_reset',
@@ -84,9 +94,6 @@ class PasswordControllerTest extends LogicalTestCase
         );
 
         $this->assertEquals(Response::HTTP_NO_CONTENT, $response->getStatusCode());
-
-        $messages = $this->readMessages();
-        $this->assertEmpty($messages);
     }
 
     /**

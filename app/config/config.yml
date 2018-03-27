@@ -8,7 +8,7 @@ framework:
     translator:      { fallback: '%locale%' }
     secret:          '%secret%'
     router:
-        resource: '%kernel.root_dir%/config/routing.yml'
+        resource: '%kernel.project_dir%/app/config/routing.yml'
         strict_requirements: true
     form:            ~
     csrf_protection: ~
@@ -20,11 +20,15 @@ framework:
     trusted_proxies: ~
     fragments:       ~
     http_method_override: true
+    assets: ~
+    php_errors:
+        log: true
     serializer:
         enable_annotations: true
     session:
         storage_id: session.storage.mock_file
-        handler_id:  ~
+        handler_id: session.handler.native_file
+        save_path: '%kernel.project_dir%/var/sessions/%kernel.environment%'
     profiler:
         collect: false
 
@@ -106,6 +110,7 @@ doctrine:
                 driver:   '%database_driver%'
                 host:     '%database_host%'
                 port:     '%database_port%'
+                path:     '%kernel.cache_dir%/test.db'
                 dbname:   '%database_name%'
                 user:     '%database_user%'
                 password: '%database_password%'
