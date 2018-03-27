@@ -4,32 +4,32 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "285824456b7152c1d7002320fe3a9543",
+    "content-hash": "8fa9396707269da74b73915596996ece",
     "packages": [
         {
             "name": "chaplean/mailer-bundle",
-            "version": "v4.2.0",
+            "version": "v5.0.0",
             "source": {
                 "type": "git",
                 "url": "git@git.chaplean.coop:private/bundle/mailer-bundle.git",
-                "reference": "25606201ec23b1676aaf02c05859c1b67567602f"
+                "reference": "0a1a6964c02ae4c013a675a69d33bdc78802ad65"
             },
             "require": {
                 "php": ">=7.0.8",
-                "symfony/config": "^2.8 || ^3.0 || ^4.0",
-                "symfony/console": "^2.8 || ^3.0 || ^4.0",
-                "symfony/dependency-injection": "^2.7 || ^3.0 || ^4.0",
-                "symfony/monolog-bundle": "~2.4 || ~3.0 || ^4.0",
+                "symfony/config": "^3.0 || ^4.0",
+                "symfony/console": "^3.0 || ^4.0",
+                "symfony/dependency-injection": "^3.0 || ^4.0",
+                "symfony/monolog-bundle": "~3.0 || ^4.0",
                 "symfony/swiftmailer-bundle": "~3.0",
-                "symfony/yaml": "^2.8 || ^3.0 || ^4.0"
+                "symfony/yaml": "^3.0 || ^4.0"
             },
             "require-dev": {
                 "chaplean/codeship-scripts": "^1.0",
                 "chaplean/coding-standard": "^1.1",
                 "mockery/mockery": "dev-master",
                 "phpunit/phpunit": "^7.0",
-                "symfony/http-kernel": "^2.8 || ^3.0 || ^4.0",
-                "symfony/var-dumper": "^2.8 || ^3.0 || ^4.0"
+                "symfony/http-kernel": "^3.0 || ^4.0",
+                "symfony/var-dumper": "^3.0 || ^4.0"
             },
             "type": "symfony-bundle",
             "autoload": {
@@ -47,7 +47,7 @@
                 }
             ],
             "description": "Contains utilities for mailer",
-            "time": "2018-03-22T09:20:19+00:00"
+            "time": "2018-03-26T15:43:56+00:00"
         },
         {
             "name": "composer/ca-bundle",

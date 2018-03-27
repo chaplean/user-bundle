@@ -28,7 +28,7 @@
     ],
     "require": {
         "php": ">=7.0.8",
-        "chaplean/mailer-bundle": "^4.0",
+        "chaplean/mailer-bundle": "^5.0",
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/orm": "^2.5",
         "friendsofsymfony/rest-bundle": "^2.1",
