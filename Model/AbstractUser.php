@@ -5,6 +5,7 @@ namespace Chaplean\Bundle\UserBundle\Model;
 use Chaplean\Bundle\UserBundle\Model\UserInterface as ChapleanUserInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\Role\Role;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * AbstractUser.php
@@ -28,6 +29,16 @@ abstract class AbstractUser implements ChapleanUserInterface
     protected $id;
 
     /**
+     * @ORM\Column(type="string", length=250, nullable=false)
+     */
+    private $username;
+
+    /**
+     * @ORM\Column(type="string", unique=true, length=250, nullable=false)
+     */
+    private $usernameCanonical;
+
+    /**
      * @var string
      *
      * @ORM\Column(type="string", length=250, nullable=false, name="email")
@@ -35,16 +46,21 @@ abstract class AbstractUser implements ChapleanUserInterface
     protected $email;
 
     /**
+     * @ORM\Column(type="string", unique=true, length=250, nullable=false)
+     */
+    private $emailCanonical;
+
+    /**
      * @var string
      *
-     * @ORM\Column(type="string", length=250, nullable=false, name="firstname")
+     * 
      */
     protected $firstname;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=250, nullable=false, name="lastname")
+     * 
      */
     protected $lastname;
 
@@ -53,7 +69,7 @@ abstract class AbstractUser implements ChapleanUserInterface
      *
      * @var string
      *
-     * @ORM\Column(type="string", length=255, nullable=false, name="password_salt")
+     * 
      */
     protected $passwordSalt;
 
@@ -62,9 +78,14 @@ abstract class AbstractUser implements ChapleanUserInterface
      *
      * @var string
      *
-     * @ORM\Column(type="string", length=255, nullable=false, name="password")
+     * @ORM\Column(type="string", nullable=false, name="password")
      */
     protected $password;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true, name="date_last_login")
+     */
+    private $dateLastLogin;
 
     /**
      * Plain password. Used for model validation. Must not be persisted.
@@ -81,23 +102,28 @@ abstract class AbstractUser implements ChapleanUserInterface
     protected $enabled = false;
 
     /**
+     * @ORM\Column(type="string", nullable=false, name="salt")
+     */
+    private $salt;
+
+    /**
      * @var boolean
      *
-     * @ORM\Column(type="boolean", nullable=false, name="is_locked")
+     * 
      */
     protected $locked = false;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(type="boolean", nullable=false, name="is_expired")
+     * 
      */
     protected $expired = false;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(type="boolean", nullable=false, name="is_credential_expired")
+     * 
      */
     protected $credentialExpired;
 
@@ -106,7 +132,7 @@ abstract class AbstractUser implements ChapleanUserInterface
      *
      * @var string
      *
-     * @ORM\Column(type="string", length=255, nullable=true, name="confirmation_token")
+     * @ORM\Column(type="string", unique=true, length=180, nullable=true, name="confirmation_token")
      */
     protected $confirmationToken;
 
@@ -121,6 +147,7 @@ abstract class AbstractUser implements ChapleanUserInterface
      * @var \DateTime
      *
      * @ORM\Column(type="datetime", nullable=false, name="date_add")
+     * @Gedmo\Timestampable(on="create")
      */
     protected $dateAdd;
 
@@ -134,7 +161,7 @@ abstract class AbstractUser implements ChapleanUserInterface
     /**
      * @var \DateTime
      *
-     * @ORM\Column(type="datetime", nullable=true, name="date_lastlogin")
+     * 
      */
     protected $dateLastlogin;
 
@@ -148,14 +175,14 @@ abstract class AbstractUser implements ChapleanUserInterface
     /**
      * @var \DateTime
      *
-     * @ORM\Column(type="datetime", nullable=true, name="date_expired")
+     * 
      */
     protected $dateExpired;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(type="datetime", nullable=true, name="date_credential_expired")
+     * 
      */
     protected $dateCredentialExpired;
 
