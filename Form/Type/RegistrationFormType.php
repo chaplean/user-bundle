@@ -28,19 +28,19 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add(
-                'email',
-                EmailType::class,
-                array(
+            'email',
+            EmailType::class,
+            [
                     'translation_domain' => 'validators'
-                )
+            ]
             )
             ->add(
                 'dateAdd',
                 DateTimeType::class,
-                array(
+                [
                     'input' => 'datetime',
                     'data'  => new \DateTime('now'),
-                )
+                ]
             );
     }
 
@@ -52,11 +52,11 @@ class RegistrationFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
-            array(
+            [
                 'data_class'         => User::class,
-                'validation_groups'  => array('registration'),
+                'validation_groups'  => ['registration'],
                 'translation_domain' => 'messages'
-            )
+            ]
         );
     }
 

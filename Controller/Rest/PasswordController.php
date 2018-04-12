@@ -49,7 +49,7 @@ class PasswordController extends FOSRestController
 
             $formData = $form->getData();
             $userManager = $this->get('chaplean_user.user_manager');
-            $user = $userManager->findUserBy(array('email' => $formData['email']));
+            $user = $userManager->findUserBy(['email' => $formData['email']]);
 
             if ($user !== null) {
                 $passwordUtility->createConfirmationToken($user);
@@ -88,7 +88,7 @@ class PasswordController extends FOSRestController
         $userManager = $this->get('fos_user.user_manager');
         $passwordUtility = $this->get('chaplean_user.password_utility');
 
-        $user = $userManager->findUserBy(array('confirmationToken' => $formData->getToken()));
+        $user = $userManager->findUserBy(['confirmationToken' => $formData->getToken()]);
         if ($user === null || !$passwordUtility->isTokenValid($formData->getToken())) {
             return $this->handleView(new View('', Response::HTTP_FORBIDDEN));
         }

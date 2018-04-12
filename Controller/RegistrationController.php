@@ -82,26 +82,30 @@ class RegistrationController extends BaseController
                 $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
                 $userManager->updateUser($user);
 
-                return new JsonResponse(array(
+                return new JsonResponse(
+                    [
                     'success' => true,
                     'message' => '',
                     'data'    => null
-                ));
+                    ]
+                );
             } else {
-                return new JsonResponse(array(
+                return new JsonResponse(
+                    [
                     'success' => false,
                     'message' => '',
-                    'data'    => array(
+                    'data'    => [
                         'errors' => $form->getErrors(true)
-                    )
-                ));
+                    ]
+                    ]
+                );
             }
         } else {
             return $this->render(
                 'ChapleanUserBundle:Registration:register.html.twig',
-                array(
+                [
                     'form' => $form->createView(),
-                )
+                ]
             );
         }
     }
@@ -137,30 +141,34 @@ class RegistrationController extends BaseController
 
         if (!$user) {
             // message error token is invalid
-            return new JsonResponse(array(
+            return new JsonResponse(
+                [
                 'success' => false,
                 'message' => $translator->trans('register.tokenUnvalid'),
                 'data'    => null
-            ));
+                ]
+            );
         } elseif (!$user->isPasswordRequestNonExpired(86400)) {
             // clean user
             $userManager->cleanUser($user);
             $userManager->updateUser($user);
 
             // message error token is invalid
-            return new JsonResponse(array(
+            return new JsonResponse(
+                [
                 'success' => false,
                 'message' => $translator->trans('register.tokenUnvalid'),
                 'data'    => null
-            ));
+                ]
+            );
         } elseif ($request->getMethod() == 'GET') {
             // load popin regsister password
             return $this->render(
                 'ChapleanUserBundle:Registration:register-password.html.twig',
-                array(
+                [
                     'token' => $token,
                     'form' => $form->createView(),
-                )
+                ]
             );
         } elseif ($request->getMethod() == 'POST') {
             // save password
@@ -178,27 +186,31 @@ class RegistrationController extends BaseController
                 $dispatcher->dispatch(FOSUserEvents::REGISTRATION_CONFIRM, $event);
                 $userManager->updateUser($user);
 
-                $response = new JsonResponse(array(
+                $response = new JsonResponse(
+                    [
                     'success' => true,
                     'message' => '',
-                    'data'    => array(
+                    'data'    => [
                         'redirect' => $this->generateUrl($indexPath)
-                    )
-                ));
+                    ]
+                    ]
+                );
 
                 $dispatcher->dispatch(FOSUserEvents::REGISTRATION_CONFIRMED, new FilterUserResponseEvent($user, $request, $response));
 
                 return $response;
             }
 
-            return new JsonResponse(array(
+            return new JsonResponse(
+                [
                 'success' => false,
                 'message' => '',
-                'data'    => array(
+                'data'    => [
                     'token'  => $token,
                     'errors' => $form->getErrors(true)
-                )
-            ));
+                ]
+                ]
+            );
         }
     }
 
@@ -226,9 +238,9 @@ class RegistrationController extends BaseController
                 // render form
                 return $this->render(
                     'ChapleanUserBundle:Registration:forgot-password.html.twig',
-                    array(
+                    [
                         'form' => $form->createView(),
-                    )
+                    ]
                 );
             } else {
                 $form->setData($user);
@@ -248,20 +260,24 @@ class RegistrationController extends BaseController
                     }
 
                     // return success
-                    return new JsonResponse(array(
+                    return new JsonResponse(
+                        [
                         'success' => true,
                         'message' => '',
                         'data'    => null
-                    ));
+                        ]
+                    );
                 } else {
                     // return error
-                    return new JsonResponse(array(
+                    return new JsonResponse(
+                        [
                         'success' => false,
                         'message' => '',
-                        'data'    => array(
+                        'data'    => [
                             'errors' => $form->getErrors(true)
-                        )
-                    ));
+                        ]
+                        ]
+                    );
                 }
             }
         }

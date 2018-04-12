@@ -34,12 +34,10 @@ class ChapleanUserCreateCommandTest extends FunctionalTestCase
 
         $this->runCommand(
             'chaplean:user:create',
-            array(
+            [
                 'email'     => 'test@test.com',
                 'password'  => 'test',
-                'firstname' => 'foo',
-                'lastname'  => 'bar',
-            ),
+            ],
             true
         );
 

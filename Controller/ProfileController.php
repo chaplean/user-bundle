@@ -46,30 +46,34 @@ class ProfileController extends BaseController
 
                 $this->get('security.token_storage')->setToken($token);
 
-                return new JsonResponse(array(
+                return new JsonResponse(
+                    [
                     'success' => true,
                     'message' => '',
-                    'data'    => array(
+                    'data'    => [
                         'redirect' => $this->generateUrl($indexUrl)
-                    )
-                ));
+                    ]
+                    ]
+                );
             } else {
-                return new JsonResponse(array(
+                return new JsonResponse(
+                    [
                     'success' => false,
                     'message' => '',
-                    'data'    => array(
+                    'data'    => [
                         'errors' => $form->getErrors(true)
-                    )
-                ));
+                    ]
+                    ]
+                );
             }
         } else {
             return $this->render(
                 'ChapleanUserBundle:Registration:register.html.twig',
-                array(
+                [
                     'form' => $form->createView(),
                     'update' => true,
                     'userTitle' => (empty($title)) ? '' : $title[0],
-                )
+                ]
             );
         }
     }

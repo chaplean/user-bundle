@@ -103,18 +103,6 @@ class UserTest extends FunctionalTestCase
     }
 
     /**
-     * @covers \Chaplean\Bundle\UserBundle\Doctrine\User::getSalt
-     *
-     * @return void
-     */
-    public function testpasswordSaltElevenChars()
-    {
-        $user = $this->getUser();
-
-        $this->assertGreaterThan(11, strlen($user->getSalt()));
-    }
-
-    /**
      * @return DummyUser
      */
     protected function getUser()

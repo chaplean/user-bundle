@@ -80,9 +80,9 @@ class Registration
         $message->setBody(
             $templateRenderer->render(
                 $view,
-                array(
-                    'link' => $router->generate('chaplean_user_password_set_password', array('token' => $token), true)
-                )
+                [
+                    'link' => $router->generate('chaplean_user_password_set_password', ['token' => $token], true)
+                ]
             )
         );
 

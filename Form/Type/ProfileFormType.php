@@ -32,10 +32,10 @@ class ProfileFormType extends AbstractType
             ->add(
                 'dateUpdate',
                 DateTimeType::class,
-                array(
+                [
                     'input' => 'datetime',
                     'data'  => new \DateTime('now'),
-                )
+                ]
             );
     }
 
@@ -47,11 +47,11 @@ class ProfileFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
-            array(
+            [
                 'data_class'         => User::class,
-                'validation_groups'  => array('profile'),
+                'validation_groups'  => ['profile'],
                 'translation_domain' => 'messages'
-            )
+            ]
         );
     }
 

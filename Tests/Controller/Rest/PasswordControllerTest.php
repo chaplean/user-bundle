@@ -35,11 +35,11 @@ class PasswordControllerTest extends FunctionalTestCase
         $response = $client->request(
             'POST',
             '/api/password/request_reset',
-            array(),
-            array(),
-            array(
+            [],
+            [],
+            [
                 'email' => 'user-1@test.com'
-            )
+            ]
         );
 
         $this->assertEquals(Response::HTTP_NO_CONTENT, $response->getStatusCode());
@@ -60,11 +60,11 @@ class PasswordControllerTest extends FunctionalTestCase
         $response = $client->request(
             'POST',
             '/api/password/request_reset',
-            array(),
-            array(),
-            array(
+            [],
+            [],
+            [
                 'email' => 'user-1@test.com'
-            )
+            ]
         );
 
         $this->assertEquals(Response::HTTP_FORBIDDEN, $response->getStatusCode());
@@ -86,11 +86,11 @@ class PasswordControllerTest extends FunctionalTestCase
         $response = $client->request(
             'POST',
             '/api/password/request_reset',
-            array(),
-            array(),
-            array(
+            [],
+            [],
+            [
                 'email' => 'invalid-email@test.com'
-            )
+            ]
         );
 
         $this->assertEquals(Response::HTTP_NO_CONTENT, $response->getStatusCode());
@@ -107,15 +107,15 @@ class PasswordControllerTest extends FunctionalTestCase
         $response = $client->request(
             'POST',
             '/api/password/set',
-            array(),
-            array(),
-            array(
-                'password' => array(
+            [],
+            [],
+            [
+                'password' => [
                     'first'  => 'test!!',
                     'second' => 'test!!',
-                ),
+                ],
                 'token'    => '42',
-            )
+            ]
         );
 
         $this->assertEquals(Response::HTTP_NO_CONTENT, $response->getStatusCode());
@@ -136,15 +136,15 @@ class PasswordControllerTest extends FunctionalTestCase
         $response = $client->request(
             'POST',
             '/api/password/set',
-            array(),
-            array(),
-            array(
-                'password' => array(
+            [],
+            [],
+            [
+                'password' => [
                     'first'  => 'test!!',
                     'second' => 'test!!',
-                ),
+                ],
                 'token'    => '42',
-            )
+            ]
         );
 
         $this->assertEquals(Response::HTTP_FORBIDDEN, $response->getStatusCode());
@@ -161,15 +161,15 @@ class PasswordControllerTest extends FunctionalTestCase
         $response = $client->request(
             'POST',
             '/api/password/set',
-            array(),
-            array(),
-            array(
-                'password' => array(
+            [],
+            [],
+            [
+                'password' => [
                     'first'  => 'test!!',
                     'second' => 'test!!',
-                ),
+                ],
                 'token'    => '0000',
-            )
+            ]
         );
 
         $this->assertEquals(Response::HTTP_FORBIDDEN, $response->getStatusCode());
@@ -186,15 +186,15 @@ class PasswordControllerTest extends FunctionalTestCase
         $response = $client->request(
             'POST',
             '/api/password/set',
-            array(),
-            array(),
-            array(
-                'password' => array(
+            [],
+            [],
+            [
+                'password' => [
                     'first'  => 'test!!',
                     'second' => 'test!!different',
-                ),
+                ],
                 'token'    => '42',
-            )
+            ]
         );
 
         $this->assertEquals(Response::HTTP_BAD_REQUEST, $response->getStatusCode());
@@ -211,15 +211,15 @@ class PasswordControllerTest extends FunctionalTestCase
         $response = $client->request(
             'POST',
             '/api/password/set',
-            array(),
-            array(),
-            array(
-                'password' => array(
+            [],
+            [],
+            [
+                'password' => [
                     'first'  => 'test',
                     'second' => 'test',
-                ),
+                ],
                 'token'    => '42',
-            )
+            ]
         );
 
         $this->assertEquals(Response::HTTP_BAD_REQUEST, $response->getStatusCode());

@@ -31,20 +31,20 @@ class SetPasswordType extends AbstractType
         $builder->add(
             'password',
             RepeatedType::class,
-            array(
+            [
                 'type'            => PasswordType::class,
                 'first_name'      => 'first',
                 'second_name'     => 'second',
                 'invalid_message' => 'fos_user.password.mismatch',
                 'required'        => true
-            )
+            ]
         );
         $builder->add(
             'token',
             HiddenType::class,
-            array(
+            [
                 'required' => true
-            )
+            ]
         );
     }
 
@@ -58,11 +58,11 @@ class SetPasswordType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
-            array(
+            [
                 'data_class'         => SetPasswordModel::class,
                 'translation_domain' => 'messages',
                 'csrf_protection'    => false,
-            )
+            ]
         );
     }
 

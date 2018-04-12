@@ -51,7 +51,7 @@ class UserProvider implements UserProviderInterface
     public function loadUserByUsername($username)
     {
         /** @var UserInterface $user */
-        $user = $this->userRepository->findOneBy(array('email' => $username));
+        $user = $this->userRepository->findOneBy(['email' => $username]);
 
         if (!$user) {
             $exception = new UsernameNotFoundException();

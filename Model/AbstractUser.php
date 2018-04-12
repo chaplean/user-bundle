@@ -6,6 +6,9 @@ use Chaplean\Bundle\UserBundle\Model\UserInterface as ChapleanUserInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\Role\Role;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Security\Core\Exception\LockedException;
+use Symfony\Component\Security\Core\Exception\AccountExpiredException;
+use Symfony\Component\Security\Core\Exception\CredentialsExpiredException;
 
 /**
  * AbstractUser.php
@@ -29,14 +32,14 @@ abstract class AbstractUser implements ChapleanUserInterface
     protected $id;
 
     /**
-     * @ORM\Column(type="string", length=250, nullable=false)
+     * @ORM\Column(type="string", length=250, nullable=true)
      */
-    private $username;
+    protected $username;
 
     /**
-     * @ORM\Column(type="string", unique=true, length=250, nullable=false)
+     * @ORM\Column(type="string", unique=false, length=250, nullable=true)
      */
-    private $usernameCanonical;
+    protected $usernameCanonical;
 
     /**
      * @var string
@@ -48,30 +51,7 @@ abstract class AbstractUser implements ChapleanUserInterface
     /**
      * @ORM\Column(type="string", unique=true, length=250, nullable=false)
      */
-    private $emailCanonical;
-
-    /**
-     * @var string
-     *
-     * 
-     */
-    protected $firstname;
-
-    /**
-     * @var string
-     *
-     * 
-     */
-    protected $lastname;
-
-    /**
-     * The salt to use for hashing.
-     *
-     * @var string
-     *
-     * 
-     */
-    protected $passwordSalt;
+    protected $emailCanonical;
 
     /**
      * Encrypted password. Must be persisted.
@@ -85,7 +65,7 @@ abstract class AbstractUser implements ChapleanUserInterface
     /**
      * @ORM\Column(type="datetime", nullable=true, name="date_last_login")
      */
-    private $dateLastLogin;
+    protected $dateLastLogin;
 
     /**
      * Plain password. Used for model validation. Must not be persisted.
@@ -102,30 +82,30 @@ abstract class AbstractUser implements ChapleanUserInterface
     protected $enabled = false;
 
     /**
-     * @ORM\Column(type="string", nullable=false, name="salt")
-     */
-    private $salt;
-
-    /**
      * @var boolean
      *
-     * 
+     * @ORM\Column(type="boolean", nullable=false, name="is_locked")
      */
     protected $locked = false;
 
     /**
      * @var boolean
      *
-     * 
+     * @ORM\Column(type="boolean", nullable=false, name="is_expired")
      */
     protected $expired = false;
 
     /**
      * @var boolean
      *
-     * 
+     * @ORM\Column(type="boolean", nullable=false, name="is_credential_expired")
      */
-    protected $credentialExpired;
+    protected $credentialExpired = false;
+
+    /**
+     * @ORM\Column(type="string", nullable=true, name="salt")
+     */
+    protected $salt;
 
     /**
      * Random string sent to the user email address in order to verify it.
@@ -161,42 +141,20 @@ abstract class AbstractUser implements ChapleanUserInterface
     /**
      * @var \DateTime
      *
-     * 
-     */
-    protected $dateLastlogin;
-
-    /**
-     * @var \DateTime
-     *
      * @ORM\Column(type="datetime", nullable=true, name="date_password_request")
      */
     protected $datePasswordRequest;
-
-    /**
-     * @var \DateTime
-     *
-     * 
-     */
-    protected $dateExpired;
-
-    /**
-     * @var \DateTime
-     *
-     * 
-     */
-    protected $dateCredentialExpired;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->passwordSalt = base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
         $this->enabled = false;
         $this->locked = false;
         $this->expired = false;
-        $this->roles = array();
         $this->credentialExpired = false;
+        $this->roles = [];
     }
 
     /**
@@ -207,6 +165,54 @@ abstract class AbstractUser implements ChapleanUserInterface
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Returns the username used to authenticate the user.
+     *
+     * @return string The username
+     * @deprecated Username is replaced by email
+     */
+    public function getUsername()
+    {
+        return $this->getEmail();
+    }
+
+    /**
+     * Sets the username.
+     *
+     * @param string $username
+     *
+     * @return self
+     * @deprecated Username not used in ChapleanUserBundle, see email
+     */
+    public function setUsername($username)
+    {
+        return $this->setEmail($username);
+    }
+
+    /**
+     * Gets the canonical username in search and sort queries.
+     *
+     * @return string
+     * @deprecated Username not used in ChapleanUserBundle
+     */
+    public function getUsernameCanonical()
+    {
+        return $this->getEmailCanonical();
+    }
+
+    /**
+     * Sets the canonical username.
+     *
+     * @param string $usernameCanonical
+     *
+     * @return self
+     * @deprecated Username not used in ChapleanUserBundle, see email
+     */
+    public function setUsernameCanonical($usernameCanonical)
+    {
+        return $this->setEmailCanonical($usernameCanonical);
     }
 
     /**
@@ -234,49 +240,27 @@ abstract class AbstractUser implements ChapleanUserInterface
     }
 
     /**
-     * Set passwordSalt
+     * Sets the canonical email.
      *
-     * @param string $passwordSalt
+     * @param string $emailCanonical
      *
      * @return self
      */
-    public function setPasswordSalt($passwordSalt)
+    public function setEmailCanonical($emailCanonical)
     {
-        $this->passwordSalt = $passwordSalt;
+        $this->emailCanonical = strtolower($emailCanonical);
 
         return $this;
     }
 
     /**
-     * Get passwordSalt
+     * Gets the canonical email in search and sort queries.
      *
      * @return string
      */
-    public function getPasswordSalt()
+    public function getEmailCanonical()
     {
-        return $this->passwordSalt;
-    }
-
-    /**
-     * Returns the salt that was originally used to encode the password.
-     *
-     * This can return null if the password was not encoded using a salt.
-     *
-     * @return string|null The salt
-     */
-    public function getSalt()
-    {
-        return $this->getPasswordSalt();
-    }
-
-    /**
-     * @param string|null $salt
-     *
-     * @return self
-     */
-    public function setSalt($salt)
-    {
-        return $this->setPasswordSalt($salt);
+        return $this->emailCanonical;
     }
 
     /**
@@ -348,6 +332,30 @@ abstract class AbstractUser implements ChapleanUserInterface
     }
 
     /**
+     * Sets the salt.
+     *
+     * @param string $salt
+     *
+     * @return self
+     */
+    public function setSalt($salt)
+    {
+        $this->salt = $salt;
+
+        return $this;
+    }
+
+    /**
+     * Gets the salt.
+     *
+     * @return string
+     */
+    public function getSalt()
+    {
+        return $this->salt;
+    }
+
+    /**
      * @param boolean $locked
      *
      * @return self
@@ -360,7 +368,7 @@ abstract class AbstractUser implements ChapleanUserInterface
     }
 
     /**
-     * @return bool
+     * @return boolean
      */
     public function isLocked()
     {
@@ -379,7 +387,7 @@ abstract class AbstractUser implements ChapleanUserInterface
      */
     public function isAccountNonLocked()
     {
-        return !$this->locked;
+        return !$this->isLocked();
     }
 
     /**
@@ -395,13 +403,12 @@ abstract class AbstractUser implements ChapleanUserInterface
     }
 
     /**
-     * @return bool
+     * @return boolean
      */
     public function isExpired()
     {
         return $this->expired;
     }
-
     /**
      * Checks whether the user's account has expired.
      *
@@ -414,7 +421,7 @@ abstract class AbstractUser implements ChapleanUserInterface
      */
     public function isAccountNonExpired()
     {
-        return !$this->expired;
+        return !$this->isExpired();
     }
 
     /**
@@ -430,13 +437,12 @@ abstract class AbstractUser implements ChapleanUserInterface
     }
 
     /**
-     * @return bool
+     * @return boolean
      */
     public function isCredentialExpired()
     {
         return $this->credentialExpired;
     }
-
     /**
      * Checks whether the user's credentials (password) has expired.
      *
@@ -449,7 +455,7 @@ abstract class AbstractUser implements ChapleanUserInterface
      */
     public function isCredentialsNonExpired()
     {
-        return !$this->credentialExpired;
+        return !$this->isCredentialExpired();
     }
 
     /**
@@ -487,7 +493,7 @@ abstract class AbstractUser implements ChapleanUserInterface
      */
     public function setRoles(array $roles)
     {
-        $this->roles = array();
+        $this->roles = [];
 
         foreach ($roles as $role) {
             $this->addRole($role);
@@ -627,17 +633,15 @@ abstract class AbstractUser implements ChapleanUserInterface
     }
 
     /**
-     * Set dateLastlogin
+     * Set dateLastLogin
      *
-     * @param \DateTime $dateLastlogin
+     * @param \DateTime $dateLastLogin
      *
      * @return self
      */
-    public function setDateLastlogin($dateLastlogin)
+    public function setDateLastLogin($dateLastLogin)
     {
-        $this->dateLastlogin = $dateLastlogin;
-
-        return $this;
+        return $this->setLastLogin($dateLastLogin);
     }
 
     /**
@@ -649,67 +653,19 @@ abstract class AbstractUser implements ChapleanUserInterface
      */
     public function setLastLogin(\DateTime $time = null)
     {
-        $this->dateLastlogin = $time;
+        $this->dateLastLogin = $time;
 
         return $this;
     }
 
     /**
-     * Get dateLastlogin
+     * Get dateLastLogin
      *
      * @return \DateTime
      */
-    public function getDateLastlogin()
+    public function getDateLastLogin()
     {
-        return $this->dateLastlogin;
-    }
-
-    /**
-     * Set dateExpired
-     *
-     * @param \DateTime $dateExpired
-     *
-     * @return self
-     */
-    public function setDateExpired($dateExpired)
-    {
-        $this->dateExpired = $dateExpired;
-
-        return $this;
-    }
-
-    /**
-     * Get dateExpired
-     *
-     * @return \DateTime
-     */
-    public function getDateExpired()
-    {
-        return $this->dateExpired;
-    }
-
-    /**
-     * Set dateCredentialExpired
-     *
-     * @param \DateTime $dateCredentialExpired
-     *
-     * @return self
-     */
-    public function setDateCredentialExpired($dateCredentialExpired)
-    {
-        $this->dateCredentialExpired = $dateCredentialExpired;
-
-        return $this;
-    }
-
-    /**
-     * Get dateCredentialExpired
-     *
-     * @return \DateTime
-     */
-    public function getDateCredentialExpired()
-    {
-        return $this->dateCredentialExpired;
+        return $this->dateLastLogin;
     }
 
     /**
@@ -722,16 +678,17 @@ abstract class AbstractUser implements ChapleanUserInterface
     public function serialize()
     {
         return serialize(
-            array(
+            [
                 $this->password,
-                $this->passwordSalt,
+                $this->salt,
                 $this->email,
+                $this->emailCanonical,
                 $this->expired,
                 $this->locked,
                 $this->credentialExpired,
                 $this->enabled,
                 $this->id,
-            )
+            ]
         );
     }
 
@@ -754,7 +711,17 @@ abstract class AbstractUser implements ChapleanUserInterface
         // older data which does not include all properties.
         $data = array_merge($data, array_fill(0, 2, null));
 
-        list($this->password, $this->passwordSalt, $this->email, $this->expired, $this->locked, $this->credentialExpired, $this->enabled, $this->id) = $data;
+        list(
+            $this->password,
+            $this->salt,
+            $this->email,
+            $this->emailCanonical,
+            $this->expired,
+            $this->locked,
+            $this->credentialExpired,
+            $this->enabled,
+            $this->id
+        ) = $data;
     }
 
     /**
@@ -804,54 +771,6 @@ abstract class AbstractUser implements ChapleanUserInterface
     }
 
     /**
-     * Get lastname.
-     *
-     * @return string
-     */
-    public function getLastname()
-    {
-        return $this->lastname;
-    }
-
-    /**
-     * Set lastname.
-     *
-     * @param string $lastname
-     *
-     * @return self
-     */
-    public function setLastname($lastname)
-    {
-        $this->lastname = strtoupper($lastname);
-
-        return $this;
-    }
-
-    /**
-     * Get firstname.
-     *
-     * @return string
-     */
-    public function getFirstname()
-    {
-        return $this->firstname;
-    }
-
-    /**
-     * Set firstname.
-     *
-     * @param string $firstname
-     *
-     * @return self
-     */
-    public function setFirstname($firstname)
-    {
-        $this->firstname = ucwords(strtolower($firstname));
-
-        return $this;
-    }
-
-    /**
      * Removes sensitive data from the user.
      *
      * This is important if, at any given point, sensitive information like
@@ -862,84 +781,6 @@ abstract class AbstractUser implements ChapleanUserInterface
     public function eraseCredentials()
     {
         $this->plainPassword = null;
-    }
-
-    /**
-     * Returns the username used to authenticate the user.
-     *
-     * @return string The username
-     * @deprecated Username is replaced by email
-     */
-    public function getUsername()
-    {
-        return $this->email;
-    }
-
-    /**
-     * Sets the username.
-     *
-     * @param string $username
-     *
-     * @return self
-     * @deprecated Username not used in ChapleanUserBundle, see email
-     */
-    public function setUsername($username)
-    {
-        $username = null;
-
-        return $this;
-    }
-
-    /**
-     * Gets the canonical username in search and sort queries.
-     *
-     * @return string
-     * @deprecated Username not used in ChapleanUserBundle
-     */
-    public function getUsernameCanonical()
-    {
-        return $this->email;
-    }
-
-    /**
-     * Sets the canonical username.
-     *
-     * @param string $usernameCanonical
-     *
-     * @return self
-     * @deprecated Username not used in ChapleanUserBundle, see email
-     */
-    public function setUsernameCanonical($usernameCanonical)
-    {
-        $usernameCanonical = null;
-
-        return $this;
-    }
-
-    /**
-     * Gets the canonical email in search and sort queries.
-     *
-     * @return string
-     * @deprecated Username not used in ChapleanUserBundle, see email
-     */
-    public function getEmailCanonical()
-    {
-        return $this->email;
-    }
-
-    /**
-     * Sets the canonical email.
-     *
-     * @param string $emailCanonical
-     *
-     * @return self
-     * @deprecated Username not used in ChapleanUserBundle, see email
-     */
-    public function setEmailCanonical($emailCanonical)
-    {
-        $emailCanonical = null;
-
-        return $this;
     }
 
     /**

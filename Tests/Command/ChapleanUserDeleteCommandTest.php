@@ -44,7 +44,7 @@ class ChapleanUserDeleteCommandTest extends FunctionalTestCase
             ]
         );
 
-        $this->assertContains('Are you sure you want to delete the user: id 1, email user-1@test.com, firstname Test, lastname TEST?', $tester->getDisplay());
+        $this->assertContains('Are you sure you want to delete the user: id 1, email user-1@test.com?', $tester->getDisplay());
         $this->assertContains('Done.', $tester->getDisplay());
         $this->assertCount(1, $this->em->getRepository('ChapleanUserBundle:DummyUser')->findAll());
     }

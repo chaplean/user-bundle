@@ -35,9 +35,11 @@ class UserManagerTest extends FunctionalTestCase
 
         $this->encoderFactory = $this->getMockEncoderFactory();
 
-        $this->manager = $this->getUserManager(array(
+        $this->manager = $this->getUserManager(
+            [
             $this->encoderFactory
-        ));
+            ]
+        );
     }
 
     /**
@@ -74,7 +76,7 @@ class UserManagerTest extends FunctionalTestCase
     {
         $this->manager->expects($this->once())
             ->method('findUserBy')
-            ->with($this->equalTo(array('email' => 'jack@email.org')));
+            ->with($this->equalTo(['email' => 'jack@email.org']));
 
         $this->manager->findUserByEmail('jack@email.org');
     }
@@ -88,7 +90,7 @@ class UserManagerTest extends FunctionalTestCase
     {
         $this->manager->expects($this->once())
             ->method('findUserBy')
-            ->with($this->equalTo(array('email' => 'jack@email.org')));
+            ->with($this->equalTo(['email' => 'jack@email.org']));
 
         $this->manager->findUserByEmail('JaCk@EmAiL.oRg');
     }

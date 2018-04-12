@@ -29,23 +29,23 @@ class ResettingFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add(
-                'plainPassword',
-                RepeatedType::class,
-                array(
+            'plainPassword',
+            RepeatedType::class,
+            [
                     'type'            => PasswordType::class,
-                    'options'         => array('translation_domain' => ''),
-                    'first_options'   => array('label' => 'form.new_password'),
-                    'second_options'  => array('label' => 'form.new_password_confirmation'),
+                    'options'         => ['translation_domain' => ''],
+                    'first_options'   => ['label' => 'form.new_password'],
+                    'second_options'  => ['label' => 'form.new_password_confirmation'],
                     'invalid_message' => 'fos_user.password.mismatch',
-                )
+            ]
             )
             ->add(
                 'dateUpdate',
                 DateTimeType::class,
-                array(
+                [
                     'input' => 'datetime',
                     'data'  => new \DateTime('now'),
-                )
+                ]
             );
     }
 
@@ -57,10 +57,10 @@ class ResettingFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
-            array(
+            [
                 'data_class' => User::class,
                 'intention'  => 'resetting',
-            )
+            ]
         );
     }
 

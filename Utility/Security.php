@@ -38,9 +38,9 @@ class Security
     {
         $helper = $this->container->get('security.authentication_utils');
 
-        return array(
+        return [
             'last_username' => $helper->getLastUsername(),
             'error'         => $helper->getLastAuthenticationError(),
-        );
+        ];
     }
 }

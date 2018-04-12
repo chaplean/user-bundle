@@ -61,10 +61,10 @@ class PasswordControllerTest extends FunctionalTestCase
         $client->request(
             'GET',
             '/password/set',
-            array(
+            [
                 'email' => 'user-1@test.com',
                 'token' => '42'
-            )
+            ]
         );
 
         $this->assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode());
@@ -81,10 +81,10 @@ class PasswordControllerTest extends FunctionalTestCase
         $client->request(
             'GET',
             '/password/set',
-            array(
+            [
                 'email' => 'user-1@test.com',
                 'token' => '00'
-            )
+            ]
         );
 
         $this->assertEquals(Response::HTTP_FORBIDDEN, $client->getResponse()->getStatusCode());
@@ -104,10 +104,10 @@ class PasswordControllerTest extends FunctionalTestCase
         $client->request(
             'GET',
             '/password/set',
-            array(
+            [
                 'email' => 'user-1@test.com',
                 'token' => '00'
-            )
+            ]
         );
 
         $this->assertEquals(Response::HTTP_FORBIDDEN, $client->getResponse()->getStatusCode());

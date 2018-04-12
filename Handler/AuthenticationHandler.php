@@ -110,7 +110,7 @@ abstract class AuthenticationHandler implements AuthenticationSuccessHandlerInte
         $redirection = $this->session->get('_security.main.target_path');
 
         if (empty($redirection)) {
-            $redirection = $this->router->generate($this->parameters['controller']['index_route'], array(), UrlGenerator::ABSOLUTE_PATH);
+            $redirection = $this->router->generate($this->parameters['controller']['index_route'], [], UrlGenerator::ABSOLUTE_PATH);
         }
 
         return $redirection;

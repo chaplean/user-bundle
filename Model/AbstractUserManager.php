@@ -59,7 +59,7 @@ abstract class AbstractUserManager implements UserManagerInterface, UserProvider
      */
     public function findUserByEmail($email)
     {
-        return $this->findUserBy(array('email' => strtolower($email)));
+        return $this->findUserBy(['email' => strtolower($email)]);
     }
 
     /**
@@ -71,7 +71,7 @@ abstract class AbstractUserManager implements UserManagerInterface, UserProvider
      */
     public function findUserByUsername($username)
     {
-        return $this->findUserBy(array('username' => strtolower($username)));
+        return $this->findUserBy(['username' => strtolower($username)]);
     }
 
     /**
@@ -103,7 +103,7 @@ abstract class AbstractUserManager implements UserManagerInterface, UserProvider
      */
     public function findUserByConfirmationToken($token)
     {
-        return $this->findUserBy(array('confirmationToken' => $token));
+        return $this->findUserBy(['confirmationToken' => $token]);
     }
 
     /**
@@ -133,7 +133,7 @@ abstract class AbstractUserManager implements UserManagerInterface, UserProvider
             throw new UnsupportedUserException(sprintf('Expected an instance of FOS\UserBundle\Model\User, but got "%s".', get_class($user)));
         }
 
-        $refreshedUser = $this->findUserBy(array('id' => $user->getId()));
+        $refreshedUser = $this->findUserBy(['id' => $user->getId()]);
         if (null === $refreshedUser) {
             throw new UsernameNotFoundException(sprintf('User with ID "%d" could not be reloaded.', $user->getId()));
         }

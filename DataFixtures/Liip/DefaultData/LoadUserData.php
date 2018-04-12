@@ -25,8 +25,6 @@ class LoadUserData extends AbstractFixture
     {
         $user = new DummyUser();
         $user->setEmail('user-1@test.com');
-        $user->setFirstname('test');
-        $user->setLastname('test');
         $user->setPassword('');
         $user->setDateAdd(new \DateTime());
         $this->persist($user, $manager);
@@ -34,8 +32,6 @@ class LoadUserData extends AbstractFixture
 
         $user = new DummyUser();
         $user->setEmail('user-with-pending-reset-password-token@test.com');
-        $user->setFirstname('test');
-        $user->setLastname('test');
         $user->setPassword('');
         $user->setDateAdd(new \DateTime());
         $user->setConfirmationToken('42');

@@ -55,7 +55,7 @@ class ChapleanUserDeleteCommand extends ContainerAwareCommand
             return;
         }
 
-        $questionText = sprintf("Are you sure you want to delete the user: id %d, email %s, firstname %s, lastname %s?\n", $user->getId(), $user->getEmail(), $user->getFirstname(), $user->getLastname());
+        $questionText = sprintf("Are you sure you want to delete the user: id %d, email %s?\n", $user->getId(), $user->getEmail());
         $question = new ConfirmationQuestion($questionText, false, '/^(yes|YES)$/');
 
         if (!$this->getHelper('question')->ask($input, $output, $question)) {

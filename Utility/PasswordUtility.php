@@ -43,7 +43,7 @@ class PasswordUtility
      */
     public function isTokenValid($token)
     {
-        $user = $this->userManager->findOneBy(array('confirmationToken' => $token));
+        $user = $this->userManager->findOneBy(['confirmationToken' => $token]);
 
         // Token found and not requested more than 48h ago
         return $user !== null && $user->isPasswordRequestNonExpired(48 * 3600);

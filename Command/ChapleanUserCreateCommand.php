@@ -27,12 +27,12 @@ class ChapleanUserCreateCommand extends ContainerAwareCommand
         $this
             ->setName('chaplean:user:create')
             ->setDescription('Create a user.')
-            ->setDefinition(array(
+            ->setDefinition(
+                [
                 new InputArgument('email', InputArgument::REQUIRED, 'The email'),
                 new InputArgument('password', InputArgument::REQUIRED, 'The password'),
-                new InputArgument('firstname', InputArgument::REQUIRED, 'The firstname'),
-                new InputArgument('lastname', InputArgument::REQUIRED, 'The lastname'),
-            ));
+                ]
+            );
     }
 
     /**
@@ -45,8 +45,6 @@ class ChapleanUserCreateCommand extends ContainerAwareCommand
     {
         $email     = $input->getArgument('email');
         $password  = $input->getArgument('password');
-        $firstname = $input->getArgument('firstname');
-        $lastname  = $input->getArgument('lastname');
 
         /** @var UserManager $userManager */
         $userManager = $this->getContainer()->get('chaplean_user.user_manager');
@@ -55,8 +53,6 @@ class ChapleanUserCreateCommand extends ContainerAwareCommand
         $user = $userManager->createUser();
 
         $user->setEmail($email);
-        $user->setFirstname($firstname);
-        $user->setLastname($lastname);
         $user->setPlainPassword($password);
         $user->setEnabled(true);
         $user->setDateAdd(new \DateTime());

@@ -63,6 +63,6 @@ class AuthenticationHandlerHttp extends AuthenticationHandler
         $messageError = parent::onAuthenticationFailure($request, $exception);
 
         $this->session->getFlashBag()->add('error', $messageError);
-        return new RedirectResponse($this->router->generate($this->parameters['controller']['login_route'], array(), UrlGenerator::ABSOLUTE_PATH));
+        return new RedirectResponse($this->router->generate($this->parameters['controller']['login_route'], [], UrlGenerator::ABSOLUTE_PATH));
     }
 }

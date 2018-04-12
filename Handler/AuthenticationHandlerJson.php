@@ -48,7 +48,7 @@ class AuthenticationHandlerJson extends AuthenticationHandler
     {
         $redirection = parent::onAuthenticationSuccess($request, $token);
 
-        return new JsonResponse(array('redirect' => $redirection));
+        return new JsonResponse(['redirect' => $redirection]);
     }
 
     /**
@@ -61,6 +61,6 @@ class AuthenticationHandlerJson extends AuthenticationHandler
     {
         $messageError = parent::onAuthenticationFailure($request, $exception);
 
-        return new JsonResponse(array('error' => $messageError), 400);
+        return new JsonResponse(['error' => $messageError], 400);
     }
 }

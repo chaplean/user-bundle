@@ -28,9 +28,9 @@ class RequestResetPasswordType extends AbstractType
         $builder->add(
             'email',
             EmailType::class,
-            array(
+            [
                 'required' => true,
-            )
+            ]
         );
     }
 
@@ -44,10 +44,10 @@ class RequestResetPasswordType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
-            array(
+            [
                 'translation_domain' => 'messages',
                 'csrf_protection'    => false,
-            )
+            ]
         );
     }
 

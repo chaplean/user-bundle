@@ -36,9 +36,9 @@ class PasswordController extends Controller
 
         return $this->render(
             'ChapleanUserBundle:Password:request-reset.html.twig',
-            array(
+            [
                 'form' => $form->createView()
-            )
+            ]
         );
     }
 
@@ -68,9 +68,9 @@ class PasswordController extends Controller
 
         return $this->render(
             'ChapleanUserBundle:Password:set-password.html.twig',
-            array(
+            [
                 'form' => $form->createView(),
-            )
+            ]
         );
     }
 }
