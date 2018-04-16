@@ -29,7 +29,7 @@ Create a User class with doctrine information.
 <?php
 //...
 
-use Chaplean\Bundle\UserBundle\Doctrine\User as BaseUser;
+use Chaplean\Bundle\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
 /**

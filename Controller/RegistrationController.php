@@ -2,8 +2,8 @@
 
 namespace Chaplean\Bundle\UserBundle\Controller;
 
-use Chaplean\Bundle\UserBundle\Doctrine\UserManager;
-use Chaplean\Bundle\UserBundle\Doctrine\User;
+use Chaplean\Bundle\UserBundle\Model\UserManager;
+use Chaplean\Bundle\UserBundle\Model\User;
 use Chaplean\Bundle\UserBundle\Form\Type\ForgotPasswordFormType;
 use Chaplean\Bundle\UserBundle\Form\Type\RegistrationFormType;
 use Chaplean\Bundle\UserBundle\Form\Type\ResettingFormType;

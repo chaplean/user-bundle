@@ -2,9 +2,9 @@
 
 namespace Chaplean\Bundle\UserBundle\Command;
 
-use Chaplean\Bundle\UserBundle\Doctrine\User;
-use Chaplean\Bundle\UserBundle\Doctrine\UserManager;
 use Chaplean\Bundle\UserBundle\Event\ChapleanUserDeletedEvent;
+use Chaplean\Bundle\UserBundle\Model\User;
+use Chaplean\Bundle\UserBundle\Model\UserManager;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;

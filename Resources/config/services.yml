@@ -12,7 +12,7 @@ services:
         arguments: ['%chaplean_user.entity.user.class%']
 
     chaplean_user.user.repository:
-        class: Chaplean\Bundle\UserBundle\Repository\UserRepository
+        class: Doctrine\ORM\EntityRepository
         factory: ['@chaplean_user.user.manager', getRepository]
         arguments: ['%chaplean_user.entity.user.class%']
 
@@ -26,7 +26,7 @@ services:
             - { name: form.type, alias: chaplean_user_registration }
 
     chaplean_user.user_manager:
-        class: Chaplean\Bundle\UserBundle\Doctrine\UserManager
+        class: Chaplean\Bundle\UserBundle\Model\UserManager
         arguments: ['@security.encoder_factory', '@doctrine', '%fos_user.model.user.class%']
         shared: false
 

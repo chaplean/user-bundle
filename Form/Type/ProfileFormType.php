@@ -2,7 +2,7 @@
 
 namespace Chaplean\Bundle\UserBundle\Form\Type;
 
-use Chaplean\Bundle\UserBundle\Doctrine\User;
+use Chaplean\Bundle\UserBundle\Model\User;
 use FOS\UserBundle\Tests\Form\Type\RegistrationFormTypeTest;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;

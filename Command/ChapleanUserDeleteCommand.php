@@ -2,8 +2,8 @@
 
 namespace Chaplean\Bundle\UserBundle\Command;
 
-use Chaplean\Bundle\UserBundle\Doctrine\User;
 use Chaplean\Bundle\UserBundle\Event\ChapleanUserDeletedEvent;
+use Chaplean\Bundle\UserBundle\Model\User;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;

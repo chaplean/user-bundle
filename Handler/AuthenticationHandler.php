@@ -2,8 +2,8 @@
 
 namespace Chaplean\Bundle\UserBundle\Handler;
 
-use Chaplean\Bundle\UserBundle\Doctrine\UserManager;
-use Chaplean\Bundle\UserBundle\Model\AbstractUser;
+use Chaplean\Bundle\UserBundle\Model\UserManager;
+use Chaplean\Bundle\UserBundle\Model\User;
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bridge\Twig\TwigEngine;
@@ -93,7 +93,7 @@ abstract class AuthenticationHandler implements AuthenticationSuccessHandlerInte
      */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token)
     {
-        /** @var AbstractUser $user */
+        /** @var User $user */
         $user = $token->getUser();
 
         $user->setLastLogin(new \DateTime('now'));

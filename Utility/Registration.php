@@ -2,7 +2,7 @@
 
 namespace Chaplean\Bundle\UserBundle\Utility;
 
-use Chaplean\Bundle\UserBundle\Doctrine\User;
+use Chaplean\Bundle\UserBundle\Model\User;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\Routing\Router;
 

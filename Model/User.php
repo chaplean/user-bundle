@@ -11,16 +11,14 @@ use Symfony\Component\Security\Core\Exception\AccountExpiredException;
 use Symfony\Component\Security\Core\Exception\CredentialsExpiredException;
 
 /**
- * AbstractUser.php
- *
- * @package   Chaplean\Bundle\UserBundle\Model
+ * User * @package   Chaplean\Bundle\UserBundle\Model
  * @author    Benoit - Chaplean <benoit@chaplean.coop>
  * @copyright 2014 - 2015 Chaplean (http://www.chaplean.coop)
  * @since     1.0.0
  *
  * @ORM\MappedSuperclass
  */
-abstract class AbstractUser implements ChapleanUserInterface
+class User implements ChapleanUserInterface
 {
     /**
      * @var integer
@@ -188,7 +186,7 @@ abstract class AbstractUser implements ChapleanUserInterface
      */
     public function setUsername($username)
     {
-        return $this->setEmail($username);
+        return $this;
     }
 
     /**
@@ -212,7 +210,7 @@ abstract class AbstractUser implements ChapleanUserInterface
      */
     public function setUsernameCanonical($usernameCanonical)
     {
-        return $this->setEmailCanonical($usernameCanonical);
+        return $this;
     }
 
     /**
@@ -409,6 +407,7 @@ abstract class AbstractUser implements ChapleanUserInterface
     {
         return $this->expired;
     }
+
     /**
      * Checks whether the user's account has expired.
      *
@@ -443,6 +442,7 @@ abstract class AbstractUser implements ChapleanUserInterface
     {
         return $this->credentialExpired;
     }
+
     /**
      * Checks whether the user's credentials (password) has expired.
      *

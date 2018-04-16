@@ -2,9 +2,12 @@
 
 namespace Chaplean\Bundle\UserBundle\Model;
 
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityRepository;
 use FOS\UserBundle\Model\User;
 use FOS\UserBundle\Model\UserInterface as FOSUserInterface;
 use FOS\UserBundle\Model\UserManagerInterface;
+use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
@@ -13,14 +16,14 @@ use Symfony\Component\Security\Core\User\UserInterface as SecurityUserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 /**
- * Class AbstractUserManager.
+ * Class UserManager.
  *
  * @package   Chaplean\Bundle\UserBundle\Model
  * @author    Valentin - Chaplean <valentin@chaplean.coop>
  * @copyright 2014 - 2015 Chaplean (http://www.chaplean.coop)
  * @since     2.0.0
  */
-abstract class AbstractUserManager implements UserManagerInterface, UserProviderInterface
+class UserManager implements UserManagerInterface, UserProviderInterface
 {
     /**
      * @var EncoderFactoryInterface
@@ -28,13 +31,36 @@ abstract class AbstractUserManager implements UserManagerInterface, UserProvider
     protected $encoderFactory;
 
     /**
+     * @var EntityManager
+     */
+    protected $em;
+
+    /**
+     * @var EntityRepository
+     */
+    protected $repository;
+
+    /**
+     * @var User
+     */
+    protected $class;
+
+    /**
      * Constructor.
      *
      * @param EncoderFactoryInterface $encoderFactory
+     * @param RegistryInterface       $registry
+     * @param string                  $class
      */
-    public function __construct(EncoderFactoryInterface $encoderFactory)
+    public function __construct(EncoderFactoryInterface $encoderFactory, RegistryInterface $registry, $class)
     {
         $this->encoderFactory = $encoderFactory;
+
+        $this->em = $registry->getManager();
+        $this->repository = $registry->getRepository($class);
+
+        $metadata = $this->em->getClassMetadata($class);
+        $this->class = $metadata->getName();
     }
 
     /**
@@ -60,38 +86,6 @@ abstract class AbstractUserManager implements UserManagerInterface, UserProvider
     public function findUserByEmail($email)
     {
         return $this->findUserBy(['email' => strtolower($email)]);
-    }
-
-    /**
-     * Finds a user by username
-     *
-     * @param string $username
-     *
-     * @return FOSUserInterface
-     */
-    public function findUserByUsername($username)
-    {
-        return $this->findUserBy(['username' => strtolower($username)]);
-    }
-
-    /**
-     * Finds a user either by email, or username
-     *
-     * @param string $usernameOrEmail
-     *
-     * @return FOSUserInterface
-     */
-    public function findUserByUsernameOrEmail($usernameOrEmail)
-    {
-        $usernameOrEmail = strtolower($usernameOrEmail);
-
-        if (filter_var($usernameOrEmail, FILTER_VALIDATE_EMAIL)) {
-            $user = $this->findUserByEmail($usernameOrEmail);
-        } else {
-            $user = $this->findUserByUsername($usernameOrEmail);
-        }
-
-        return $user;
     }
 
     /**
@@ -225,5 +219,162 @@ abstract class AbstractUserManager implements UserManagerInterface, UserProvider
         trigger_error('Using the UserManager as user provider is deprecated. Use FOS\UserBundle\Security\UserProvider instead.', E_USER_DEPRECATED);
 
         return $class === $this->getClass();
+    }
+
+    /**
+     * @param FOSUserInterface $user
+     *
+     * @return void
+     */
+    public function deleteUser(FOSUserInterface $user)
+    {
+        $this->em->remove($user);
+    }
+
+    /**
+     * @return string
+     */
+    public function getClass()
+    {
+        return $this->class;
+    }
+
+    /**
+     * @param array $criteria
+     *
+     * @return object
+     */
+    public function findUserBy(array $criteria)
+    {
+        return $this->repository->findOneBy($criteria);
+    }
+
+    /**
+     * @param array $criteria
+     *
+     * @return object
+     */
+    public function findOneBy(array $criteria)
+    {
+        return $this->repository->findOneBy($criteria);
+    }
+
+    /**
+     * @return array
+     */
+    public function findUsers()
+    {
+        return $this->repository->findAll();
+    }
+
+    /**
+     * @return array
+     */
+    public function findAll()
+    {
+        return $this->repository->findAll();
+    }
+
+    /**
+     * @param FOSUserInterface $user
+     *
+     * @return void
+     */
+    public function reloadUser(FOSUserInterface $user)
+    {
+        $this->em->refresh($user);
+    }
+
+    /**
+     * Active a user.
+     *
+     * @param FOSUserInterface $user
+     *
+     * @return void
+     */
+    public function activeUser(FOSUserInterface $user)
+    {
+        $user->setConfirmationToken(null);
+        $user->setEnabled(true);
+    }
+
+    /**
+     * Clean token and date password request for a user.
+     *
+     * @param FOSUserInterface $user
+     *
+     * @return void
+     */
+    public function cleanUser(FOSUserInterface $user)
+    {
+        $user->setConfirmationToken(null);
+        $user->setPasswordRequestedAt(null);
+    }
+
+    /**
+     * Updates a user.
+     *
+     * @param FOSUserInterface $user
+     * @param boolean       $andFlush Whether to flush the changes (default true)
+     *
+     * @return void
+     */
+    public function updateUser(FOSUserInterface $user, $andFlush = true)
+    {
+        $this->updatePassword($user);
+
+        $this->em->persist($user);
+
+        if ($andFlush) {
+            $this->em->flush();
+        }
+
+        $user->eraseCredentials();
+    }
+
+    /**
+     * Remove a user.
+     *
+     * @param FOSUserInterface $user
+     *
+     * @return void
+     * @deprecated use deleteUser()
+     */
+    public function removeUser(FOSUserInterface $user)
+    {
+        $this->deleteUser($user);
+    }
+
+    /**
+     * Find a user by its username.
+     *
+     * @param string $username
+     *
+     * @return FOSUserInterface or null if user does not exist
+     */
+    public function findUserByUsername($username)
+    {
+        return $this->findUserByEmail($username);
+    }
+
+    /**
+     * Finds a user by its username or email.
+     *
+     * @param string $usernameOrEmail
+     *
+     * @return FOSUserInterface or null if user does not exist
+     */
+    public function findUserByUsernameOrEmail($usernameOrEmail)
+    {
+        return $this->findUserByEmail($usernameOrEmail);
+    }
+
+    /**
+     * Updates the canonical username and email fields for a user.
+     *
+     * @param FOSUserInterface $user
+     */
+    public function updateCanonicalFields(FOSUserInterface $user)
+    {
     }
 }

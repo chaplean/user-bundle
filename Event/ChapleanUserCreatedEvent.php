@@ -2,7 +2,7 @@
 
 namespace Chaplean\Bundle\UserBundle\Event;
 
-use Chaplean\Bundle\UserBundle\Doctrine\User;
+use Chaplean\Bundle\UserBundle\Model\User;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
@@ -19,6 +19,9 @@ class ChapleanUserCreatedEvent extends Event
 {
     const NAME = 'chaplean.user.created';
 
+    /**
+     * @var User
+     */
     protected $user;
 
     /**

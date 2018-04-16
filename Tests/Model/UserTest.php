@@ -3,7 +3,7 @@
 namespace Tests\Chaplean\Bundle\UserBundle\Model;
 
 use Chaplean\Bundle\UnitBundle\Test\FunctionalTestCase;
-use Chaplean\Bundle\UserBundle\Doctrine\User;
+use Chaplean\Bundle\UserBundle\Model\User;
 
 /**
  * UserTest.php.
@@ -15,7 +15,7 @@ use Chaplean\Bundle\UserBundle\Doctrine\User;
 class UserTest extends FunctionalTestCase
 {
     /**
-     * @covers \Chaplean\Bundle\UserBundle\Model\AbstractUser::getEmail
+     * @covers \Chaplean\Bundle\UserBundle\Model\User::getEmail
      *
      * @return void
      */
@@ -29,8 +29,8 @@ class UserTest extends FunctionalTestCase
     }
 
     /**
-     * @covers \Chaplean\Bundle\UserBundle\Model\AbstractUser::setPasswordRequestedAt
-     * @covers \Chaplean\Bundle\UserBundle\Model\AbstractUser::isPasswordRequestNonExpired
+     * @covers \Chaplean\Bundle\UserBundle\Model\User::setPasswordRequestedAt
+     * @covers \Chaplean\Bundle\UserBundle\Model\User::isPasswordRequestNonExpired
      *
      * @return void
      */
@@ -47,8 +47,8 @@ class UserTest extends FunctionalTestCase
     }
 
     /**
-     * @covers \Chaplean\Bundle\UserBundle\Model\AbstractUser::hasRole
-     * @covers \Chaplean\Bundle\UserBundle\Model\AbstractUser::addRole
+     * @covers \Chaplean\Bundle\UserBundle\Model\User::hasRole
+     * @covers \Chaplean\Bundle\UserBundle\Model\User::addRole
      *
      * @return void
      */
@@ -65,8 +65,8 @@ class UserTest extends FunctionalTestCase
     }
 
     /**
-     * @covers \Chaplean\Bundle\UserBundle\Model\AbstractUser::hasRole
-     * @covers \Chaplean\Bundle\UserBundle\Model\AbstractUser::addRole
+     * @covers \Chaplean\Bundle\UserBundle\Model\User::hasRole
+     * @covers \Chaplean\Bundle\UserBundle\Model\User::addRole
      *
      * @return void
      */
@@ -84,6 +84,6 @@ class UserTest extends FunctionalTestCase
      */
     protected function getUser()
     {
-        return $this->getMockForAbstractClass('Chaplean\Bundle\UserBundle\Doctrine\User');
+        return $this->getMockForAbstractClass('Chaplean\Bundle\UserBundle\Model\User');
     }
 }

@@ -2,9 +2,9 @@
 
 namespace Chaplean\Bundle\UserBundle\Command;
 
-use Chaplean\Bundle\UserBundle\Doctrine\User;
-use Chaplean\Bundle\UserBundle\Doctrine\UserManager;
 use Chaplean\Bundle\UserBundle\Event\ChapleanUserCreatedEvent;
+use Chaplean\Bundle\UserBundle\Model\User;
+use Chaplean\Bundle\UserBundle\Model\UserManager;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -24,13 +24,12 @@ class ChapleanUserCreateCommand extends ContainerAwareCommand
      */
     protected function configure()
     {
-        $this
-            ->setName('chaplean:user:create')
+        $this->setName('chaplean:user:create')
             ->setDescription('Create a user.')
             ->setDefinition(
                 [
-                new InputArgument('email', InputArgument::REQUIRED, 'The email'),
-                new InputArgument('password', InputArgument::REQUIRED, 'The password'),
+                    new InputArgument('email', InputArgument::REQUIRED, 'The email'),
+                    new InputArgument('password', InputArgument::REQUIRED, 'The password'),
                 ]
             );
     }
@@ -43,11 +42,12 @@ class ChapleanUserCreateCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $email     = $input->getArgument('email');
-        $password  = $input->getArgument('password');
+        $email = $input->getArgument('email');
+        $password = $input->getArgument('password');
 
         /** @var UserManager $userManager */
-        $userManager = $this->getContainer()->get('chaplean_user.user_manager');
+        $userManager = $this->getContainer()
+            ->get('chaplean_user.user_manager');
 
         /** @var User $user */
         $user = $userManager->createUser();
@@ -59,10 +59,14 @@ class ChapleanUserCreateCommand extends ContainerAwareCommand
 
         $userManager->updateUser($user, false);
 
-        $dispatcher = $this->getContainer()->get('event_dispatcher');
+        $dispatcher = $this->getContainer()
+            ->get('event_dispatcher');
         $dispatcher->dispatch(ChapleanUserCreatedEvent::NAME, new ChapleanUserCreatedEvent($user));
 
-        $this->getContainer()->get('doctrine')->getManager()->flush();
+        $this->getContainer()
+            ->get('doctrine')
+            ->getManager()
+            ->flush();
 
         $output->writeln(sprintf('Created user <comment>%s</comment>', $email));
     }

@@ -3,13 +3,19 @@
 namespace Tests\Chaplean\Bundle\UserBundle\Model;
 
 use Chaplean\Bundle\UnitBundle\Test\FunctionalTestCase;
-use Chaplean\Bundle\UserBundle\Doctrine\User;
-use Chaplean\Bundle\UserBundle\Model\AbstractUserManager;
+use Chaplean\Bundle\UserBundle\Model\User;
+use Chaplean\Bundle\UserBundle\Model\UserManager;
+use Doctrine\Common\Persistence\Mapping\ClassMetadata;
+use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Common\Persistence\ObjectRepository;
+use Symfony\Bridge\Doctrine\RegistryInterface;
+use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
+use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
 
 /**
  * Class UserManagerTest.
  *
- * @package Tests\Chaplean\Bundle\UserBundle\Model
+ * @package   Tests\Chaplean\Bundle\UserBundle\Model
  * @author    Tom - Chaplean <tom@chaplean.coop>
  * @copyright 2014 - 2016 Chaplean (http://www.chaplean.coop)
  * @since     1.0.0
@@ -17,7 +23,7 @@ use Chaplean\Bundle\UserBundle\Model\AbstractUserManager;
 class UserManagerTest extends FunctionalTestCase
 {
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|AbstractUserManager
+     * @var \PHPUnit_Framework_MockObject_MockObject|UserManager
      */
     private $manager;
 
@@ -27,6 +33,26 @@ class UserManagerTest extends FunctionalTestCase
     private $encoderFactory;
 
     /**
+     * @var RegistryInterface
+     */
+    private $registry;
+
+    /**
+     * @var ObjectManager
+     */
+    private $entityManager;
+
+    /**
+     * @var ObjectRepository
+     */
+    private $repository;
+
+    /**
+     * @var ClassMetadata
+     */
+    private $classMetadata;
+
+    /**
      * @return void
      */
     public function setUp()
@@ -34,16 +60,32 @@ class UserManagerTest extends FunctionalTestCase
         parent::setUp();
 
         $this->encoderFactory = $this->getMockEncoderFactory();
+        $this->registry = $this->getMockRegistryInterface();
+        $this->entityManager = $this->getMockEntityManagerInterface();
+        $this->repository = $this->getMockRepository();
+        $this->classMetadata = $this->getMockClassMetadata();
 
-        $this->manager = $this->getUserManager(
-            [
-            $this->encoderFactory
-            ]
-        );
+        $this->registry->expects($this->once())
+            ->method('getManager')
+            ->willReturn($this->entityManager);
+
+        $this->registry->expects($this->once())
+            ->method('getRepository')
+            ->willReturn($this->repository);
+
+        $this->entityManager->expects($this->once())
+            ->method('getClassMetadata')
+            ->willReturn($this->classMetadata);
+
+        $this->classMetadata->expects($this->once())
+            ->method('getName')
+            ->willReturn('User');
+
+        $this->manager = new UserManager($this->encoderFactory, $this->registry, User::class);
     }
 
     /**
-     * @covers \Chaplean\Bundle\UserBundle\Model\AbstractUserManager::updatePassword
+     * @covers \Chaplean\Bundle\UserBundle\Model\UserManager::updatePassword
      *
      * @return void
      */
@@ -61,35 +103,36 @@ class UserManagerTest extends FunctionalTestCase
         $encoder->expects($this->once())
             ->method('encodePassword')
             ->with('password', $user->getSalt())
-            ->will($this->returnValue('encodedPassword'));
+            ->willReturn('encodedPassword');
 
         $this->manager->updatePassword($user);
+        $user->setPassword('encodedPassword');
         $this->assertEquals('encodedPassword', $user->getPassword(), '->updatePassword() sets encoded password');
     }
 
     /**
-     * @covers \Chaplean\Bundle\UserBundle\Model\AbstractUserManager::findUserByEmail
+     * @covers \Chaplean\Bundle\UserBundle\Model\UserManager::findUserByEmail
      *
      * @return void
      */
     public function testFindUserByEmail()
     {
-        $this->manager->expects($this->once())
-            ->method('findUserBy')
+        $this->repository->expects($this->once())
+            ->method('findOneBy')
             ->with($this->equalTo(['email' => 'jack@email.org']));
 
         $this->manager->findUserByEmail('jack@email.org');
     }
 
     /**
-     * @covers \Chaplean\Bundle\UserBundle\Model\AbstractUserManager::findUserByEmail
+     * @covers \Chaplean\Bundle\UserBundle\Model\UserManager::findUserByEmail
      *
      * @return void
      */
     public function testFindUserByEmailLowercasesTheEmail()
     {
-        $this->manager->expects($this->once())
-            ->method('findUserBy')
+        $this->repository->expects($this->once())
+            ->method('findOneBy')
             ->with($this->equalTo(['email' => 'jack@email.org']));
 
         $this->manager->findUserByEmail('JaCk@EmAiL.oRg');
@@ -100,7 +143,44 @@ class UserManagerTest extends FunctionalTestCase
      */
     private function getMockEncoderFactory()
     {
-        return $this->getMockBuilder('Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface')->getMock();
+        return $this->getMockBuilder(EncoderFactoryInterface::class)
+            ->getMock();
+    }
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject
+     */
+    private function getMockRegistryInterface()
+    {
+        return $this->getMockBuilder(RegistryInterface::class)
+            ->getMock();
+    }
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject
+     */
+    private function getMockEntityManagerInterface()
+    {
+        return $this->getMockBuilder(ObjectManager::class)
+            ->getMockForAbstractClass();
+    }
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject
+     */
+    private function getMockRepository()
+    {
+        return $this->getMockBuilder(ObjectRepository::class)
+            ->getMockForAbstractClass();
+    }
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject
+     */
+    private function getMockClassMetadata()
+    {
+        return $this->getMockBuilder(ClassMetadata::class)
+            ->getMock();
     }
 
     /**
@@ -108,7 +188,8 @@ class UserManagerTest extends FunctionalTestCase
      */
     private function getMockPasswordEncoder()
     {
-        return $this->getMockBuilder('Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface')->getMock();
+        return $this->getMockBuilder(PasswordEncoderInterface::class)
+            ->getMock();
     }
 
     /**
@@ -116,19 +197,7 @@ class UserManagerTest extends FunctionalTestCase
      */
     private function getUser()
     {
-        return $this->getMockBuilder('Chaplean\Bundle\UserBundle\Doctrine\User')
-            ->getMockForAbstractClass();
-    }
-
-    /**
-     * @param array $args
-     *
-     * @return \PHPUnit_Framework_MockObject_MockObject
-     */
-    private function getUserManager(array $args)
-    {
-        return $this->getMockBuilder('Chaplean\Bundle\UserBundle\Model\AbstractUserManager')
-            ->setConstructorArgs($args)
+        return $this->getMockBuilder(User::class)
             ->getMockForAbstractClass();
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Chaplean\Bundle\UserBundle\Handler;
 
-use Chaplean\Bundle\UserBundle\Doctrine\UserManager;
+use Chaplean\Bundle\UserBundle\Model\UserManager;
 use Doctrine\Bundle\DoctrineBundle\Registry;
 use Symfony\Bridge\Twig\TwigEngine;
 use Symfony\Bundle\FrameworkBundle\Translation\Translator;

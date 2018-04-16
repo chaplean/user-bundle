@@ -3,7 +3,7 @@
 namespace Tests\Chaplean\Bundle\UserBundle\Entity;
 
 use Chaplean\Bundle\UnitBundle\Test\FunctionalTestCase;
-use Chaplean\Bundle\UserBundle\Model\AbstractUser;
+use Chaplean\Bundle\UserBundle\Model\User;
 
 /**
  * UserTest.php.
@@ -15,8 +15,8 @@ use Chaplean\Bundle\UserBundle\Model\AbstractUser;
 class UserTest extends FunctionalTestCase
 {
     /**
-     * @covers \Chaplean\Bundle\UserBundle\Doctrine\User::getEmail
-     * @covers \Chaplean\Bundle\UserBundle\Doctrine\User::setEmail
+     * @covers \Chaplean\Bundle\UserBundle\Model\User::getEmail
+     * @covers \Chaplean\Bundle\UserBundle\Model\User::setEmail
      *
      * @return void
      */
@@ -30,10 +30,10 @@ class UserTest extends FunctionalTestCase
     }
 
     /**
-     * @covers \Chaplean\Bundle\UserBundle\Doctrine\User::getPasswordRequestedAt
-     * @covers \Chaplean\Bundle\UserBundle\Doctrine\User::setPasswordRequestedAt
-     * @covers \Chaplean\Bundle\UserBundle\Doctrine\User::isPasswordRequestNonExpired
-     * @covers \Chaplean\Bundle\UserBundle\Doctrine\User::setEnabled
+     * @covers \Chaplean\Bundle\UserBundle\Model\User::getPasswordRequestedAt
+     * @covers \Chaplean\Bundle\UserBundle\Model\User::setPasswordRequestedAt
+     * @covers \Chaplean\Bundle\UserBundle\Model\User::isPasswordRequestNonExpired
+     * @covers \Chaplean\Bundle\UserBundle\Model\User::setEnabled
      *
      * @return void
      */
@@ -52,8 +52,8 @@ class UserTest extends FunctionalTestCase
     }
 
     /**
-     * @covers \Chaplean\Bundle\UserBundle\Doctrine\User::setPasswordRequestedAt
-     * @covers \Chaplean\Bundle\UserBundle\Doctrine\User::isPasswordRequestNonExpired
+     * @covers \Chaplean\Bundle\UserBundle\Model\User::setPasswordRequestedAt
+     * @covers \Chaplean\Bundle\UserBundle\Model\User::isPasswordRequestNonExpired
      *
      * @return void
      */
@@ -70,15 +70,15 @@ class UserTest extends FunctionalTestCase
     }
 
     /**
-     * @covers \Chaplean\Bundle\UserBundle\Doctrine\User::hasRole
-     * @covers \Chaplean\Bundle\UserBundle\Doctrine\User::addRole
+     * @covers \Chaplean\Bundle\UserBundle\Model\User::hasRole
+     * @covers \Chaplean\Bundle\UserBundle\Model\User::addRole
      *
      * @return void
      */
     public function testTrueHasRole()
     {
         $user = $this->getUser();
-        $defaultrole = AbstractUser::ROLE_DEFAULT;
+        $defaultrole = User::ROLE_DEFAULT;
         $newrole = 'ROLE_X';
         $this->assertTrue($user->hasRole($defaultrole));
         $user->addRole($defaultrole);
@@ -88,8 +88,8 @@ class UserTest extends FunctionalTestCase
     }
 
     /**
-     * @covers \Chaplean\Bundle\UserBundle\Doctrine\User::hasRole
-     * @covers \Chaplean\Bundle\UserBundle\Doctrine\User::addRole
+     * @covers \Chaplean\Bundle\UserBundle\Model\User::hasRole
+     * @covers \Chaplean\Bundle\UserBundle\Model\User::addRole
      *
      * @return void
      */
@@ -119,7 +119,7 @@ class UserTest extends FunctionalTestCase
  * @copyright 2014 - 2015 Chaplean (http://www.chaplean.coop)
  * @since     1.0.0
  */
-class DummyUser extends AbstractUser
+class DummyUser extends User
 {
     /**/
 }
