@@ -7,7 +7,7 @@ security:
         ROLE_SUPER_ADMIN: ROLE_ADMIN
 
     providers:
-        app_front:
+        chaplean_user_provider:
             id: chaplean_user.user.provider
 
     firewalls:
@@ -18,7 +18,7 @@ security:
         main:
             pattern: ^/
             form_login:
-                provider: app_front
+                provider: chaplean_user_provider
                 login_path: /login
                 use_forward: false
                 remember_me: true

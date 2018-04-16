@@ -1,6 +1,3 @@
-chaplean_user_index:
-    path: /
-
 chaplean_user_register:
     path: /register
     defaults: { _controller: ChapleanUserBundle:Registration:register }
