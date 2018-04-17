@@ -20,11 +20,12 @@ security:
             form_login:
                 provider: chaplean_user_provider
                 login_path: /login
+                check_path: /api/login
                 use_forward: false
                 remember_me: true
                 use_referer: true
-                success_handler: chaplean_user.authentication.handler_http
-                failure_handler: chaplean_user.authentication.handler_http
+                success_handler: chaplean_user.authentication.handler_json
+                failure_handler: chaplean_user.authentication.handler_json
                 csrf_token_generator: security.csrf.token_manager
             logout:
                 path: /logout
