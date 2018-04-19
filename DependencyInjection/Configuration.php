@@ -34,6 +34,7 @@ class Configuration implements ConfigurationInterface
                     ->children()
                         ->scalarNode('index_route')->isRequired()->end()
                         ->scalarNode('login_route')->isRequired()->end()
+                        ->scalarNode('set_password_route')->defaultValue('chaplean_user_password_set_password')->end()
                     ->end()
                 ->end()
             ->end();

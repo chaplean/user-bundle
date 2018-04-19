@@ -4,6 +4,7 @@ namespace Chaplean\Bundle\UserBundle\Utility;
 
 use Chaplean\Bundle\UserBundle\Model\User;
 use Symfony\Component\DependencyInjection\Container;
+use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Routing\Router;
 
 /**
@@ -16,15 +17,31 @@ use Symfony\Component\Routing\Router;
  */
 class Registration
 {
+    /**
+     * @var Container
+     */
     protected $serviceContainer;
+
+    /**
+     * @var TranslatorInterface
+     */
     protected $translator;
+
+    /**
+     * @var array
+     */
+    protected $parameters;
 
     /**
      * Constructor.
      *
-     * @param Container $serviceContainer serviceContainer.
+     * @param Container $serviceContainer
+     * @param array     $parameters
+     *
+     * @return void
+     * @throws \Exception
      */
-    public function __construct($serviceContainer)
+    public function __construct($serviceContainer, array $parameters)
     {
         $this->serviceContainer = $serviceContainer;
         $this->translator = $serviceContainer->get('translator');
@@ -36,6 +53,7 @@ class Registration
      * @param User $user User to send the mail to.
      *
      * @return void
+     * @throws \Exception
      */
     public function sendRegistrationMailForUser(User $user)
     {
@@ -48,6 +66,7 @@ class Registration
      * @param User $user User to send the mail to.
      *
      * @return void
+     * @throws \Exception
      */
     public function sendResettingMailForUser(User $user)
     {
@@ -62,6 +81,7 @@ class Registration
      * @param string $view
      *
      * @return void
+     * @throws \Exception
      */
     private function sendMail($subject, $user, $view)
     {
@@ -69,6 +89,8 @@ class Registration
 
         /** @var \Symfony\Bundle\TwigBundle\TwigEngine $templateRenderer */
         $templateRenderer = $this->serviceContainer->get('templating');
+
+        $link = isset($this->parameters['controller']['set_password_route']) ? $this->parameters['controller']['set_password_route'] : 'chaplean_user_password_set_password';
 
         /** @var Router $router */
         $router = $this->serviceContainer->get('router');
@@ -81,7 +103,7 @@ class Registration
             $templateRenderer->render(
                 $view,
                 [
-                    'link' => $router->generate('chaplean_user_password_set_password', ['token' => $token], true)
+                    'link' => $router->generate($link, ['token' => $token], true)
                 ]
             )
         );

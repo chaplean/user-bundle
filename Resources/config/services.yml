@@ -32,7 +32,7 @@ services:
 
     chaplean_user.registration:
         class: Chaplean\Bundle\UserBundle\Utility\Registration
-        arguments: ['@service_container']
+        arguments: ['@service_container', '%chaplean_user%']
 
     chaplean_user.password_utility:
         class: Chaplean\Bundle\UserBundle\Utility\PasswordUtility
