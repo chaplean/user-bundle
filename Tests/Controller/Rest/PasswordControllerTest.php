@@ -93,7 +93,35 @@ class PasswordControllerTest extends FunctionalTestCase
             ]
         );
 
-        $this->assertEquals(Response::HTTP_NO_CONTENT, $response->getStatusCode());
+        $this->assertEquals(Response::HTTP_BAD_REQUEST, $response->getStatusCode());
+        $this->assertEquals('{"error":"user_not_found"}', $response->getContent());
+    }
+
+    /**
+     * @covers \Chaplean\Bundle\UserBundle\Controller\Rest\PasswordController::postRequestResetPasswordAction
+     *
+     * @return void
+     */
+    public function testPostRequestResetPasswordActionWithInvalidForm()
+    {
+        $mailer = \Mockery::mock(\Swift_Mailer::class);
+        $client = $this->createRestClient();
+
+        $client->getContainer()->set('swiftmailer.mailer', $mailer);
+        $mailer->shouldReceive('send')->never();
+
+        $response = $client->request(
+            'POST',
+            '/api/password/request_reset',
+            [],
+            [],
+            [
+                'emaillll' => 'invalid-email@test.com'
+            ]
+        );
+
+        $this->assertEquals(Response::HTTP_BAD_REQUEST, $response->getStatusCode());
+        $this->assertEquals('{"error":"invalid_form"}', $response->getContent());
     }
 
     /**
