@@ -45,6 +45,7 @@ class Registration
     {
         $this->serviceContainer = $serviceContainer;
         $this->translator = $serviceContainer->get('translator');
+        $this->parameters = $parameters;
     }
 
     /**
