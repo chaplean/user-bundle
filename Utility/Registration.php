@@ -90,7 +90,7 @@ class Registration
         /** @var \Symfony\Bundle\TwigBundle\TwigEngine $templateRenderer */
         $templateRenderer = $this->serviceContainer->get('templating');
 
-        $link = isset($this->parameters['controller']['set_password_route']) ? $this->parameters['controller']['set_password_route'] : 'chaplean_user_password_set_password';
+        $link = $this->parameters['controller']['set_password_route'];
 
         /** @var Router $router */
         $router = $this->serviceContainer->get('router');
