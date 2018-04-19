@@ -51,14 +51,18 @@ class PasswordController extends FOSRestController
             $userManager = $this->get('chaplean_user.user_manager');
             $user = $userManager->findUserBy(['email' => $formData['email']]);
 
-            if ($user !== null) {
-                $passwordUtility->createConfirmationToken($user);
-                $userManager->updateUser($user);
-                $registrationUtility->sendResettingMailForUser($user);
+            if ($user === null) {
+                return $this->handleView(new View(['error' => 'user_not_found'], Response::HTTP_BAD_REQUEST));
             }
+
+            $passwordUtility->createConfirmationToken($user);
+            $userManager->updateUser($user);
+            $registrationUtility->sendResettingMailForUser($user);
+
+            return $this->handleView(new View());
         }
 
-        return $this->handleView(new View());
+        return $this->handleView(new View(['error' => 'invalid_form'], Response::HTTP_BAD_REQUEST));
     }
 
     /**
