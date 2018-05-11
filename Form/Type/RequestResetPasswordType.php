@@ -46,7 +46,6 @@ class RequestResetPasswordType extends AbstractType
         $resolver->setDefaults(
             [
                 'translation_domain' => 'messages',
-                'csrf_protection'    => false,
             ]
         );
     }

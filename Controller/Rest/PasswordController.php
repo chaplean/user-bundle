@@ -5,6 +5,7 @@ namespace Chaplean\Bundle\UserBundle\Controller\Rest;
 use Chaplean\Bundle\UserBundle\Form\Type\RequestResetPasswordType;
 use Chaplean\Bundle\UserBundle\Form\Type\SetPasswordType;
 use Chaplean\Bundle\UserBundle\Model\SetPasswordModel;
+use Chaplean\Bundle\UserBundle\Utility\RegistrationUtility;
 use FOS\RestBundle\Controller\Annotations;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\View\View;
@@ -45,7 +46,7 @@ class PasswordController extends FOSRestController
 
         if ($form->isValid()) {
             $passwordUtility = $this->get('chaplean_user.password_utility');
-            $registrationUtility = $this->get('chaplean_user.registration');
+            $registrationUtility = $this->get(RegistrationUtility::class);
 
             $formData = $form->getData();
             $userManager = $this->get('chaplean_user.user_manager');

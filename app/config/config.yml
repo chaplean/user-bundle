@@ -143,6 +143,9 @@ chaplean_mailer:
     test: true
 
 chaplean_user:
+    entity:
+        user:
+            class: Chaplean\Bundle\UserBundle\Entity\DummyUser
     controller:
         index_route: chaplean_user_index
 

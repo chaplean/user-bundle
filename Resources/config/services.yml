@@ -30,9 +30,12 @@ services:
         arguments: ['@security.encoder_factory', '@doctrine', '%fos_user.model.user.class%']
         shared: false
 
-    chaplean_user.registration:
-        class: Chaplean\Bundle\UserBundle\Utility\Registration
-        arguments: ['@service_container', '%chaplean_user%']
+    Chaplean\Bundle\UserBundle\Utility\RegistrationUtility:
+        arguments: ['%chaplean_user%']
+
+    Chaplean\Bundle\UserBundle\Utility\PasswordUtility:
+        class: Chaplean\Bundle\UserBundle\Utility\PasswordUtility
+        arguments: ['@chaplean_user.user_manager', '@fos_user.util.token_generator']
 
     chaplean_user.password_utility:
         class: Chaplean\Bundle\UserBundle\Utility\PasswordUtility

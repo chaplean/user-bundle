@@ -17,8 +17,8 @@ composer require chaplean/user-bundle
 
 Add
 ```
-            new FOS\UserBundle\FOSUserBundle(),
             new Chaplean\Bundle\UserBundle\ChapleanUserBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
 ```
 
 ## 3. Define User entity
@@ -43,12 +43,13 @@ class User extends BaseUser {
 
 ## 4. Minimal Configuration
 
-Define namespace your user entity in `parameters.yml`:
+Define namespace your user entity in `app/config/config.yml`:
 
 ```yaml
-parameters:
-#...
-    chaplean_user.entity.user.class: '<NamespaceUserEntity>'
+chaplean_user:
+    entity:
+        user:
+            class: '<NamespaceUserEntity>'
 ```
 
 Import default config in `app/config/config.yml`:
@@ -62,10 +63,28 @@ Define a route name for index path
 In `app/config/config.yml`:
 ```yaml
 chaplean_user:
+    entity:
+        user:
+            class: '<NamespaceUserEntity>'
     controller:
         index_route: <YourRouteNameForIndex>
         login_route: <YourRouteNameForLogin>
 ```
+
+Custom templating email:
+In `app/config/config.yml`
+```yaml
+chaplean_user:
+    # ...
+    emailing:
+        register:
+            subject: '<Translation key>'
+            body: '<template twig>'
+        resetting:
+            subject: '<Translation key>'
+            body: '<template twig>'
+```
+
 
 ## 5. Configure security
 
