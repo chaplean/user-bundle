@@ -35,7 +35,6 @@ services:
 
     Chaplean\Bundle\UserBundle\Utility\PasswordUtility:
         class: Chaplean\Bundle\UserBundle\Utility\PasswordUtility
-        arguments: ['@chaplean_user.user_manager', '@fos_user.util.token_generator']
 
     chaplean_user.password_utility:
         class: Chaplean\Bundle\UserBundle\Utility\PasswordUtility

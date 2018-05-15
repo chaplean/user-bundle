@@ -2,6 +2,5 @@ Chaplean\Bundle\UserBundle\Model\SetPasswordModel:
     properties:
         password:
             - NotBlank: ~
-            - Chaplean\Bundle\UserBundle\Validator\Constraints\MinimalPasswordRequirements: ~
         token:
             - NotBlank: ~

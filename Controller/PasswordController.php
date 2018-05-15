@@ -53,7 +53,7 @@ class PasswordController extends Controller
      *
      * @return Response
      */
-    public function setPasswordFormAction(Request $request)
+    public function setPasswordFormAction(Request $request, $isReset = false)
     {
         $token = $request->query->get('token', '');
 

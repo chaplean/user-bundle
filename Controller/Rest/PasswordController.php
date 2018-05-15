@@ -5,6 +5,7 @@ namespace Chaplean\Bundle\UserBundle\Controller\Rest;
 use Chaplean\Bundle\UserBundle\Form\Type\RequestResetPasswordType;
 use Chaplean\Bundle\UserBundle\Form\Type\SetPasswordType;
 use Chaplean\Bundle\UserBundle\Model\SetPasswordModel;
+use Chaplean\Bundle\UserBundle\Utility\FormErrorUtility;
 use Chaplean\Bundle\UserBundle\Utility\RegistrationUtility;
 use FOS\RestBundle\Controller\Annotations;
 use FOS\RestBundle\Controller\FOSRestController;
@@ -78,15 +79,15 @@ class PasswordController extends FOSRestController
      */
     public function postSetPasswordAction(Request $request)
     {
-        $form = $this->createForm(SetPasswordType::class, new SetPasswordModel());
+        $form = $this->createForm(SetPasswordType::class);
         $form->submit($request->request->all());
 
         if ($this->getUser() !== null) {
-            return $this->handleView(new View('', Response::HTTP_FORBIDDEN));
+            return $this->handleView($this->view('', Response::HTTP_UNAUTHORIZED));
         }
 
         if (!$form->isValid()) {
-            return $this->handleView(new View('', Response::HTTP_BAD_REQUEST));
+            return $this->handleView($this->view(FormErrorUtility::errorsToArray($form->getErrors(true)), Response::HTTP_BAD_REQUEST));
         }
 
         $formData = $form->getData();
@@ -101,6 +102,6 @@ class PasswordController extends FOSRestController
         $passwordUtility->setPassword($user, $formData->getPassword());
         $userManager->updateUser($user);
 
-        return $this->handleView(new View());
+        return $this->handleView($this->view());
     }
 }

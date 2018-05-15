@@ -39,6 +39,7 @@ class SetPasswordType extends AbstractType
                 'required'        => true
             ]
         );
+
         $builder->add(
             'token',
             HiddenType::class,
@@ -61,7 +62,8 @@ class SetPasswordType extends AbstractType
             [
                 'data_class'         => SetPasswordModel::class,
                 'translation_domain' => 'messages',
-                'csrf_protection'    => false,
+                'csrf_protection'    => true,
+                'csrf_token_id'      => 'chaplean_user_set_password'
             ]
         );
     }
