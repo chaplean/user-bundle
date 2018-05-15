@@ -198,6 +198,14 @@ app_front:
     prefix: /
 ```
 
+# Validator
+
+### MinimalPasswordRequirements
+
+`Chaplean\Bundle\UserBundle\Validator\Constraints\MinimalPasswordRequirements` has 2 options:
+* `minLength`, default: 6
+* `atLeastOneSpecialCharacter`, default: true
+
 # Events
 
 The UserBundle defines some events to allow you to hook in your own logic:

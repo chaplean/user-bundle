@@ -16,4 +16,7 @@ class MinimalPasswordRequirements extends Constraint
 {
     public $tooShort = 'form.set_password.error.too_short';
     public $noSpecialCharacters = 'form.set_password.error.no_special_characters';
+
+    public $minLength = 6;
+    public $atLeastOneSpecialCharacter = true;
 }

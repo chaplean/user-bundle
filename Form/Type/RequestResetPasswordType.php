@@ -46,6 +46,8 @@ class RequestResetPasswordType extends AbstractType
         $resolver->setDefaults(
             [
                 'translation_domain' => 'messages',
+                'csrf_protection'    => true,
+                'csrf_token_id'      => 'chaplean_user_request_reset_password'
             ]
         );
     }

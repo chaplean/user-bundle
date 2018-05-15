@@ -16,19 +16,21 @@ use Symfony\Component\Validator\ConstraintValidator;
 class MinimalPasswordRequirementsValidator extends ConstraintValidator
 {
     /**
-     * @param string     $value
-     * @param Constraint $constraint
+     * @param string                                 $value
+     * @param Constraint|MinimalPasswordRequirements $constraint
      *
      * @return void
      */
     public function validate($value, Constraint $constraint)
     {
-        if (strlen($value) < 6) {
+        if (strlen($value) < $constraint->minLength) {
             $this->context->addViolation($constraint->tooShort);
+            return;
         }
 
-        if (preg_match('/^[a-zA-Z0-9]+$/', $value)) {
+        if ($constraint->atLeastOneSpecialCharacter && preg_match('/^[a-zA-Z0-9]+$/', $value)) {
             $this->context->addViolation($constraint->noSpecialCharacters);
+            return;
         }
     }
 }
