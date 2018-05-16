@@ -2,7 +2,7 @@
 
 namespace Chaplean\Bundle\UserBundle\Utility;
 
-use Chaplean\Bundle\UserBundle\Model\User;
+use Chaplean\Bundle\UserBundle\Model\UserInterface;
 use Symfony\Bridge\Twig\TwigEngine;
 use Symfony\Bundle\FrameworkBundle\Translation\Translator;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -45,11 +45,11 @@ class RegistrationUtility
     /**
      * RegistrationUtility constructor.
      *
-     * @param array         $parameters
-     * @param RouterInterface        $router
-     * @param \Swift_Mailer $swiftMailer
-     * @param TranslatorInterface    $translator
-     * @param EngineInterface    $templating
+     * @param array               $parameters
+     * @param RouterInterface     $router
+     * @param \Swift_Mailer       $swiftMailer
+     * @param TranslatorInterface $translator
+     * @param EngineInterface     $templating
      */
     public function __construct(array $parameters, RouterInterface $router, \Swift_Mailer $swiftMailer, TranslatorInterface $translator, EngineInterface $templating)
     {
@@ -63,11 +63,11 @@ class RegistrationUtility
     /**
      * Send the registration mail with the link to activate the account.
      *
-     * @param User $user User to send the mail to.
+     * @param UserInterface $user User to send the mail to.
      *
      * @return void
      */
-    public function sendRegistrationMailForUser(User $user)
+    public function sendRegistrationMailForUser(UserInterface $user): void
     {
         $emailing = $this->parameters['emailing']['register'];
         $this->sendMail($this->translator->trans($emailing['subject']), $user, $emailing['body']);
@@ -76,11 +76,11 @@ class RegistrationUtility
     /**
      * Send the registration mail with the link to activate the account.
      *
-     * @param User $user User to send the mail to.
+     * @param UserInterface $user User to send the mail to.
      *
      * @return void
      */
-    public function sendResettingMailForUser(User $user)
+    public function sendResettingMailForUser(UserInterface $user): void
     {
         $emailing = $this->parameters['emailing']['resetting'];
         $this->sendMail($this->translator->trans($emailing['subject']), $user, $emailing['body']);
@@ -89,13 +89,13 @@ class RegistrationUtility
     /**
      * Return mail to send.
      *
-     * @param string $subject
-     * @param User   $user
-     * @param string $view
+     * @param string        $subject
+     * @param UserInterface $user
+     * @param string        $view
      *
      * @return void
      */
-    private function sendMail($subject, $user, $view)
+    private function sendMail(string $subject, UserInterface $user, string $view): void
     {
         $token = $user->getConfirmationToken();
         $link = $this->parameters['controller']['set_password_route'];
