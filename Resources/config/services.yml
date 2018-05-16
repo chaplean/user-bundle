@@ -34,7 +34,7 @@ services:
         arguments: ['%chaplean_user%']
 
     Chaplean\Bundle\UserBundle\Utility\PasswordUtility:
-        class: Chaplean\Bundle\UserBundle\Utility\PasswordUtility
+        arguments: ['@chaplean_user.user_manager']
 
     chaplean_user.password_utility:
         class: Chaplean\Bundle\UserBundle\Utility\PasswordUtility
