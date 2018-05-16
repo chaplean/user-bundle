@@ -4,7 +4,6 @@ namespace Chaplean\Bundle\UserBundle\Controller\Rest;
 
 use Chaplean\Bundle\UserBundle\Form\Type\RequestResetPasswordType;
 use Chaplean\Bundle\UserBundle\Form\Type\SetPasswordType;
-use Chaplean\Bundle\UserBundle\Model\SetPasswordModel;
 use Chaplean\Bundle\UserBundle\Utility\FormErrorUtility;
 use Chaplean\Bundle\UserBundle\Utility\RegistrationUtility;
 use FOS\RestBundle\Controller\Annotations;
@@ -87,7 +86,14 @@ class PasswordController extends FOSRestController
         }
 
         if (!$form->isValid()) {
-            return $this->handleView($this->view(FormErrorUtility::errorsToArray($form->getErrors(true)), Response::HTTP_BAD_REQUEST));
+            return $this->handleView(
+                $this->view(
+                    [
+                        'errors' => FormErrorUtility::errorsToArray($form->getErrors(true))
+                    ],
+                    Response::HTTP_BAD_REQUEST
+                )
+            );
         }
 
         $formData = $form->getData();
