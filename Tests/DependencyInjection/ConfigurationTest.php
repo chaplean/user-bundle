@@ -37,7 +37,8 @@ class ConfigurationTest extends TestCase
                     'controller'     => [
                         'index_route'        => '',
                         'login_route'        => '',
-                        'set_password_route' => '',
+                        'register_password_route' => '',
+                        'resetting_password_route' => '',
                     ],
                     'emailing'       => [
                         'register'  => [
@@ -58,7 +59,8 @@ class ConfigurationTest extends TestCase
         $this->assertTrue($container->hasParameter('chaplean_user.template_login'));
         $this->assertTrue($container->hasParameter('chaplean_user.controller.index_route'));
         $this->assertTrue($container->hasParameter('chaplean_user.controller.login_route'));
-        $this->assertTrue($container->hasParameter('chaplean_user.controller.set_password_route'));
+        $this->assertTrue($container->hasParameter('chaplean_user.controller.register_password_route'));
+        $this->assertTrue($container->hasParameter('chaplean_user.controller.resetting_password_route'));
         $this->assertTrue($container->hasParameter('chaplean_user.emailing.register.subject'));
         $this->assertTrue($container->hasParameter('chaplean_user.emailing.register.body'));
         $this->assertTrue($container->hasParameter('chaplean_user.emailing.resetting.subject'));
@@ -80,7 +82,9 @@ class ConfigurationTest extends TestCase
         $this->assertTrue($container->hasParameter('chaplean_user.template_login'));
         $this->assertFalse($container->hasParameter('chaplean_user.controller.index_route'));
         $this->assertFalse($container->hasParameter('chaplean_user.controller.login_route'));
-        $this->assertFalse($container->hasParameter('chaplean_user.controller.set_password_route'));
+        $this->assertTrue($container->hasParameter('chaplean_user.controller.register_password_route'));
+        $this->assertTrue($container->hasParameter('chaplean_user.controller.resetting_password_route'));
+        $this->assertNull($container->getParameter('chaplean_user.controller.resetting_password_route'));
         $this->assertTrue($container->hasParameter('chaplean_user.emailing.register.subject'));
         $this->assertTrue($container->hasParameter('chaplean_user.emailing.register.body'));
         $this->assertTrue($container->hasParameter('chaplean_user.emailing.resetting.subject'));

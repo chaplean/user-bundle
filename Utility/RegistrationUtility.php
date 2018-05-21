@@ -70,7 +70,9 @@ class RegistrationUtility
     public function sendRegistrationMailForUser(UserInterface $user): void
     {
         $emailing = $this->parameters['emailing']['register'];
-        $this->sendMail($this->translator->trans($emailing['subject']), $user, $emailing['body']);
+        $link = $this->parameters['controller']['register_password_route'];
+
+        $this->sendMail($emailing['subject'], $link, $emailing['body'], $user);
     }
 
     /**
@@ -83,26 +85,32 @@ class RegistrationUtility
     public function sendResettingMailForUser(UserInterface $user): void
     {
         $emailing = $this->parameters['emailing']['resetting'];
-        $this->sendMail($this->translator->trans($emailing['subject']), $user, $emailing['body']);
+        $link = $this->parameters['controller']['resetting_password_route'];
+
+        if ($link === null) {
+            $link = $this->parameters['controller']['register_password_route'];
+        }
+
+        $this->sendMail($emailing['subject'], $link, $emailing['body'], $user);
     }
 
     /**
      * Return mail to send.
      *
      * @param string        $subject
-     * @param UserInterface $user
+     * @param string        $link
      * @param string        $view
+     * @param UserInterface $user
      *
      * @return void
      */
-    private function sendMail(string $subject, UserInterface $user, string $view): void
+    private function sendMail(string $subject, string $link, string $view, UserInterface $user): void
     {
         $token = $user->getConfirmationToken();
-        $link = $this->parameters['controller']['set_password_route'];
 
         $message = new \Swift_Message();
         $message->setContentType('text/html');
-        $message->setSubject($subject);
+        $message->setSubject($this->translator->trans($subject));
         $message->setTo($user->getEmail());
         $message->setBody(
             $this->templating->render(
