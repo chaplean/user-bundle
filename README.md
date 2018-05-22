@@ -20,6 +20,7 @@ Add
             new Chaplean\Bundle\UserBundle\ChapleanUserBundle(),
             new FOS\UserBundle\FOSUserBundle(),
 ```
+**NOTE**: After SecurityBundle
 
 ## 3. Define User entity
 
@@ -69,6 +70,8 @@ chaplean_user:
     controller:
         index_route: <YourRouteNameForIndex>
         login_route: <YourRouteNameForLogin>
+        register_password_route: <Route to set password on register> # default: 'chaplean_user_password_set_password'
+        resetting_password_route: <Route to set password on resetting> # default: null and use register_password_route
 ```
 
 Custom templating email:

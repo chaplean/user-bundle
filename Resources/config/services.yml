@@ -55,6 +55,15 @@ services:
     chaplean_user.encoder.password:
         class: Chaplean\Bundle\UserBundle\Encoder\PasswordEncoder
 
+    Chaplean\Bundle\UserBundle\Security\Handler\ExceptionHandler:
+        tags:
+          - { name: kernel.event_listener, event: kernel.exception, method: onException }
+
+    security.authentication.form_entry_point:
+        class: Chaplean\Bundle\UserBundle\Security\Http\EntryPoint\AuthenticationEntryPoint
+        abstract: true
+        arguments: ['@kernel']
+
     # Needed because those services are private
     fos_user.util.token_generator:
         alias: fos_user.util.token_generator.default
