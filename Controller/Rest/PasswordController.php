@@ -109,6 +109,8 @@ class PasswordController extends FOSRestController
         }
 
         $passwordUtility->setPassword($user, $formData->getPassword());
+        $user->setEnabled(true);
+
         $userManager->updateUser($user);
 
         return $this->handleView($this->view());
