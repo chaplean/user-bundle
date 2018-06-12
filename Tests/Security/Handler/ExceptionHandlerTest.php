@@ -12,7 +12,7 @@ use Symfony\Component\HttpKernel\KernelEvents;
 /**
  * Class ExceptionHandlerTest.
  *
- * @package   Tests\Chaplean\Bundle\UserBundle\Security\Handler
+ * @package   Tests\Chaplean\Bundle\UserBundle\SecurityUtilityTest\Handler
  * @author    Valentin - Chaplean <valentin@chaplean.coop>
  * @copyright 2014 - 2018 Chaplean (http://www.chaplean.coop)
  */

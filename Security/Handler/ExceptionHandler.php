@@ -9,7 +9,7 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 /**
  * Class ExceptionHandler.
  *
- * @package   Chaplean\Bundle\UserBundle\Security\Handler
+ * @package   Chaplean\Bundle\UserBundle\SecurityUtility\Handler
  * @author    Valentin - Chaplean <valentin@chaplean.coop>
  * @copyright 2014 - 2018 Chaplean (http://www.chaplean.coop)
  */

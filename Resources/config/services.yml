@@ -67,3 +67,9 @@ services:
     # Needed because those services are private
     fos_user.util.token_generator:
         alias: fos_user.util.token_generator.default
+
+    Chaplean\Bundle\UserBundle\Email\:
+        resource: '../../Email/*'
+
+    Chaplean\Bundle\UserBundle\Form\Handler\:
+        resource: '../../Form/Handler/*'

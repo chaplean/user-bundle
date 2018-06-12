@@ -2,10 +2,11 @@
 
 namespace Chaplean\Bundle\UserBundle\Controller\Rest;
 
+use Chaplean\Bundle\UserBundle\Form\Handler\SetPasswordSuccessHandler;
 use Chaplean\Bundle\UserBundle\Form\Type\RequestResetPasswordType;
 use Chaplean\Bundle\UserBundle\Form\Type\SetPasswordType;
+use Chaplean\Bundle\UserBundle\Model\SetPasswordModel;
 use Chaplean\Bundle\UserBundle\Model\UserInterface;
-use Chaplean\Bundle\UserBundle\Utility\FormErrorUtility;
 use Chaplean\Bundle\UserBundle\Utility\RegistrationUtility;
 use FOS\RestBundle\Controller\Annotations;
 use FOS\RestBundle\Controller\FOSRestController;
@@ -38,12 +39,12 @@ class PasswordController extends FOSRestController
      */
     public function postRequestResetPasswordAction(Request $request)
     {
-        $form = $this->createForm(RequestResetPasswordType::class);
-        $form->submit($request->request->all());
-
         if ($this->getUser() !== null) {
             return $this->handleView(new View('', Response::HTTP_FORBIDDEN));
         }
+
+        $form = $this->createForm(RequestResetPasswordType::class);
+        $form->submit($request->request->all());
 
         if ($form->isValid()) {
             $passwordUtility = $this->get('chaplean_user.password_utility');
@@ -61,6 +62,8 @@ class PasswordController extends FOSRestController
             $passwordUtility->createConfirmationToken($user);
             $userManager->updateUser($user);
             $registrationUtility->sendResettingMailForUser($user);
+
+            $this->get('doctrine')->getManager()->flush();
 
             return $this->handleView(new View());
         }
@@ -80,39 +83,12 @@ class PasswordController extends FOSRestController
      */
     public function postSetPasswordAction(Request $request)
     {
-        $form = $this->createForm(SetPasswordType::class);
-        $form->submit($request->request->all());
-
         if ($this->getUser() !== null) {
             return $this->handleView($this->view('', Response::HTTP_UNAUTHORIZED));
         }
 
-        if (!$form->isValid()) {
-            return $this->handleView(
-                $this->view(
-                    [
-                        'errors' => FormErrorUtility::errorsToArray($form->getErrors(true))
-                    ],
-                    Response::HTTP_BAD_REQUEST
-                )
-            );
-        }
-
-        $formData = $form->getData();
-        $userManager = $this->get('fos_user.user_manager');
-        $passwordUtility = $this->get('chaplean_user.password_utility');
-
-        /** @var UserInterface $user */
-        $user = $userManager->findUserBy(['confirmationToken' => $formData->getToken()]);
-        if ($user === null || !$passwordUtility->isTokenValid($formData->getToken())) {
-            return $this->handleView(new View('', Response::HTTP_FORBIDDEN));
-        }
-
-        $passwordUtility->setPassword($user, $formData->getPassword());
-        $user->setEnabled(true);
-
-        $userManager->updateUser($user);
-
-        return $this->handleView($this->view());
+        return $this->get('chaplean_form_handler.form.controller_form_handler')
+            ->successHandler(SetPasswordSuccessHandler::class)
+            ->handle(SetPasswordType::class, new SetPasswordModel() ,$request);
     }
 }

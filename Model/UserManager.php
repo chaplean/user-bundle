@@ -109,7 +109,7 @@ class UserManager implements UserManagerInterface, UserProviderInterface
      * It is strongly discouraged to use this method manually as it bypasses
      * all ACL checks.
      *
-     * @deprecated Use FOS\UserBundle\Security\UserProvider instead
+     * @deprecated Use FOS\UserBundle\SecurityUtility\UserProvider instead
      *
      * @param SecurityUserInterface $user
      *
@@ -141,7 +141,7 @@ class UserManager implements UserManagerInterface, UserProviderInterface
      * It is strongly discouraged to call this method manually as it bypasses
      * all ACL checks.
      *
-     * @deprecated Use FOS\UserBundle\Security\UserProvider instead
+     * @deprecated Use FOS\UserBundle\SecurityUtility\UserProvider instead
      *
      * @param string $username
      *
@@ -208,7 +208,7 @@ class UserManager implements UserManagerInterface, UserProviderInterface
     }
 
     /**
-     * @deprecated Use FOS\UserBundle\Security\UserProvider instead
+     * @deprecated Use FOS\UserBundle\SecurityUtility\UserProvider instead
      *
      * @param string $class
      *
@@ -315,19 +315,14 @@ class UserManager implements UserManagerInterface, UserProviderInterface
      * Updates a user.
      *
      * @param FOSUserInterface $user
-     * @param boolean       $andFlush Whether to flush the changes (default true)
      *
      * @return void
      */
-    public function updateUser(FOSUserInterface $user, $andFlush = true)
+    public function updateUser(FOSUserInterface $user)
     {
         $this->updatePassword($user);
 
         $this->em->persist($user);
-
-        if ($andFlush) {
-            $this->em->flush();
-        }
 
         $user->eraseCredentials();
     }

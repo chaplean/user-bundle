@@ -65,6 +65,4 @@ class SetPasswordModel
 
         return $this;
     }
-    
-    
 }

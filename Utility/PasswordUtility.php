@@ -43,6 +43,7 @@ class PasswordUtility
      */
     public function isTokenValid($token)
     {
+        /** @var UserInterface $user */
         $user = $this->userManager->findOneBy(['confirmationToken' => $token]);
 
         // Token found and not requested more than 48h ago

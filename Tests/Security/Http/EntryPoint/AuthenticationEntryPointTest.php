@@ -16,7 +16,7 @@ use Symfony\Component\Security\Http\HttpUtils;
 /**
  * Class AuthenticationEntryPointTest.
  *
- * @package   Tests\Chaplean\Bundle\UserBundle\Security\Http\EntryPoint
+ * @package   Tests\Chaplean\Bundle\UserBundle\SecurityUtilityTest\Http\EntryPoint
  * @author    Valentin - Chaplean <valentin@chaplean.coop>
  * @copyright 2014 - 2018 Chaplean (http://www.chaplean.coop)
  */

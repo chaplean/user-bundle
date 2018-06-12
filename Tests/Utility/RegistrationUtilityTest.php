@@ -3,6 +3,7 @@
 namespace Tests\Chaplean\Bundle\UserBundle\Utility;
 
 use Chaplean\Bundle\UnitBundle\Test\FunctionalTestCase;
+use Chaplean\Bundle\UserBundle\Email\UserPasswordEmail;
 use Chaplean\Bundle\UserBundle\Utility\RegistrationUtility;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 
@@ -19,8 +20,7 @@ class RegistrationUtilityTest extends FunctionalTestCase
     use MockeryPHPUnitIntegration;
 
     /**
-     * @covers \Chaplean\Bundle\UserBundle\Utility\RegistrationUtility::sendResettingMailForUser
-     * @covers \Chaplean\Bundle\UserBundle\Utility\RegistrationUtility::sendMail()
+     * @covers \Chaplean\Bundle\UserBundle\Utility\RegistrationUtility::sendRegistrationMailForUser()
      *
      * @return void
      * @throws \Exception
@@ -36,17 +36,14 @@ class RegistrationUtilityTest extends FunctionalTestCase
 
         $registrationUtility = new RegistrationUtility(
             $this->getContainer()->getParameter('chaplean_user'),
-            $this->getContainer()->get('router'),
             $mailer,
-            $this->getContainer()->get('translator'),
-            $this->getContainer()->get('templating')
+            $this->getContainer()->get(UserPasswordEmail::class)
         );
         $registrationUtility->sendRegistrationMailForUser($user);
     }
 
     /**
      * @covers \Chaplean\Bundle\UserBundle\Utility\RegistrationUtility::sendResettingMailForUser
-     * @covers \Chaplean\Bundle\UserBundle\Utility\RegistrationUtility::sendMail()
      *
      * @return void
      * @throws \Exception
@@ -61,10 +58,8 @@ class RegistrationUtilityTest extends FunctionalTestCase
         $user = $this->getReference('user-with-pending-reset-password-token');
         $registrationUtility = new RegistrationUtility(
             $this->getContainer()->getParameter('chaplean_user'),
-            $this->getContainer()->get('router'),
             $mailer,
-            $this->getContainer()->get('translator'),
-            $this->getContainer()->get('templating')
+            $this->getContainer()->get(UserPasswordEmail::class)
         );
         $registrationUtility->sendResettingMailForUser($user);
     }

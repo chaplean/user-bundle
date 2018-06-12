@@ -2,14 +2,9 @@
 
 namespace Chaplean\Bundle\UserBundle\Utility;
 
+use Chaplean\Bundle\UserBundle\Email\UserPasswordEmail;
 use Chaplean\Bundle\UserBundle\Model\UserInterface;
-use Symfony\Bridge\Twig\TwigEngine;
 use Symfony\Bundle\FrameworkBundle\Translation\Translator;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Routing\Router;
-use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\Templating\EngineInterface;
-use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * Registration.php.
@@ -25,10 +20,7 @@ class RegistrationUtility
      * @var array
      */
     protected $parameters;
-    /**
-     * @var Router
-     */
-    protected $router;
+
     /**
      * @var \Swift_Mailer
      */
@@ -37,27 +29,24 @@ class RegistrationUtility
      * @var Translator
      */
     protected $translator;
+
     /**
-     * @var TwigEngine
+     * @var UserPasswordEmail
      */
-    protected $templating;
+    protected $userPasswordEmail;
 
     /**
      * RegistrationUtility constructor.
      *
      * @param array               $parameters
-     * @param RouterInterface     $router
      * @param \Swift_Mailer       $swiftMailer
-     * @param TranslatorInterface $translator
-     * @param EngineInterface     $templating
+     * @param UserPasswordEmail   $userPasswordEmail
      */
-    public function __construct(array $parameters, RouterInterface $router, \Swift_Mailer $swiftMailer, TranslatorInterface $translator, EngineInterface $templating)
+    public function __construct(array $parameters, \Swift_Mailer $swiftMailer, UserPasswordEmail $userPasswordEmail)
     {
         $this->parameters = $parameters;
-        $this->router = $router;
         $this->swiftMailer = $swiftMailer;
-        $this->translator = $translator;
-        $this->templating = $templating;
+        $this->userPasswordEmail = $userPasswordEmail;
     }
 
     /**
@@ -72,7 +61,11 @@ class RegistrationUtility
         $emailing = $this->parameters['emailing']['register'];
         $link = $this->parameters['controller']['register_password_route'];
 
-        $this->sendMail($emailing['subject'], $link, $emailing['body'], $user);
+        $this->userPasswordEmail->setSubject($emailing['subject']);
+        $this->userPasswordEmail->setBody($emailing['body']);
+        $this->userPasswordEmail->setLink($link);
+        $this->userPasswordEmail->setUser($user);
+        $this->swiftMailer->send($this->userPasswordEmail->getEmail());
     }
 
     /**
@@ -91,37 +84,10 @@ class RegistrationUtility
             $link = $this->parameters['controller']['register_password_route'];
         }
 
-        $this->sendMail($emailing['subject'], $link, $emailing['body'], $user);
-    }
-
-    /**
-     * Return mail to send.
-     *
-     * @param string        $subject
-     * @param string        $link
-     * @param string        $view
-     * @param UserInterface $user
-     *
-     * @return void
-     */
-    private function sendMail(string $subject, string $link, string $view, UserInterface $user): void
-    {
-        $token = $user->getConfirmationToken();
-
-        $message = new \Swift_Message();
-        $message->setContentType('text/html');
-        $message->setSubject($this->translator->trans($subject));
-        $message->setTo($user->getEmail());
-        $message->setBody(
-            $this->templating->render(
-                $view,
-                [
-                    'user' => $user,
-                    'link' => $this->router->generate($link, ['token' => $token], UrlGeneratorInterface::ABSOLUTE_URL)
-                ]
-            )
-        );
-
-        $this->swiftMailer->send($message);
+        $this->userPasswordEmail->setSubject($emailing['subject']);
+        $this->userPasswordEmail->setBody($emailing['body']);
+        $this->userPasswordEmail->setLink($link);
+        $this->userPasswordEmail->setUser($user);
+        $this->swiftMailer->send($this->userPasswordEmail->getEmail());
     }
 }

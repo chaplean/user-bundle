@@ -102,10 +102,10 @@ abstract class AuthenticationHandler implements AuthenticationSuccessHandlerInte
         if ($user->isEnabled() && $user->getConfirmationToken() != null) {
             $this->userManager->cleanUser($user);
             $this->userManager->updateUser($user);
-        } else {
-            $this->em->persist($user);
-            $this->em->flush();
         }
+
+        $this->em->persist($user);
+        $this->em->flush();
 
         $redirection = $this->session->get('_security.main.target_path');
 
@@ -124,6 +124,6 @@ abstract class AuthenticationHandler implements AuthenticationSuccessHandlerInte
      */
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
-        return str_replace('.', '', str_replace(' ', '_', strtolower($exception->getMessage())));
+        return $this->translator->trans($exception->getMessageKey(), $exception->getMessageData());
     }
 }

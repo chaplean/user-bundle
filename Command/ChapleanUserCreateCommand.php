@@ -57,7 +57,7 @@ class ChapleanUserCreateCommand extends ContainerAwareCommand
         $user->setEnabled(true);
         $user->setDateAdd(new \DateTime());
 
-        $userManager->updateUser($user, false);
+        $userManager->updateUser($user);
 
         $dispatcher = $this->getContainer()
             ->get('event_dispatcher');
