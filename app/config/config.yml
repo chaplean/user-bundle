@@ -38,56 +38,6 @@ twig:
     debug:            '%kernel.debug%'
     strict_variables: '%kernel.debug%'
 
-# Assetic Configuration
-assetic:
-    debug:          '%use_assetic_debug%'
-    use_controller: '%use_assetic_controller%'
-    bundles:        []
-    ruby: '%ruby.bin%'
-    filters:
-        cssrewrite: ~
-        sass:
-            bin: '%sass.bin%'
-            apply_to: '\.scss'
-        compass:
-            bin: '%compass.bin%'
-            no_line_comments: true
-    assets:
-        bootstrap_fonts_woff:
-            inputs:
-                - '@ChapleanCmsBundle/Resources/public/libs/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.woff'
-            output: fonts/bootstrap/glyphicons-halflings-regular.woff
-        bootstrap_fonts_ttf:
-            inputs:
-                - '@ChapleanCmsBundle/Resources/public/libs/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.ttf'
-            output: fonts/bootstrap/glyphicons-halflings-regular.ttf
-        bootstrap_fonts_svg:
-            inputs:
-                - '@ChapleanCmsBundle/Resources/public/libs/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.svg'
-            output: fonts/bootstrap/glyphicons-halflings-regular.svg
-        bootstrap_fonts_eot:
-            inputs:
-                - '@ChapleanCmsBundle/Resources/public/libs/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.eot'
-            output: fonts/bootstrap/glyphicons-halflings-regular.eot
-        font-awesome-otf:
-            inputs: '@ChapleanCmsBundle/Resources/public/libs/components-font-awesome/fonts/FontAwesome.otf'
-            output: 'fonts/FontAwesome.otf'
-        font-awesome-eot:
-            inputs: '@ChapleanCmsBundle/Resources/public/libs/components-font-awesome/fonts/fontawesome-webfont.eot'
-            output: 'fonts/fontawesome-webfont.eot'
-        font-awesome-svg:
-            inputs: '@ChapleanCmsBundle/Resources/public/libs/components-font-awesome/fonts/fontawesome-webfont.svg'
-            output: 'fonts/fontawesome-webfont.svg'
-        font-awesome-ttf:
-            inputs: '@ChapleanCmsBundle/Resources/public/libs/components-font-awesome/fonts/fontawesome-webfont.ttf'
-            output: 'fonts/fontawesome-webfont.ttf'
-        font-awesome-woff:
-            inputs: '@ChapleanCmsBundle/Resources/public/libs/components-font-awesome/fonts/fontawesome-webfont.woff'
-            output: 'fonts/fontawesome-webfont.woff'
-        font-awesome-woff2:
-            inputs: '@ChapleanCmsBundle/Resources/public/libs/components-font-awesome/fonts/fontawesome-webfont.woff2'
-            output: 'fonts/fontawesome-webfont.woff2'
-
 monolog:
     handlers:
         main:

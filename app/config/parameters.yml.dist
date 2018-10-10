@@ -14,8 +14,6 @@ parameters:
     locale: fr
     secret: ThatsChapleanBundleNameBun2le
 
-    use_assetic_controller: false
-    use_assetic_debug: true
     sass.bin: /usr/local/bin/sass
     ruby.bin: /usr/bin/ruby
     compass.bin: /usr/local/bin/compass
