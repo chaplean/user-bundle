@@ -46,7 +46,6 @@
         "twig/extensions": "^1.0"
     },
     "require-dev": {
-        "chaplean/codeship-scripts": "^1.0",
         "chaplean/coding-standard": "^1.1",
         "chaplean/unit-bundle": "^7.0",
         "mockery/mockery": "dev-master",
