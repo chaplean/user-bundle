@@ -38,10 +38,7 @@ class PasswordControllerTest extends FunctionalTestCase
      */
     public function testCantSeeRequestPasswordResetPageLoggedIn()
     {
-        $user = $this->getReference('user-1');
-
-        $client = static::createClient();
-        $this->authenticate($user, $client);
+        $client = $this->createClientWith('user-1');
         $client->request(
             'GET',
             '/password/request_reset'
@@ -97,10 +94,7 @@ class PasswordControllerTest extends FunctionalTestCase
      */
     public function testCantSeeSetPasswordPageLoggedInWithValidToken()
     {
-        $user = $this->getReference('user-1');
-
-        $client = static::createClient();
-        $this->authenticate($user, $client);
+        $client = $this->createClientWith('user-1');
         $client->request(
             'GET',
             '/password/set',

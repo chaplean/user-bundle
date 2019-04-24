@@ -15,14 +15,6 @@ use Chaplean\Bundle\UnitBundle\Test\FunctionalTestCase;
 class ChapleanUserCreateCommandTest extends FunctionalTestCase
 {
     /**
-     * @return void
-     */
-    public static function setUpBeforeClass()
-    {
-        parent::setUpBeforeClass();
-    }
-
-    /**
      * @covers \Chaplean\Bundle\UserBundle\Command\ChapleanUserCreateCommand::configure
      * @covers \Chaplean\Bundle\UserBundle\Command\ChapleanUserCreateCommand::execute
      *
