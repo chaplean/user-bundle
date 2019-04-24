@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @package   Chaplean\Bundle\UserBundle\Entity
  * @author    Benoit - Chaplean <benoit@chaplean.coop>
- * @copyright 2014 - 2015 Chaplean (http://www.chaplean.coop)
+ * @copyright 2014 - 2015 Chaplean (https://www.chaplean.coopn.coop)
  * @since     2.0.0
  *
  * @ORM\Entity

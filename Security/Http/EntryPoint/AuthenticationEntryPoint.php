@@ -14,7 +14,7 @@ use Symfony\Component\Security\Http\EntryPoint\FormAuthenticationEntryPoint;
  *
  * @package   Chaplean\Bundle\UserBundle\SecurityUtility\Http\EntryPoint
  * @author    Valentin - Chaplean <valentin@chaplean.coop>
- * @copyright 2014 - 2018 Chaplean (http://www.chaplean.coop)
+ * @copyright 2014 - 2018 Chaplean (https://www.chaplean.coopn.coop)
  */
 class AuthenticationEntryPoint extends FormAuthenticationEntryPoint
 {

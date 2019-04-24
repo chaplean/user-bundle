@@ -7,7 +7,7 @@ namespace Chaplean\Bundle\UserBundle\Email;
  *
  * @package   App\Bundle\RestBundle\Email
  * @author    Matthias - Chaplean <matthias@chaplean.coop>
- * @copyright 2014 - 2017 Chaplean (http://www.chaplean.coop)
+ * @copyright 2014 - 2017 Chaplean (https://www.chaplean.coopn.coop)
  * @since     7.1.0
  */
 interface EmailInterface

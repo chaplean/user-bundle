@@ -18,7 +18,7 @@ use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
  *
  * @package   Chaplean\Bundle\UserBundle\Form\Hanldler
  * @author    Matthias - Chaplean <matthias@chaplean.coop>
- * @copyright 2014 - 2018 Chaplean (http://www.chaplean.coop)
+ * @copyright 2014 - 2018 Chaplean (https://www.chaplean.coopn.coop)
  */
 class SetPasswordSuccessHandler implements SuccessHandlerInterface
 {

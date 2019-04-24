@@ -13,7 +13,7 @@ use Symfony\Component\Translation\TranslatorInterface;
  *
  * @package   Chaplean\Bundle\UserBundle\Email
  * @author    Matthias - Chaplean <matthias@chaplean.coop>
- * @copyright 2014 - 2018 Chaplean (http://www.chaplean.coop)
+ * @copyright 2014 - 2018 Chaplean (https://www.chaplean.coopn.coop)
  */
 class UserPasswordEmail implements EmailInterface
 {

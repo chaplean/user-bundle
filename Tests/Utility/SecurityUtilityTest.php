@@ -11,7 +11,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
  *
  * @package   Chaplean\Bundle\UserBundle\Tests\Utility
  * @author    Matthias - Chaplean <matthias@chaplean.coop>
- * @copyright 2014 - 2018 Chaplean (http://www.chaplean.coop)
+ * @copyright 2014 - 2018 Chaplean (https://www.chaplean.coopn.coop)
  */
 class SecurityUtilityTest extends MockeryTestCase
 {

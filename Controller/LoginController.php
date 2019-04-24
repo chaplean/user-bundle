@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
  *
  * @package   App\Bundle\FrontBundle\Controller
  * @author    Matthias - Chaplean <matthias@chaplean.coop>
- * @copyright 2014 - 2018 Chaplean (http://www.chaplean.coop)
+ * @copyright 2014 - 2018 Chaplean (https://www.chaplean.coopn.coop)
  */
 class LoginController extends Controller
 {

@@ -14,7 +14,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  *
  * @package   Chaplean\Bundle\UserBundle\Command
  * @author    Valentin - Chaplean <valentin@chaplean.coop>
- * @copyright 2014 - 2015 Chaplean (http://www.chaplean.coop)
+ * @copyright 2014 - 2015 Chaplean (https://www.chaplean.coopn.coop)
  * @since     0.1.0
  */
 class ChapleanUserCleanCommand extends ContainerAwareCommand

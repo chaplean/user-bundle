@@ -12,7 +12,7 @@ use Tests\Chaplean\Bundle\UserBundle\Entity\DummyUser;
  *
  * @package   Tests\Chaplean\Bundle\SorClientBundle\DependencyInjection
  * @author    Valentin - Chaplean <valentin@chaplean.coop>
- * @copyright 2014 - 2018 Chaplean (http://www.chaplean.coop)
+ * @copyright 2014 - 2018 Chaplean (https://www.chaplean.coopn.coop)
  */
 class ConfigurationTest extends TestCase
 {

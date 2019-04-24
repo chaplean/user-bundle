@@ -16,7 +16,7 @@ use Symfony\Component\Console\Question\ConfirmationQuestion;
  *
  * @package   Chaplean\Bundle\UserBundle\Command
  * @author    Matthias - Chaplean <matthias@chaplean.coop>
- * @copyright 2014 - 2017 Chaplean (http://www.chaplean.coop)
+ * @copyright 2014 - 2017 Chaplean (https://www.chaplean.coopn.coop)
  * @since     5.0.1
  */
 class ChapleanUserDeleteCommand extends ContainerAwareCommand

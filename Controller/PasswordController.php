@@ -15,7 +15,7 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
  *
  * @package   Chaplean\Bundle\UserBundle\Controller
  * @author    Matthias - Chaplean <matthias@chaplean.coop>
- * @copyright 2014 - 2016 Chaplean (http://www.chaplean.coop)
+ * @copyright 2014 - 2016 Chaplean (https://www.chaplean.coopn.coop)
  * @since     4.0.0
  */
 class PasswordController extends Controller

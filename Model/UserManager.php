@@ -20,7 +20,7 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
  *
  * @package   Chaplean\Bundle\UserBundle\Model
  * @author    Valentin - Chaplean <valentin@chaplean.coop>
- * @copyright 2014 - 2015 Chaplean (http://www.chaplean.coop)
+ * @copyright 2014 - 2015 Chaplean (https://www.chaplean.coopn.coop)
  * @since     2.0.0
  */
 class UserManager implements UserManagerInterface, UserProviderInterface

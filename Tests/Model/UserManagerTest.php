@@ -17,7 +17,7 @@ use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
  *
  * @package   Tests\Chaplean\Bundle\UserBundle\Model
  * @author    Tom - Chaplean <tom@chaplean.coop>
- * @copyright 2014 - 2016 Chaplean (http://www.chaplean.coop)
+ * @copyright 2014 - 2016 Chaplean (https://www.chaplean.coopn.coop)
  * @since     1.0.0
  */
 class UserManagerTest extends FunctionalTestCase

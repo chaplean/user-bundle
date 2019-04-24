@@ -10,7 +10,7 @@ use Chaplean\Bundle\UserBundle\Validator\Constraints\MinimalPasswordRequirements
  *
  * @package   Chaplean\Bundle\UserBundle\Tests\Validator\Constraints
  * @author    Valentin - Chaplean <valentin@chaplean.coop>
- * @copyright 2014 - 2018 Chaplean (http://www.chaplean.coop)
+ * @copyright 2014 - 2018 Chaplean (https://www.chaplean.coopn.coop)
  */
 class MinimalPasswordRequirementsValidatorTest extends FunctionalTestCase
 {

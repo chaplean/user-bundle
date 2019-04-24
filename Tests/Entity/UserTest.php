@@ -9,7 +9,7 @@ use Chaplean\Bundle\UserBundle\Model\User;
  * UserTest.php.
  *
  * @author    Tom - Chaplean <tom@chaplean.coop>
- * @copyright 2014 - 2015 Chaplean (http://www.chaplean.coop)
+ * @copyright 2014 - 2015 Chaplean (https://www.chaplean.coopn.coop)
  * @since     1.0.0
  */
 class UserTest extends FunctionalTestCase
@@ -116,7 +116,7 @@ class UserTest extends FunctionalTestCase
  *
  * @package   Tests\Chaplean\Bundle\UserBundle\Entity
  * @author    Valentin - Chaplean <valentin@chaplean.coop>
- * @copyright 2014 - 2015 Chaplean (http://www.chaplean.coop)
+ * @copyright 2014 - 2015 Chaplean (https://www.chaplean.coopn.coop)
  * @since     1.0.0
  */
 class DummyUser extends User

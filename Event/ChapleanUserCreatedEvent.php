@@ -12,7 +12,7 @@ use Symfony\Component\EventDispatcher\Event;
  *
  * @package   Chaplean\Bundle\UserBundle\Event
  * @author    Matthias - Chaplean <matthias@chaplean.coop>
- * @copyright 2014 - 2017 Chaplean (http://www.chaplean.coop)
+ * @copyright 2014 - 2017 Chaplean (https://www.chaplean.coopn.coop)
  * @since     5.0.1
  */
 class ChapleanUserCreatedEvent extends Event

@@ -11,7 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Translation\Translator;
  *
  * @package   Chaplean\Bundle\UserBundle\Utility
  * @author    Matthias - Chaplean <matthias@chaplean.coop>
- * @copyright 2014 - 2015 Chaplean (http://www.chaplean.coop)
+ * @copyright 2014 - 2015 Chaplean (https://www.chaplean.coopn.coop)
  * @since     0.1.0
  */
 class RegistrationUtility

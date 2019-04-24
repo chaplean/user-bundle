@@ -11,7 +11,7 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
  *
  * @package   Chaplean\Bundle\UserBundle\SecurityUtility\Handler
  * @author    Valentin - Chaplean <valentin@chaplean.coop>
- * @copyright 2014 - 2018 Chaplean (http://www.chaplean.coop)
+ * @copyright 2014 - 2018 Chaplean (https://www.chaplean.coopn.coop)
  */
 class ExceptionHandler
 {

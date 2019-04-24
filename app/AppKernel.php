@@ -10,7 +10,7 @@ use Symfony\Component\Config\Loader\LoaderInterface;
  * Class AppKernel.
  *
  * @author    Valentin - Chaplean <valentin@chaplean.coop>
- * @copyright 2014 - 2015 Chaplean (http://www.chaplean.coop)
+ * @copyright 2014 - 2015 Chaplean (https://www.chaplean.coopn.coop)
  * @since     1.0.0
  */
 class AppKernel extends Kernel
