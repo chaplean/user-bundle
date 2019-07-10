@@ -20,12 +20,6 @@
         },
         "classmap": ["app/AppKernel.php"]
     },
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://satis.chaplean.coop"
-        }
-    ],
     "require": {
         "php": ">=7.0.8",
         "chaplean/mailer-bundle": "^5.0",

@@ -1,18 +1,24 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8fa9396707269da74b73915596996ece",
+    "content-hash": "48f544aa3b5fa9c6d9aee36991f8273f",
     "packages": [
         {
             "name": "chaplean/mailer-bundle",
             "version": "v5.0.0",
             "source": {
                 "type": "git",
-                "url": "git@git.chaplean.coop:private/bundle/mailer-bundle.git",
-                "reference": "0a1a6964c02ae4c013a675a69d33bdc78802ad65"
+                "url": "https://github.com/chaplean/mailer-bundle.git",
+                "reference": "fb2d35a6bdb6e3f673d527439da2d7b3791f1d0a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/chaplean/mailer-bundle/zipball/fb2d35a6bdb6e3f673d527439da2d7b3791f1d0a",
+                "reference": "fb2d35a6bdb6e3f673d527439da2d7b3791f1d0a",
+                "shasum": ""
             },
             "require": {
                 "php": ">=7.0.8",
@@ -37,6 +43,7 @@
                     "Chaplean\\Bundle\\MailerBundle\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -813,12 +820,12 @@
             "version": "v2.6.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/doctrine/doctrine2.git",
+                "url": "https://github.com/doctrine/orm.git",
                 "reference": "87ee409783a4a322b5597ebaae558661404055a7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/doctrine2/zipball/87ee409783a4a322b5597ebaae558661404055a7",
+                "url": "https://api.github.com/repos/doctrine/orm/zipball/87ee409783a4a322b5597ebaae558661404055a7",
                 "reference": "87ee409783a4a322b5597ebaae558661404055a7",
                 "shasum": ""
             },
@@ -1960,6 +1967,7 @@
                 "compression",
                 "minification"
             ],
+            "abandoned": "symfony/webpack-encore-pack",
             "time": "2017-07-14T07:26:46+00:00"
         },
         {
@@ -2829,6 +2837,7 @@
                 }
             ],
             "description": "Codeship scripts to automatically install in your bin directory",
+            "abandoned": "chaplean/continuous-integration-scripts",
             "time": "2017-08-25T07:37:15+00:00"
         },
         {
@@ -2867,8 +2876,14 @@
             "version": "v7.2.0",
             "source": {
                 "type": "git",
-                "url": "git@git.chaplean.coop:private/bundle/unit-bundle.git",
-                "reference": "9d133f5df8462e09de4b5166758ff00f327163f5"
+                "url": "https://github.com/chaplean/unit-bundle.git",
+                "reference": "980852b41ea2ead882d3551e5deba4dfa1f5d7b4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/chaplean/unit-bundle/zipball/980852b41ea2ead882d3551e5deba4dfa1f5d7b4",
+                "reference": "980852b41ea2ead882d3551e5deba4dfa1f5d7b4",
+                "shasum": ""
             },
             "require": {
                 "doctrine/doctrine-bundle": "^1.6",
@@ -2916,26 +2931,7 @@
                     "Foo\\Bundle\\FooBundle\\": ""
                 }
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "Tests\\": "Tests"
-                },
-                "classmap": [
-                    "app/AppKernel.php"
-                ]
-            },
-            "scripts": {
-                "post-install-cmd": [
-                    "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
-                    "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
-                    "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
-                ],
-                "post-update-cmd": [
-                    "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
-                    "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
-                    "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
-                ]
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -3248,12 +3244,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/mockery/mockery.git",
-                "reference": "e4c958124bc28709f20d8a3fdafdeb83b482c86c"
+                "reference": "d0e6b4d3d8deba978e4c5fa0846562ed416325cf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mockery/mockery/zipball/e4c958124bc28709f20d8a3fdafdeb83b482c86c",
-                "reference": "e4c958124bc28709f20d8a3fdafdeb83b482c86c",
+                "url": "https://api.github.com/repos/mockery/mockery/zipball/d0e6b4d3d8deba978e4c5fa0846562ed416325cf",
+                "reference": "d0e6b4d3d8deba978e4c5fa0846562ed416325cf",
                 "shasum": ""
             },
             "require": {
@@ -3262,8 +3258,7 @@
                 "php": ">=5.6.0"
             },
             "require-dev": {
-                "phpdocumentor/phpdocumentor": "^2.9",
-                "phpunit/phpunit": "~5.7.10|~6.5"
+                "phpunit/phpunit": "~5.7.10|~6.5|~7.0|~8.0"
             },
             "type": "library",
             "extra": {
@@ -3306,7 +3301,7 @@
                 "test double",
                 "testing"
             ],
-            "time": "2018-03-07 06:00:02"
+            "time": "2019-05-13T15:41:06+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -3399,7 +3394,7 @@
                     "email": "shelburt02@gmail.com"
                 },
                 {
-                    "name": "Théo FIDRY",
+                    "name": "Théo Fidry",
                     "email": "theo.fidry@gmail.com"
                 }
             ],
@@ -4173,6 +4168,7 @@
                 "mock",
                 "xunit"
             ],
+            "abandoned": true,
             "time": "2018-02-15T05:27:38+00:00"
         },
         {
